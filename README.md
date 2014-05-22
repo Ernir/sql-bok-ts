@@ -18,6 +18,7 @@ Efnisyfirlit:
 2. Uppsetning á töflum
   * CREATE
   * Helstu gagnagerðir og notkun þeirra
+  * Auto increment
   * NULL, NOT NULL
   * INSERT
   * DROP
@@ -35,7 +36,7 @@ Efnisyfirlit:
   * Aðallyklar
   * Margar töflur í sama gagnagrunninum
   * Aðkomulyklar
-  * Auto increment
+  * 1-1, 1-N, N-N tengingar
 
 5. Gagnavinnsla með mörgum töflum
   * INNER JOIN
@@ -48,6 +49,6 @@ Efnisyfirlit:
   * DELETE
 
 7. Ítarefni
-  * 1-1, 1-N, N-N tengingar
   * Views
   * Helstu gagnagrunnskerfi
+  * Að tengjast gagnagrunni með PHP
