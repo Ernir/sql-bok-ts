@@ -1,0 +1,11 @@
+*~BACKUP
+*.backup
+
+*.tex~
+*.aux
+*.log
+*.out
+*.pyg
+*.toc
+
+*.kilepr
