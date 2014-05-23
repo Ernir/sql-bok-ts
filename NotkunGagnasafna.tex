@@ -1,0 +1,119 @@
+\documentclass[nohyper,notoc,justified]{tufte-book} 
+
+\usepackage[utf8]{inputenc}
+\usepackage[icelandic]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts, amssymb, amsthm, amsmath}
+\usepackage{microtype}
+
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{minted}
+\usepackage{listings}
+\usepackage{color}
+
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true,pdfauthor={Eirikur Ernir Thorsteinsson},pdftitle={SQL},linkcolor=blue,urlcolor=blue}
+
+\hyphenpenalty=1000
+\hyphenation{Tungu-mál gagna-grunnur gagna-grunna SQL-gagna-grunna gagnagrunns-kerfi}
+
+\newfloat{sql}{bt}{lop}
+\floatname{sql}{SQL lýsing}
+
+
+\makeatletter
+% Paragraph indentation and separation for normal text
+\renewcommand{\@tufte@reset@par}{%
+  \setlength{\RaggedRightParindent}{0pt}%
+  \setlength{\JustifyingParindent}{0pt}%
+  \setlength{\parindent}{0pt}%
+  \setlength{\parskip}{0.4\baselineskip}%
+}
+\@tufte@reset@par
+
+% Paragraph indentation and separation for marginal text
+\renewcommand{\@tufte@margin@par}{%
+  \setlength{\RaggedRightParindent}{0pt}%
+  \setlength{\JustifyingParindent}{0pt}%
+  \setlength{\parindent}{0pt}%
+  \setlength{\parskip}{0.3\baselineskip}%
+}
+\makeatother
+
+
+\author{Eiríkur Ernir Þorsteinsson}
+\title{Notkun gagnasafna - námsefni}
+\publisher{Tækniskólinn}
+\date{}
+
+\begin{document}
+
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{0}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\chapter{Inngangur}
+\section{Hvað er gagnagrunnur?}
+\section{Hvað er SQL?}
+\section{Af hverju SQL?}
+\section{Hvað er gagnagrunnskerfi?}
+\subsection{Hvernig vinnum við með gagnagrunnskerfi?}
+\section{Yfirlit}
+
+\chapter{Fyrstu skrefin í SQL}
+\section{Töflur}
+\section{Fyrirspurnir}
+\section{Keyrsla sýnidæma}
+
+\chapter{Uppsetning á töflum}
+\section{Að búa til töflu} % CREATE
+\section{Helstu gagnagerðir} % INT, VARCHAR, CHAR, DATE
+\section{Tóm gildi} % NULL, NOT NULL
+\section{Innsetning gagna} % INSERT
+\section{Að eyða töflum} % DROP
+
+\chapter{Fyrirspurnir}
+\section{SELECT, FROM og WHERE}
+\section{LIKE og ``wildcards''}
+\section{AND, OR og IN}
+\section{Helstu einindaföll}
+\subsection{LENGTH}
+\subsection{ROUND}
+\subsection{UCASE og LCASE}
+\section{Helstu samsteypuföll}
+\subsection{SUM og AVG}
+\subsection{MIN og MAX}
+\subsection{COUNT}
+\section{GROUP BY}
+\section{ORDER BY}
+
+\chapter{Að setja upp gagnagrunn}
+\section{Aðallyklar} % PRIMARY KEY
+\section{Margar töflur í sama gagnagrunninum}
+\section{Aðkomulyklar} % FOREIGN KEY
+\section{Tengingar} % 1-1, 1-N, N-N
+
+\chapter{Gagnavinnsla með mörgum töflum}
+\section{INNER JOIN}
+\section{OUTER JOIN}
+\section{Undirfyrirspurnir}
+
+\chapter{Ítarefni}
+\label{kafli:itarefni}
+\section{Views}
+\section{Yfirlit yfir helstu gagnagrunnskerfi}
+\subsection{MySQL}
+\subsection{SQLite}
+\subsection{PostgreSQL}
+\subsection{Microsoft SQL Server}
+\subsection{Oracle Database}
+\section{Að tengjast gagnagrunni með PHP}
+\end{document}
