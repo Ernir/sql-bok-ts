@@ -1,0 +1,34 @@
+Skjal þetta er ætlað nemendum til gagns og stuðnings í fyrsta áfanga Tækniskólans er varðar notkun gagnagrunna með SQL.
+\section{Hvað er gagnagrunnur?}
+Gagnagrunnur\footnote{e. \emph{database}} er, í sinni víðustu skilgreiningu, skipulagt samansafn af upplýsingum.
+
+Í þessum áfanga munum við skoða svokallaða SQL-gagnagrunna.
+Líta má á sem svo að slíkir gagnagrunnar samanstandi fyrst og fremst af \emph{töflum} sem geyma upplýsingarnar. Það að smíða slíkar töflur, breyta þeim og birta úr þeim upplýsingar með SQL er aðalviðfangsefni áfangans.
+\section{Hvað er SQL?}
+Skammstöfunin SQL stendur fyrir \textbf{S}tructured \textbf{Q}uery \textbf{L}anguage. Skoðum þá skammstöfun nánar.
+
+\emph{Query Language} hefur verið þýtt á íslensku sem \emph{fyrirspurnamál}. SQL er sem sagt mál, líkt og tungumál og forritunarmál, sem nota má til að eiga ákveðin samskipti. SQL er notað til að senda \emph{fyrirspurnir} á gagnagrunnskerfi, oftast í þeim tilgangi að fá upplýsingar frá kerfinu.
+
+\emph{Structured} bendir til þess að málið hafi ákveðna uppbyggingu. Tungumál sem fólk notar til samskipta sín á milli eru oftast mjög sveigjanleg og fær um að koma upplýsingum til skila á marga mismunandi vegu. Tölvur eru hins vegar ekki svo klárar að þær skilji hugtök jafn vel og fólk. Þess vegna þurfa þær fyrirspurnir sem við skrifum að vera á mjög fastmótuðu sniði svo að þær komist til skila. Það að læra SQL snýst að miklu leyti um að læra þetta snið - hvað er leyfilegt innan þess og hvað ekki.
+\section{Af hverju SQL?}
+Vinnsla gagna er stór hluti af nær öllum stórum tölvukerfum. Áratuga reynsla hefur sýnt að SQL er mjög hentugt til slíkrar vinnslu. Því er oftast ekki verið að vinna með gagnagrunna vegna eigin verðleika, heldur vegna aflsins sem gagnagrunnar hafa upp á að bjóða sem hluti af stærra kerfi.
+\section{Hvað er gagnagrunnskerfi?}
+Gagnagrunnskerfi\footnote{e. \emph{database management system}} er sá hugbúnaður sem tölva notar til að hafa umsjón með gagnagrunninum. Dæmi í þessari bók miðast við að gagnagrunnskerfið MySQL sé notað.
+
+Yfirlit yfir nokkur gagnagrunnskerfi sem mikið eru notuð má finna í kafla \ref{kafli:itarefni}.
+\subsection{Hvernig vinnum við með gagnagrunnskerfi?}
+\label{kafli:HvernigVinnumVid}
+MySQL gagnagrunnskerfi skiptast í \emph{client} og \emph{server}\footnote{orðin client og server hafa verið þýdd sem ``biðlari'' og ``miðlari'' á Íslensku, en þau orð eru í takmarkaðri notkun}. Server sér um úrvinnslu og meðhöndlun gagna. Client tengist servernum og veitir notandanum aðgang að gagnagrunninum.
+
+Til að keyra MySQL-server þarf að setja upp töluverða umgerð á viðkomandi tölvu. Dæmi um hugbúnaðarpakka sem heldur utan um MySQL-server er \href{http://www.apachefriends.org/en/xampp.html}{XAMPP}\footnote{\url{http://www.apachefriends.org/en/xampp.html}}. Ekki verður farið sérstaklega yfir uppsetningu slíkrar umgjörðar hér, en hún er til staðar á vefþjóni\footnote{\url{http://tsuts.tskoli.is/}} tölvudeildar Upplýsingatækniskólans.
+
+Hugbúnaðurinn sem notaður er í GSÖ$1$G til að tengjast SQL-servernum er \href{http://www.mysql.com/products/workbench/}{MySQL Workbench}\footnote{\url{http://www.mysql.com/products/workbench/}}. Sá hugbúnaður er þegar upp settur á sýndarvélum nemenda Upplýsingatækniskólans.
+\section{Yfirlit}
+Í þessum kafla fórum við yfir eftirfarandi atriði:
+\begin{itemize}
+ \item SQL-gagnagrunnur er samansafn af upplýsingum, skipulagt með töflum.
+ \item SQL er fyrirspurnamál, notað til að eiga samskipti við gagnagrunnskerfi.
+ \item Forrit geta tengst SQL-gagnagrunnum og notað þá til að sjá um gagnavinnslu. Þetta er gert í stórum stíl í tölvukerfum í dag.
+ \item Gagnagrunnskerfi er hugbúnaður sem tölva notar til að hafa umsjón með gagnagrunnum. MySQL er dæmi um gagnagrunnskerfi.
+ \item Í þessum áfanga verður gagnagrunnskerfið MySQL notað. Forritið MySQL Workbench verður notað til að tengjast MySQL-server tölvudeildarinnar.
+\end{itemize}
