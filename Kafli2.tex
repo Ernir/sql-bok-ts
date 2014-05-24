@@ -1,0 +1,58 @@
+SQL er nokkuð sveigjanlegt og yfirgripsmikið mál. 
+Margt er að læra, í þessum áfanga er einungis farið yfir lítið brot af því sem viðfangsefnið hefur upp á að bjóða.
+
+Byrjum á að skoða grundvallaraðgerðirnar í SQL - það að búa til töflur, setja í þær gögn og að skoða gögnin aftur.
+\section{Töflur}
+Gögn í SQL-gagnagrunni má líta á sem raðir í töflum. Því hlýtur mikilvægt skref í því að læra að nota SQL að vera það að skilja uppbyggingu taflna mjög nákvæmlega.
+
+Lítum fyrst á dæmigerða töflu.
+
+\begin{table}
+\centering
+\caption{Nokkrir starfsmenn Tækniskólans}
+\label{tafla:starfsmenn_ts}
+\begin{tabular}{lll}
+\toprule
+Nafn&Starfsheiti&Netfang\\
+\midrule
+Bjargey G. Gísladóttir&Skólastjóri&bbg@tskoli.is\\
+Eiríkur Ernir Þorsteinsson&Kennari&eet@tskoli.is\\
+Emil Gautur Emilsson&Kennari&ege@tskoli.is\\
+% Donatas Butkus&Tölvuþjónusta&db@tskoli.is\\
+Geir Sigurðsson&Kennari&ges@tskoli.is\\
+Gunnar Þórunnarson&Kennari&gus@tskoli.is\\
+Guðmundur Jón Guðjónsson&Kennari&gjg@tskoli.is\\
+Guðrún Randalín Lárusdóttir&Kennari&grl@tskoli.is\\
+Hallur Ó. Karlsson&Kennari&hal@tskoli.is\\
+Konráð Guðmundsson&Kennari&kng@tskoli.is\\
+% Matthias Skúlason&Tölvuþjónusta&matti@tskoli.is\\
+Sigurður R. Ragnarsson&Kennari&srr@tskoli.is\\
+Snorri Emilsson&Kennari&sem@tskoli.is\\
+% Tryggvi Jóhannsson&Kerfisstjóri&tj@tskoli.is\\
+Þórarinn J. Kristjánsson&Kennari&tjk@tskoli.is\\
+\bottomrule
+\end{tabular}
+\end{table}
+Eins og allar alvöru töflur inniheldur þessi starfsmannatafla annarsvegar \emph{dálkheiti} og hins vegar \emph{gögn}. Dálkheitin eru ``Nafn'', ``Starfsheiti'' og ``Netfang''. Dæmi um upplýsingar eru að til sé starfsmaður sem heitir ``Eiríkur Ernir Þorsteinsson'', sem er ``Kennari'' og hefur netfangið ``eet@tskoli.is''. 
+
+Mikilvægt er að átta sig á þessum mun - hver einasta tafla sem unnið er með inniheldur dálkheiti og gögn, sem eru aðskilin fyrirbrigði. Þetta á augljóslega við ``hefðbundnar'' töflur sem við sjáum á prenti og í forritum á borð við Microsoft Excel. En taktu eftir því að þetta á en líka við töflur sem við skilgreinum með SQL-skipunum.
+
+Þegar töflur eru sýndar á prenti er venjan að dálkheitin komi fram í fyrstu línu töflunnar (og oftast aðskilin gögnunum með striki). Gögnin koma fram í næstu línum.
+
+Þegar SQL er notað til að lýsa töflum eru dálkheitin og aðrar upplýsingar sem skilgreina töfluna sjálfa búnar til með sérstökum skipunum. Aðrar skipanir eru notaðar til að vinna með gögnin sjálf. Við sjáum dæmi um þessar skipanir í undirkaflanum \nameref{undirkafli:synidaemi_i_sql}. 6\footnote{Betur verður farið í muninn á þessum skipunum í kafla \ref{kafli:uppfaera}}
+\section{Fyrirspurnir}
+Ekki er mikið gagn í því að geyma upplýsingar í töfluformi nema að hægt sé að ná í þær aftur.
+
+Einfalt er að fletta upp upplýsingum í litlum töflum á borð við töflu \ref{tafla:starfsmenn_ts}. Viljum við t.d. komast að því hver er með netfangið ``kng@tskoli.is'' dugar okkur að láta augun reika yfir töfluna þar til við rekumst á netfangið og líta svo í starfsmannadálkinn.
+
+Væri taflan örlítið stærri væri verkefnið strax erfiðara. Væri taflan á stærð við símaskrána væri það nær ómögulegt.
+
+Slíkar uppflettingar, stórar og smáar, eru sérsvið SQL. Þær eru nefndar \emph{fyrirspurnir} og eru framkvæmdar með mjög mikilvægri SQL-skipun sem heitir \emph{SELECT}. Við sjáum dæmi um SELECT-skipanir í undirkaflanum \nameref{undirkafli:synidaemi_i_sql} og kynnumst þeim náið í kafla \ref{kafli:select}.
+\section{Gagnagrunnar}
+Ef upplýsingar eru geymdar í töflum, hvað er þá gagnagrunnur?
+
+Gagnagrunnur heldur utan um töflur, eina eða fleiri. Hann bindur þær saman í eina heild og myndar um þær umgjörð.
+\section{Sýnidæmi í SQL}
+\label{undirkafli:synidaemi_i_sql}
+
+\section{Yfirlit}
