@@ -52,7 +52,24 @@ Slíkar uppflettingar, stórar og smáar, eru sérsvið SQL. Þær eru nefndar \
 Ef upplýsingar eru geymdar í töflum, hvað er þá gagnagrunnur?
 
 Gagnagrunnur heldur utan um töflur, eina eða fleiri. Hann bindur þær saman í eina heild og myndar um þær umgjörð.
+\begin{marginfigure}
+\centering
+\caption{Uppbygging gagnagrunns}
+\label{mynd:uppbygging}
+\color{red} Hingað kemur falleg mynd af uppbyggingu gagnagrunna.
+\end{marginfigure}
+
 \section{Sýnidæmi í SQL}
 \label{undirkafli:synidaemi_i_sql}
+Skoðum hvernig búa má til töflu \ref{tafla:starfsmenn_ts} með SQL. Eins og fram hefur komið þarf til þess að nota SQL-skipun.
+
+\begin{sql}[h]
+\caption{CREATE skipun fyrir starfsmannatöfluna}
+\label{sql:k1d1}
+\centering
+\inputminted[frame=lines]{sql}{sql/k1d1.sql}
+\end{sql}
+
+Skipunina má sjá á SQL-sýnidæmi \ref{sql:k1d1}.
 
 \section{Yfirlit}
