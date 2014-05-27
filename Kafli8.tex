@@ -1,0 +1,39 @@
+\section{Views}
+\section{Yfirlit yfir helstu gagnagrunnskerfi}
+\subsection{MySQL}
+\subsection{SQLite}
+\subsection{PostgreSQL}
+\subsection{Microsoft SQL Server}
+\subsection{Oracle Database}
+\section{Venslalíkanið}
+\section{Að tengjast gagnagrunni með PHP}
+Við höfum eytt miklum tíma í að skoða gagnagrunna sem sjálfstætt fyrirbrigði.
+
+Í þessum undirkafla skoðum við loksins hvernig tengja má MySQL-gagnagrunn við PHP-forritskóða.
+Slíkar tengingar eru teknar fyrir vegna þess hve gríðarlega algengt 
+
+Útskýringarnar gera ráð fyrir skilningi á ýmsum atriðum:
+\begin{itemize}
+ \item Hugtökum í vefsíðum - HTML, Javascript
+ \item Grundvallarmálfræði PHP
+ \item Lykkjum og fylkjum\footnote{e. \emph{loops} og \emph{arrays}}
+\end{itemize}
+\subsection{Hlutverk gagnagrunna í vefsíðum}
+Vefsíða sem byggð er upp á hefðbundinn hátt skiptist gróflega í tvo hluta - client og server. 
+
+\begin{figure}
+\centering
+\caption{Hefðbundin uppbygging vefsíðu}
+\label{mynd:uppbyggingvefsidu}
+\color{red} Hingað kemur falleg mynd af client-server strúktúr vefsíðu.
+\end{figure}
+
+Client-hlutinn er sá hluti sem keyrður er á tölvu notandans. Í client-hluta eru HTML-tög túlkuð og Javascript-kóði keyrður, m.a.. Venjulega fer þessi vinna fram í vafra\footnote{e. \emph{browser}, t.d. Google Chrome, Firefox og Internet Explorer} notandans.
+
+Server-hlutinn er margskiptur. Viðfangsefni okkar, PHP og MySQL, tilheyra þessum hluta. Oft keyra PHP og MySQL á sömu tölvu, sem er þá einfaldlega nefnd ``serverinn''.
+
+Hlutverk gagnagrunnsins í þessari uppbyggingu er, eðli hans samkvæmt, það að halda utan um upplýsingar. PHP-hluti serversins sér um að eiga samskipti við gagnagrunninn og miðla upplýsingunum áfram til clientsins. Notandinn og tölva hans eiga aldrei bein samskipti við MySQL-serverinn.
+
+\subsection{Uppsetning tengingar með PDO}
+\subsection{Að sækja gögn með PDO}
+\subsection{Að birta gögn á vefsíðu}
