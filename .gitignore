@@ -7,6 +7,9 @@
 *.out
 *.pyg
 *.toc
+*.loe
+*.lof
+*.lot
 
 *.kilepr
 

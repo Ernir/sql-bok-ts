@@ -1,4 +1,4 @@
-\documentclass[nohyper,notoc,justified]{tufte-book} 
+\documentclass[nohyper, notoc, justified, openany]{tufte-book} 
 
 \usepackage[utf8]{inputenc}
 \usepackage[icelandic]{babel}
@@ -8,24 +8,25 @@
 
 \usepackage{tikz}
 \usepackage{booktabs}
-\usepackage{float}
 \usepackage{minted}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{chngcntr}
 
 \usepackage{hyperref}
-
+% PDF-upplýsingar
 \hypersetup{colorlinks=true,pdfauthor={Eirikur Ernir Thorsteinsson},pdftitle={SQL},linkcolor=blue,urlcolor=blue}
 
+% Orðaskiptingar
 \hyphenpenalty=1000
 \hyphenation{Tungu-mál gagna-grunnur gagna-grunna SQL-gagna-grunna gagnagrunns-kerfi}
 
-\newfloat{sql}{bt}{lop}
-\floatname{sql}{SQL sýnidæmi}
+% Endurnúmerun á myndum, svo teljarinn endurræsist í hverjum kafla
+\counterwithin{figure}{chapter}
 
-
+% Endurskilgreining á inndrætti
+% Uppruni: http://tex.stackexchange.com/questions/77999/remove-indent-of-paragraph-and-add-line-skip-with-tufte-latex
 \makeatletter
-% Paragraph indentation and separation for normal text
 \renewcommand{\@tufte@reset@par}{%
   \setlength{\RaggedRightParindent}{0pt}%
   \setlength{\JustifyingParindent}{0pt}%
@@ -34,7 +35,6 @@
 }
 \@tufte@reset@par
 
-% Paragraph indentation and separation for marginal text
 \renewcommand{\@tufte@margin@par}{%
   \setlength{\RaggedRightParindent}{0pt}%
   \setlength{\JustifyingParindent}{0pt}%
@@ -42,6 +42,33 @@
   \setlength{\parskip}{0.3\baselineskip}%
 }
 \makeatother
+
+% Skilgreining ``example'' flotumhverfisins og listans
+% Uppruni: http://tex.stackexchange.com/questions/113631/caption-placement-for-new-float-in-tufte-book-class
+\newcounter{example}[chapter]
+\newcommand\examplename{Sýnidæmi}
+\newcommand\listexamplename{Sýnidæmaskrá}
+\makeatletter
+\newcommand\listofexamples{%
+  \ifthenelse{\equal{\@tufte@class}{book}}%
+    {\chapter*{\listexamplename}}%
+    {\section*{\listexamplename}}%
+%  \begin{fullwidth}%
+    \@starttoc{loe}%
+%  \end{fullwidth}%
+}
+\renewcommand\theexample
+     {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@example}
+\def\fps@example{tbp}
+\def\ftype@example{1}
+\def\ext@example{loe}
+\def\fnum@example{\examplename\nobreakspace\theexample}
+\newenvironment{example}[1][htbp]
+  {\begin{@tufte@float}[#1]{example}{}}
+  {\end{@tufte@float}}
+\let\l@example\l@figure
+\makeatother
+
 
 
 \author{Eiríkur Ernir Þorsteinsson}
@@ -57,6 +84,9 @@
 \maketitle
 
 \tableofcontents
+\listoffigures
+\listoftables
+\listofexamples
 
 \newpage
 
