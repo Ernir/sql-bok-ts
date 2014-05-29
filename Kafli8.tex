@@ -17,6 +17,7 @@ Slíkar tengingar eru teknar fyrir vegna þess hve algengar\footnote{Linux, Apac
  \item Hugtökum í vefsíðum - HTML, Javascript
  \item Keyrslu PHP-skripta
  \item Grundvallarmálfræði PHP
+ \item IP-tölum
  \item Föllum, lykkjum og fylkjum\footnote{e. \emph{functions}, \emph{loops} og \emph{arrays}}
 \end{itemize}
 \subsection{Hlutverk gagnagrunna í vefsíðum}
@@ -39,22 +40,26 @@ Hlutverk gagnagrunnsins í þessari uppbyggingu er, eðli hans samkvæmt, það 
 Gerum ráð fyrir að við séum með PHP-skriptu sem keyrir á vefþjóni. Til að tengjast MySQL-gagnagrunni þarf hún eftirfarandi upplýsingar:
 \begin{itemize}
  \item Tengingarupplýsingar: Gagnagrunnsgerðina (hjá okkur alltaf MySQL), nafn gagnagrunnsins og staðsetningu hans
- \item Notendanafn MySQL-þjónsins
+ \item Notandanafn MySQL-þjónsins
  \item Lykilorð notandans.
 \end{itemize}
-Klasann \href{http://www.php.net/manual/en/class.pdo.php}{PDO}\marginnote{\url{http://www.php.net/manual/en/class.pdo.php}} má svo nota til þess að mynda tenginguna sjálfa. 
+Klasann \href{http://www.php.net/manual/en/class.pdo.php}{PDO}\footnote{\url{http://www.php.net/manual/en/class.pdo.php}} má svo nota til þess að mynda tenginguna sjálfa.\footnote{Fleiri leiðir eru færar til að mynda tengingar af þessum toga, til dæmis \emph{mysqli} viðbótin. Þá PHP-viðbót sem einfaldlega heitir \emph{mysql} skal þó alls ekki nota - hún er úreld.}
 
-\begin{sql}[h]
+\begin{example}[h]
 \caption{Tenging við gagnagrunn með PDO}
 \label{sql:k8d1}
 \centering
 \inputminted[frame=lines, fontfamily=courier]{php}{sql/k8d1.php}
-\end{sql}
+\end{example}
 
-Dæmi um hvernig öll skriptan gæti litið út má sjá á sýnidæmi \ref{sql:k8d1}.
+Dæmi um hvernig öll skriptan gæti litið út má sjá á sýnidæmi \ref{sql:k8d1}. Skoðum það sýnidæmi nánar. 
 
-Skoðum það sýnidæmi nánar.
+Fyrsta breytan sem er skilgreind í skriptunni (\verb|$source|) inniheldur tengingarupplýsingarnar. Þar kemur fyrst fram orðið \verb|mysql|, aðskilið frá gagnagrunnsnafninu og staðsetningu gagnagrunnins með tvípunkti. Sé ætlunin að skrifa skriptu af þessum toga til nota í eigin forriti þyrfti að skipta út \verb|testdb| fyrir nafn gagnagrunnsins sem nota skal. Sé MySQL-serverinn ekki að keyra á sömu tölvu og PHP-skriptan þarf einnig að breyta IP-tölunni í IP-tölu tölvunnar sem MySQL-serverinn keyrir á.\footnote{Server Upplýsingatækniskólans keyrir á IP-tölunni \emph{82.148.66.15}. Einnig má skrifa nafn hans, \emph{tsuts.tskoli.is}, í stað IP-tölunnar.}
 
+Næstu tvær breytur innihalda notandanafn og lykilorð fyrir MySQL-serverinn. Þetta er sama notandanafn og lykilorð og notað var til að tengjast gagnagrunninum í kafla \ref{kafli:fyrstuskrefin}.
 
+Þegar upplýsingarnar hafa verið geymdar er loks ``reynt'' að búa til tengingu með PDO. Takist það eru tengingarupplýsingarnar geymdar í  ``database handle'' breytu, nefnd \verb|$dbh| í sýnidæminu. Þessa breytu má síðan nýta til að eiga samskipti við gagnagrunninn.
+
+Takist ekki að koma tengingunni á prentar skriptan út strenginn ``Tenging mistókst'' ásamt villuskilaboðunum sem berast.
 \subsection{Að sækja gögn með PDO}
 \subsection{Að birta gögn á vefsíðu}
