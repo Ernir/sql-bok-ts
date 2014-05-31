@@ -70,6 +70,47 @@ Skoðum hvernig búa má til töflu \ref{tafla:starfsmenn_ts} með SQL. Eins og 
 \sql{sql/k1d1.sql}
 \end{example}
 
-Skipunina má sjá á SQL-sýnidæmi \ref{sql:k1d1}.
+Skipunina má sjá á SQL-sýnidæmi \ref{sql:k1d1}. Þetta er mjög dæmigerð skipun til að búa til töflu. Þar kemur fram hvað gera skal (búa til töflu $\rightarrow$ \verb|CREATE TABLE|) og hver dálkheitin eru (nafn, Starfsheiti og netfang). Í kafla \ref{kafli:uppsetningtaflna} skoðum við hin orðin sem koma fyrir í skipuninni og í kafla \ref{undirkafli:keyrslaiworkbench} sjáum við hvernig koma má skipuninni í gagnið.
+
+\section{Keyrsla í MySQL Workbench}
+\label{undirkafli:keyrslaiworkbench}
+Lítum örstutt á hvernig nota má MySQL Workbench til að búa til okkar fyrstu töflu með SQL.
+
+Um nokkur skref er að ræða.
+\begin{enumerate}
+ \item Ræsa þarf forritið. Við það birtist upphafsskjár, líkur þeim sem sjá má á mynd \ref{mynd:workbench-upphafsskjar}.\footnote{Útlit MySQL Workbench er eðli málsins samkvæmt örlítið mismunandi eftir stýrikerfum og útgáfum á forritinu. Skjáskotin eru tekin af Workbench útgáfu 6.0, á Linux vél.}
+ \item Mynda þarf tengingu við MySQL-server. Henni þarf að gefa nafn, IP-tölu MySQL serversins, notandanafn og lykilorð.\footnote{Nemendur Tölvudeildar Tækniskólans skulu biðja kennarann um þessar upplýsingar.} Sjá mynd \ref{mynd:workbench-login}.
+ \item Búa þarf til nýjan gagnagrunn á MySQL-servernum á skjánum sem birtist eftir að tengingin er mynduð. Það er einfaldast að gera með svokallaðri \verb|CREATE DATABASE| skipun, slegin inn í aðalgluggann - sjá mynd \ref{mynd:workbench-create-db}. Þegar þessu er lokið höfum við keyrt okkar fyrstu SQL-skipun!
+ \item Skipunin í sýnidæmi \ref{sql:k1d1} er slegin inn í aðalgluggann og keyrð. Taflan er þá komin inn!
+\end{enumerate}
+Ávallt má gera ráð fyrir að SQL-sýnidæmi í þessari bók megi keyra með hliðstæðum hætti - í aðalglugga MySQL Workbench.
+
+\begin{figure*}
+\caption[Upphafsskjár MySQL Workbench]{Upphafsskjár MySQL Workbench. Örin vísar á hnapp sem nota má til að búa til nýja tengingu.}
+\label{mynd:workbench-upphafsskjar}
+\centering
+\includegraphics[width=\linewidth]{myndir/workbench-upphafsskjar-or}
+\end{figure*}
+
+\begin{figure*}
+\caption[Tengingarskjár MySQL Workbench]{Tengingarskjár MySQL Workbench. Hér er verið að búa til tenginguna ``Prufutenging'', sem tengist MySQL-þjóni sem keyrir á sömu tölvu og Workbench-inn (127.0.0.1) með notandanafninu ``root''.}
+\label{mynd:workbench-login}
+\centering
+\includegraphics[width=\linewidth]{myndir/workbench-login}
+\end{figure*}
+
+\begin{figure*}
+\caption[Nýr gagnagrunnur]{Nýr gagnagrunnur búinn til með MySQL Workbench. Efri örin vísar á hnappinn sem ýta þarf á til að keyra SQL-skipunina. Neðri örin vísar á lista af gagnagrunnum sem sýnilegir eru á servernum. Birtist gagnagrunnurinn sem búinn er til ekki um leið og skipunin er keyrð, hægri-smellið þá á listann og ``refresh''ið hann.}
+\label{mynd:workbench-create-db}
+\centering
+\includegraphics[width=0.8\linewidth]{myndir/workbench-create-db-or}
+\end{figure*}
+
+\begin{figure*}
+\caption[Ný tafla]{Ný tafla búin til með MySQL Workbench. Skipunin er slegin inn í aðalgluggann og keyrð með ``eldingarhnappnum'' eins og skipunin á mynd \ref{mynd:workbench-create-db}.}
+\label{mynd:workbench-create-table}
+\centering
+\includegraphics[width=0.8\linewidth]{myndir/workbench-create-table}
+\end{figure*}
 
 \section{Yfirlit}
