@@ -61,16 +61,38 @@ Gagnagrunnur heldur utan um töflur, eina eða fleiri. Hann bindur þær saman �
 
 \section{Sýnidæmi í SQL}
 \label{undirkafli:synidaemi_i_sql}
-Skoðum hvernig búa má til töflu \ref{tafla:starfsmenn_ts} með SQL. Eins og fram hefur komið þarf til þess að nota SQL-skipun.
+Skoðum hvernig búa má til töflu \ref{tafla:starfsmenn_ts} með SQL, setja í hana gögn og sækja gögnin aftur. 
+
+Eins og fram hefur komið þarf til þess að nota SQL-skipanir.
 
 \begin{example}[h]
 \caption{CREATE skipun fyrir starfsmannatöfluna}
-\label{sql:k1d1}
+\label{sql:k2d1}
 \centering
-\sql{sql/k1d1.sql}
+\sql{sql/k2d1.sql}
 \end{example}
 
-Skipunina má sjá á SQL-sýnidæmi \ref{sql:k1d1}. Þetta er mjög dæmigerð skipun til að búa til töflu. Þar kemur fram hvað gera skal (búa til töflu $\rightarrow$ \verb|CREATE TABLE|) og hver dálkheitin eru (nafn, Starfsheiti og netfang). Í kafla \ref{kafli:uppsetningtaflna} skoðum við hin orðin sem koma fyrir í skipuninni og í kafla \ref{undirkafli:keyrslaiworkbench} sjáum við hvernig koma má skipuninni í gagnið.
+Skipunina til að skilgreina töfluna má sjá á SQL-sýnidæmi \ref{sql:k2d1}. Þetta er mjög dæmigerð skipun til að búa til töflu. Þar kemur fram hvað gera skal (búa til töflu $\rightarrow$ \verb|CREATE TABLE|) og hver dálkheitin eru (nafn, Starfsheiti og netfang). Í kafla \ref{kafli:uppsetningtaflna} skoðum við hin orðin sem koma fyrir í skipuninni og í kafla \ref{undirkafli:keyrslaiworkbench} sjáum við hvernig koma má skipuninni í gagnið.
+
+Hér ber að athuga að enn eru engin gögn komin inn í töfluna. Það má gera með skipuninni í SQL-sýnidæmi \ref{sql:k1d2}.
+
+\begin{example}[h]
+\caption{INSERT skipun fyrir starfsmannatöfluna}
+\label{sql:k2d2}
+\centering
+{\small
+\sql{sql/k2d2.sql}
+}
+\end{example}
+
+Til að sækja gögn úr töflunni þarf síðan að framkvæma fyrirspurn. Dæmi um fyrirspurn (SQL-skipun) sem finnur nafn þess starfsmanns sem er með netfangið ``kng@tskoli.is'' má sjá á sýnidæmi \ref{sql:k2d3}.
+
+\begin{example}[h]
+\caption{SELECT skipun sem finnur Konráð kennara í starfsmannatöflunni}
+\label{sql:k2d3}
+\centering
+\sql{sql/k2d3.sql}
+\end{example}
 
 \section{Keyrsla í MySQL Workbench}
 \label{undirkafli:keyrslaiworkbench}
@@ -81,9 +103,9 @@ Um nokkur skref er að ræða.
  \item Ræsa þarf forritið. Við það birtist upphafsskjár, líkur þeim sem sjá má á mynd \ref{mynd:workbench-upphafsskjar}.\footnote{Útlit MySQL Workbench er eðli málsins samkvæmt örlítið mismunandi eftir stýrikerfum og útgáfum á forritinu. Skjáskotin eru tekin af Workbench útgáfu 6.0, á Linux vél.}
  \item Mynda þarf tengingu við MySQL-server. Henni þarf að gefa nafn, IP-tölu MySQL serversins, notandanafn og lykilorð.\footnote{Nemendur Tölvudeildar Tækniskólans skulu biðja kennarann um þessar upplýsingar.} Sjá mynd \ref{mynd:workbench-login}.
  \item Búa þarf til nýjan gagnagrunn á MySQL-servernum á skjánum sem birtist eftir að tengingin er mynduð. Það er einfaldast að gera með svokallaðri \verb|CREATE DATABASE| skipun, slegin inn í aðalgluggann - sjá mynd \ref{mynd:workbench-create-db}. Þegar þessu er lokið höfum við keyrt okkar fyrstu SQL-skipun!
- \item Skipunin í sýnidæmi \ref{sql:k1d1} er slegin inn í aðalgluggann og keyrð. Taflan er þá komin inn!
+ \item Skipunin í sýnidæmi \ref{sql:k2d1} er slegin inn í aðalgluggann og keyrð. Taflan er þá komin inn!
 \end{enumerate}
-Ávallt má gera ráð fyrir að SQL-sýnidæmi í þessari bók megi keyra með hliðstæðum hætti - í aðalglugga MySQL Workbench.
+Ávallt má gera ráð fyrir að SQL-sýnidæmi í þessari bók megi keyra með hliðstæðum hætti - í aðalglugga MySQL Workbench. T.d. mætti keyra sýnidæmi \ref{sql:k1d2} og \ref{sql:k2d3} á þann hátt.
 
 \begin{figure*}
 \caption[Upphafsskjár MySQL Workbench]{Upphafsskjár MySQL Workbench. Örin vísar á hnapp sem nota má til að búa til nýja tengingu.}
@@ -114,3 +136,13 @@ Um nokkur skref er að ræða.
 \end{figure*}
 
 \section{Yfirlit}
+Í þessum kafla fengum við örstutta kynningu því hvernig SQL-gagnagrunnar eru uppbyggðir og hvernig við getum átt við þá samskipti. 
+
+Helstu atriðin eru:
+\begin{itemize}
+ \item Gögn í SQL-gagnagrunni má líta á sem raðir í töflum.
+ \item SQL-skipanir eru notaðir til að skilgreina töflur og setja í þær gögn.
+ \item Fyrirspurnir eru notaðar til að sækja gögn úr gagnagrunnum. Fyrirspurnir eru sérstök gerð SQL-skipana.
+ \item SQL-skipanir má keyra úr aðalglugga MySQL Workbench.
+\end{itemize}
+Athuga ber að við höfum ekki farið yfir uppbyggingu skipananna. Það að læra á skipanirnar sjálfar er viðfangsefni næstu kafla.
