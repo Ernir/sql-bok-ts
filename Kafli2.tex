@@ -5,7 +5,7 @@ Byrjum á að skoða grundvallaraðgerðirnar í SQL - það að búa gagnagrunn
 \section{Gagnagrunnar}
 Fram kom í kafla \ref{kafli:inngangur} að gagnagrunnur sé \emph{skipulagt samansafn af upplýsingum}. Einnig kom fram að upplýsingarnar eru hlutaðar niður með ``töflum''.
 \begin{marginfigure}
-\caption[Uppbygging gagnagrunns]{Uppbygging einfalds gagnagrunns með þremur töflum.}
+\caption[Uppbygging gagnagrunns]{Uppbygging einfalds gagnagrunns með þremur töflum}
 \label{mynd:uppbygginggagnagrunns}
 \centering
 \includegraphics[width=\linewidth]{myndir/uppbygging-gagnagrunns}
@@ -17,7 +17,7 @@ Hér er vert að taka nokkur atriði fram:
 \end{itemize}
 Líkja mætti gagnagrunni við ``möppu'' í tölvu sem inniheldur töflur\footnote{Reyndar getur gagnagrunnur innihaldið ýmislegt annað en töflur. Slík atriði eru tekin fyrir í seinni áföngum.}. Hægt er að búa til gagnagrunna á tölvu, setja í hann töflur og skoða innihald þeirra.
 
-Við sjáum dæmi um hvernig búa má til gagnagrunn í undirkafla \nameref{undirkafli:synidaemi_i_sql}.
+Við sjáum dæmi um hvernig búa má til gagnagrunn í undirkaflanum \nameref{undirkafli:synidaemi_i_sql}.
 \section{Töflur}
 Gögn í SQL-gagnagrunni má líta á sem raðir í töflum. Því hlýtur mikilvægt skref í því að læra að nota SQL að vera það að skilja uppbyggingu taflna mjög nákvæmlega.
 
@@ -25,80 +25,100 @@ Lítum fyrst á dæmigerða töflu.
 
 \begin{table}
 \centering
-\caption{Nokkrir starfsmenn Tækniskólans}
+\caption[Nokkrir starfsmenn Tækniskólans]{Nokkrir starfsmenn Tækniskólans}
 \label{tafla:starfsmenn_ts}
 \begin{tabular}{lll}
 \toprule
 Nafn&Starfsheiti&Netfang\\
 \midrule
 Bjargey G. Gísladóttir&Skólastjóri&bbg@tskoli.is\\
+Donatas Butkus&Tölvuþjónusta&db@tskoli.is\\
 Eiríkur Ernir Þorsteinsson&Kennari&eet@tskoli.is\\
 Emil Gautur Emilsson&Kennari&ege@tskoli.is\\
-% Donatas Butkus&Tölvuþjónusta&db@tskoli.is\\
 Geir Sigurðsson&Kennari&ges@tskoli.is\\
 Gunnar Þórunnarson&Kennari&gus@tskoli.is\\
 Guðmundur Jón Guðjónsson&Kennari&gjg@tskoli.is\\
 Guðrún Randalín Lárusdóttir&Kennari&grl@tskoli.is\\
 Hallur Ó. Karlsson&Kennari&hal@tskoli.is\\
 Konráð Guðmundsson&Kennari&kng@tskoli.is\\
-% Matthias Skúlason&Tölvuþjónusta&matti@tskoli.is\\
+Matthias Skúlason&Tölvuþjónusta&matti@tskoli.is\\
 Sigurður R. Ragnarsson&Kennari&srr@tskoli.is\\
 Snorri Emilsson&Kennari&sem@tskoli.is\\
-% Tryggvi Jóhannsson&Kerfisstjóri&tj@tskoli.is\\
+Tryggvi Jóhannsson&Kerfisstjóri&tj@tskoli.is\\
 Þórarinn J. Kristjánsson&Kennari&tjk@tskoli.is\\
 \bottomrule
 \end{tabular}
 \end{table}
 Eins og allar alvöru töflur inniheldur þessi starfsmannatafla annarsvegar \emph{dálkheiti} og hins vegar \emph{gögn}. Dálkheitin eru ``Nafn'', ``Starfsheiti'' og ``Netfang''. Dæmi um upplýsingar eru að til sé starfsmaður sem heitir ``Eiríkur Ernir Þorsteinsson'', sem er ``Kennari'' og hefur netfangið ``eet@tskoli.is''. 
 
-Mikilvægt er að átta sig á þessum mun - hver einasta tafla sem unnið er með inniheldur dálkheiti og gögn, sem eru aðskilin fyrirbrigði. Þetta á augljóslega við ``hefðbundnar'' töflur sem við sjáum á prenti og í forritum á borð við Microsoft Excel. En taktu eftir því að þetta á en líka við töflur sem við skilgreinum með SQL-skipunum.
+Mikilvægt er að átta sig á þessum mun - hver einasta tafla sem unnið er með inniheldur dálkheiti og gögn, sem eru aðskilin fyrirbrigði. Þetta á augljóslega við ``hefðbundnar'' töflur sem við sjáum á prenti og í forritum á borð við Microsoft Excel. 
+
+En þetta á en líka við töflur sem við skilgreinum með SQL-skipunum. SQL-töflur innihalda dálkheiti og gögn, alveg eins og við myndum búast við af venjulegum töflum.
 
 Þegar töflur eru sýndar á prenti er venjan að dálkheitin komi fram í fyrstu línu töflunnar (og oftast aðskilin gögnunum með striki). Gögnin koma fram í næstu línum.
 
-Þegar SQL er notað til að lýsa töflum eru dálkheitin og aðrar upplýsingar sem skilgreina töfluna sjálfa búnar til með sérstökum skipunum. Aðrar skipanir eru notaðar til að vinna með gögnin sjálf. Við sjáum dæmi um þessar skipanir í undirkaflanum \nameref{undirkafli:synidaemi_i_sql}. 6\footnote{Betur verður farið í muninn á þessum skipunum í kafla \ref{kafli:uppfaera}}
+Þegar SQL er notað til að lýsa töflum eru dálkheitin og aðrar upplýsingar sem skilgreina töfluna sjálfa búnar til með sérstökum skipunum. Aðrar skipanir eru notaðar til að vinna með gögnin sjálf. Við sjáum dæmi um þessar skipanir í undirkaflanum \nameref{undirkafli:synidaemi_i_sql}. \footnote{Farið í muninn á skipunum sem skilgreina töflur og skipunum sem vinna með gögn í kafla \ref{kafli:uppfaera}.}
 \section{Fyrirspurnir}
 Ekki er mikið gagn í því að geyma upplýsingar í töfluformi nema að hægt sé að ná í þær aftur.
 
-Einfalt er að fletta upp upplýsingum í litlum töflum á borð við töflu \ref{tafla:starfsmenn_ts}. Viljum við t.d. komast að því hver er með netfangið ``kng@tskoli.is'' dugar okkur að láta augun reika yfir töfluna þar til við rekumst á netfangið og líta svo í starfsmannadálkinn.
+Einfalt er að fletta upp upplýsingum í litlum töflum á borð við töflu \ref{tafla:starfsmenn_ts} þegar þær eru prentaðar út. Viljum við t.d. komast að því hver er með netfangið ``kng@tskoli.is'' dugar okkur að láta augun reika yfir töfluna þar til við rekumst á netfangið og líta svo í starfsmannadálkinn.
 
 Væri taflan örlítið stærri væri verkefnið strax erfiðara. Væri taflan á stærð við símaskrána væri það nær ómögulegt.
 
-Slíkar uppflettingar, stórar og smáar, eru sérsvið SQL. Þær eru nefndar \emph{fyrirspurnir} og eru framkvæmdar með mjög mikilvægri SQL-skipun sem heitir \emph{SELECT}. Við sjáum dæmi um SELECT-skipanir í undirkafla \nameref{undirkafli:synidaemi_i_sql} og kynnumst þeim náið í kafla \ref{kafli:select}.
+Slíkar uppflettingar, stórar og smáar, eru sérsvið SQL. Þær eru nefndar \emph{fyrirspurnir} og eru framkvæmdar með mjög mikilvægri SQL-skipun sem heitir \emph{SELECT}. Við sjáum dæmi um SELECT-skipun í næsta undirkafla og kynnumst þeim náið í kafla \ref{kafli:select}.
 
 \section{Sýnidæmi í SQL}
 \label{undirkafli:synidaemi_i_sql}
 Skoðum hvernig búa má til töflu \ref{tafla:starfsmenn_ts} með SQL, setja í hana gögn og sækja gögnin aftur. 
 
-Eins og fram hefur komið þarf til þess að nota SQL-skipanir.
+Eins og fram hefur komið þarf til þess að nota SQL-skipanir. 
 
-\begin{example}[h]
-\caption{CREATE skipun fyrir starfsmannatöfluna}
-\label{sql:k2d1}
+\subsection{Skilgreining gagnagrunns}
+Okkar fyrsta verk verður að vera að búa til gagnagrunn til að setja hana í. Slíka skipun má sjá á sýnidæmi \ref{sql:k2d4-create-database}.
+
+\begin{example}
+\caption{CREATE DATABASE skipun fyrir Tækniskólagagnagrunninn}
+\label{sql:k2d4-create-database}
 \centering
-\sql{sql/k2d1.sql}
+\sql{sql/k2d4-create-database.sql}
 \end{example}
 
-Skipunina til að skilgreina töfluna má sjá á SQL-sýnidæmi \ref{sql:k2d1}. Þetta er mjög dæmigerð skipun til að búa til töflu. Þar kemur fram hvað gera skal (búa til töflu $\rightarrow$ \verb|CREATE TABLE|) og hver dálkheitin eru (nafn, Starfsheiti og netfang). Í kafla \ref{kafli:uppsetningtaflna} skoðum við hin orðin sem koma fyrir í skipuninni og í kafla \ref{undirkafli:keyrslaiworkbench} sjáum við hvernig koma má skipuninni í gagnið.
+Skipunin er ein lína. Hér vill reyndar svo til að hún er nálægt því að vera málfræðilega rétt setning á ensku. Hún er einfaldlega lýsing á því sem við viljum að gagnagrunnskerfið geri fyrir okkur: ``búðu til gagnagrunn með nafnið \verb|taekniskolinn|''!
 
-Hér ber að athuga að enn eru engin gögn komin inn í töfluna. Það má gera með skipuninni í SQL-sýnidæmi \ref{sql:k2d2}.
+Þetta er mjög einkennandi fyrir SQL. Í SQL erum við nær alltaf að lýsa því \emph{hvað} við viljum gera frekar en \emph{hvernig} við gerum það. Þetta gerir SQL frábrugðið flestum vinsælum forritunarmálum.
+
+\subsection{Skilgreining töflu og innsetning gagna}
+Skipunina til að skilgreina töfluna má sjá á SQL-sýnidæmi \ref{sql:k2d1-create-table}. Þetta er mjög dæmigerð skipun til að búa til töflu. Þar kemur fram hvað gera skal (búa til töflu $\rightarrow$ \verb|CREATE TABLE|) og hver dálkheitin eru (nafn, Starfsheiti og netfang). Í kafla \ref{kafli:uppsetningtaflna} skoðum við hin orðin sem koma fyrir í skipuninni og í næsta undirkafla sjáum við hvernig koma má skipuninni í gagnið.
+
+\begin{example}[h]
+\caption{CREATE TABLE skipun fyrir starfsmannatöfluna}
+\label{sql:k2d1-create-table}
+\centering
+\sql{sql/k2d1-create-table.sql}
+\end{example}
+
+Hér ber að athuga að enn eru engin gögn komin inn í töfluna. Það má gera með skipuninni í SQL-sýnidæmi \ref{sql:k2d2-insert}.
 
 \begin{example}[h]
 \caption{INSERT skipun fyrir starfsmannatöfluna}
-\label{sql:k2d2}
+\label{sql:k2d2-insert}
 \centering
 {\small
-\sql{sql/k2d2.sql}
+\sql{sql/k2d2-insert.sql}
 }
 \end{example}
 
-Til að sækja gögn úr töflunni þarf síðan að framkvæma fyrirspurn. Dæmi um fyrirspurn (SQL-skipun) sem finnur nafn þess starfsmanns sem er með netfangið ``kng@tskoli.is'' má sjá á sýnidæmi \ref{sql:k2d3}.
+\subsection{Fyrirspurnir}
+Til að sækja gögn úr töflunni þarf síðan að framkvæma fyrirspurn. Dæmi um fyrirspurn (SQL-skipun) sem finnur nafn þess starfsmanns sem er með netfangið ``kng@tskoli.is'' má sjá á sýnidæmi \ref{sql:k2d3-select}.
 
 \begin{example}[h]
 \caption{SELECT skipun sem finnur Konráð kennara í starfsmannatöflunni}
-\label{sql:k2d3}
+\label{sql:k2d3-select}
 \centering
-\sql{sql/k2d3.sql}
+\sql{sql/k2d3-select.sql}
 \end{example}
+
+Athugum hvað kemur fram í fyrirspurninni. Við getum séð þrjá aðalhluta - lýsingu á því hvað gera skal (finna nafn/\verb|SELECT nafn|), hvaðan upplýsingarnar skulu koma (úr starfsmannatöflunni/\verb|FROM Starfsmenn|) og hvaða \emph{skilyrði} gilda um gögnin sem finna skal (gögnin þar sem netfangið er kng@tskoli.is/\verb|WHERE netfang = "kng@tskoli.is"|). 
 
 \section{Keyrsla í MySQL Workbench}
 \label{undirkafli:keyrslaiworkbench}
@@ -108,16 +128,16 @@ Um nokkur skref er að ræða.
 \begin{enumerate}
  \item Ræsa þarf forritið. Við það birtist upphafsskjár, líkur þeim sem sjá má á mynd \ref{mynd:workbench-upphafsskjar}.\footnote{Útlit MySQL Workbench er eðli málsins samkvæmt örlítið mismunandi eftir stýrikerfum og útgáfum á forritinu. Skjáskotin eru tekin af Workbench útgáfu 6.0, á Linux vél.}
  \item Mynda þarf tengingu við MySQL-server. Henni þarf að gefa nafn, IP-tölu MySQL serversins, notandanafn og lykilorð.\footnote{Nemendur Tölvudeildar Tækniskólans skulu biðja kennarann um þessar upplýsingar.} Sjá mynd \ref{mynd:workbench-login}.
- \item Búa þarf til nýjan gagnagrunn á MySQL-servernum á skjánum sem birtist eftir að tengingin er mynduð. Það er einfaldast að gera með svokallaðri \verb|CREATE DATABASE| skipun, slegin inn í aðalgluggann - sjá mynd \ref{mynd:workbench-create-db}. Þegar þessu er lokið höfum við keyrt okkar fyrstu SQL-skipun!
- \item Skipunin í sýnidæmi \ref{sql:k2d1} er slegin inn í aðalgluggann og keyrð. Taflan er þá komin inn!
+ \item Búa þarf til nýjan gagnagrunn á MySQL-servernum á skjánum sem birtist eftir að tengingin er mynduð. Það er gert með \verb|CREATE DATABASE| skipun, sjá mynd \ref{mynd:workbench-create-db}. Þegar þessu er lokið höfum við keyrt okkar fyrstu SQL-skipun!
+ \item Skipunin í sýnidæmi \ref{sql:k2d1-create-table} er slegin inn í aðalgluggann og keyrð. Taflan er þá komin inn.
 \end{enumerate}
-Ávallt má gera ráð fyrir að SQL-sýnidæmi í þessari bók megi keyra með hliðstæðum hætti - í aðalglugga MySQL Workbench. T.d. mætti keyra sýnidæmi \ref{sql:k2d2} og \ref{sql:k2d3} á þann hátt.
+Ávallt má gera ráð fyrir að SQL-sýnidæmi í þessari bók megi keyra með hliðstæðum hætti - í aðalglugga MySQL Workbench. T.d. mætti keyra sýnidæmi \ref{sql:k2d2-insert} og \ref{sql:k2d3-select} á þann hátt.
 
 \begin{figure*}
 \caption[Upphafsskjár MySQL Workbench]{Upphafsskjár MySQL Workbench. Örin vísar á hnapp sem nota má til að búa til nýja tengingu.}
 \label{mynd:workbench-upphafsskjar}
 \centering
-\includegraphics[width=\linewidth]{myndir/workbench-upphafsskjar-or}
+\includegraphics[width=\linewidth]{myndir/workbench-upphafsskjar}
 \end{figure*}
 
 \begin{figure*}
@@ -131,7 +151,7 @@ Um nokkur skref er að ræða.
 \caption[Nýr gagnagrunnur]{Nýr gagnagrunnur búinn til með MySQL Workbench. Efri örin vísar á hnappinn sem ýta þarf á til að keyra SQL-skipunina. Neðri örin vísar á lista af gagnagrunnum sem sýnilegir eru á servernum. Birtist gagnagrunnurinn sem búinn er til ekki um leið og skipunin er keyrð, hægri-smellið þá á listann og ``refresh''ið hann.}
 \label{mynd:workbench-create-db}
 \centering
-\includegraphics[width=0.8\linewidth]{myndir/workbench-create-db-or}
+\includegraphics[width=0.8\linewidth]{myndir/workbench-create-db}
 \end{figure*}
 
 \begin{figure*}
