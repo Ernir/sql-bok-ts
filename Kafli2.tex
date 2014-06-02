@@ -1,7 +1,23 @@
 SQL er nokkuð sveigjanlegt og yfirgripsmikið mál. 
 Margt er að læra, í þessum áfanga er einungis farið yfir lítið brot af því sem viðfangsefnið hefur upp á að bjóða.
 
-Byrjum á að skoða grundvallaraðgerðirnar í SQL - það að búa til töflur, setja í þær gögn og að skoða gögnin aftur.
+Byrjum á að skoða grundvallaraðgerðirnar í SQL - það að búa gagnagrunn, búa til töflur, setja í töflurnar gögn og að skoða gögnin aftur.
+\section{Gagnagrunnar}
+Fram kom í kafla \ref{kafli:inngangur} að gagnagrunnur sé \emph{skipulagt samansafn af upplýsingum}. Einnig kom fram að upplýsingarnar eru hlutaðar niður með ``töflum''.
+\begin{marginfigure}
+\caption[Uppbygging gagnagrunns]{Uppbygging einfalds gagnagrunns með þremur töflum.}
+\label{mynd:uppbygginggagnagrunns}
+\centering
+\includegraphics[width=\linewidth]{myndir/uppbygging-gagnagrunns}
+\end{marginfigure}
+Hér er vert að taka nokkur atriði fram:
+\begin{itemize}
+ \item Gagnagrunnur er ekki það sama og tölva. Talað er um að gagnagrunnur sé geymdur á tölvu eða jafnvel að tölva keyri gagnagrunns-server. Ein tölva getur geymt marga gagnagrunna.
+ \item Gagnagrunnur er ekki forrit. Forrit, nefnt gagnagrunnskerfi\footnote{Sjá undirkafla \ref{undirkafli:gagnagrunnskerfi} og \ref{undirkafli:helstugagnagrunnskerfi}} keyrir á tölvunni og heldur utan um gagnagrunninn. En gagnagrunnurinn sjálfur er ekki forrit.
+\end{itemize}
+Líkja mætti gagnagrunni við ``möppu'' í tölvu sem inniheldur töflur\footnote{Reyndar getur gagnagrunnur innihaldið ýmislegt annað en töflur. Slík atriði eru tekin fyrir í seinni áföngum.}. Hægt er að búa til gagnagrunna á tölvu, setja í hann töflur og skoða innihald þeirra.
+
+Við sjáum dæmi um hvernig búa má til gagnagrunn í undirkafla \nameref{undirkafli:synidaemi_i_sql}.
 \section{Töflur}
 Gögn í SQL-gagnagrunni má líta á sem raðir í töflum. Því hlýtur mikilvægt skref í því að læra að nota SQL að vera það að skilja uppbyggingu taflna mjög nákvæmlega.
 
@@ -47,17 +63,7 @@ Einfalt er að fletta upp upplýsingum í litlum töflum á borð við töflu \r
 
 Væri taflan örlítið stærri væri verkefnið strax erfiðara. Væri taflan á stærð við símaskrána væri það nær ómögulegt.
 
-Slíkar uppflettingar, stórar og smáar, eru sérsvið SQL. Þær eru nefndar \emph{fyrirspurnir} og eru framkvæmdar með mjög mikilvægri SQL-skipun sem heitir \emph{SELECT}. Við sjáum dæmi um SELECT-skipanir í undirkaflanum \nameref{undirkafli:synidaemi_i_sql} og kynnumst þeim náið í kafla \ref{kafli:select}.
-\section{Gagnagrunnar}
-Ef upplýsingar eru geymdar í töflum, hvað er þá gagnagrunnur?
-
-Gagnagrunnur heldur utan um töflur, eina eða fleiri. Hann bindur þær saman í eina heild og myndar um þær umgjörð.
-\begin{marginfigure}
-\centering
-\caption{Uppbygging gagnagrunns}
-\label{mynd:uppbygging}
-\color{red} Hingað kemur falleg mynd af uppbyggingu gagnagrunna.
-\end{marginfigure}
+Slíkar uppflettingar, stórar og smáar, eru sérsvið SQL. Þær eru nefndar \emph{fyrirspurnir} og eru framkvæmdar með mjög mikilvægri SQL-skipun sem heitir \emph{SELECT}. Við sjáum dæmi um SELECT-skipanir í undirkafla \nameref{undirkafli:synidaemi_i_sql} og kynnumst þeim náið í kafla \ref{kafli:select}.
 
 \section{Sýnidæmi í SQL}
 \label{undirkafli:synidaemi_i_sql}
