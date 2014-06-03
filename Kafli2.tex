@@ -6,27 +6,26 @@ Byrjum á að skoða grundvallaraðgerðirnar í SQL - það að búa gagnagrunn
 Fram kom í kafla \ref{kafli:inngangur} að gagnagrunnur sé \emph{skipulagt samansafn af upplýsingum}. Einnig kom fram að upplýsingarnar eru hlutaðar niður með ``töflum''.
 \begin{marginfigure}
 \caption[Uppbygging gagnagrunns]{Uppbygging einfalds gagnagrunns með þremur töflum}
-\label{mynd:uppbygginggagnagrunns}
+\label{mynd:uppbygging-gagnagrunns}
 \centering
 \includegraphics[width=\linewidth]{myndir/uppbygging-gagnagrunns}
 \end{marginfigure}
 Hér er vert að taka nokkur atriði fram:
 \begin{itemize}
  \item Gagnagrunnur er ekki það sama og tölva. Talað er um að gagnagrunnur sé geymdur á tölvu eða jafnvel að tölva keyri gagnagrunns-server. Ein tölva getur geymt marga gagnagrunna.
- \item Gagnagrunnur er ekki forrit. Forrit, nefnt gagnagrunnskerfi\footnote{Sjá undirkafla \ref{undirkafli:gagnagrunnskerfi} og \ref{undirkafli:helstugagnagrunnskerfi}} keyrir á tölvunni og heldur utan um gagnagrunninn. En gagnagrunnurinn sjálfur er ekki forrit.
+ \item Gagnagrunnur er ekki forrit. Forrit, nefnt gagnagrunnskerfi\footnote{Sjá undirkafla \ref{undirkafli:gagnagrunnskerfi} og \ref{undirkafli:helstu-gagnagrunnskerfi}} keyrir á tölvunni og heldur utan um gagnagrunninn. En gagnagrunnurinn sjálfur er ekki forrit.
 \end{itemize}
 Líkja mætti gagnagrunni við ``möppu'' í tölvu sem inniheldur töflur\footnote{Reyndar getur gagnagrunnur innihaldið ýmislegt annað en töflur. Slík atriði eru tekin fyrir í seinni áföngum.}. Hægt er að búa til gagnagrunna á tölvu, setja í hann töflur og skoða innihald þeirra.
 
-Við sjáum dæmi um hvernig búa má til gagnagrunn í undirkaflanum \nameref{undirkafli:synidaemi_i_sql}.
+Við sjáum dæmi um hvernig búa má til gagnagrunn í undirkafla \ref{undirkafli:synidaemi-i-sql}.
 \section{Töflur}
 Gögn í SQL-gagnagrunni má líta á sem raðir í töflum. Því hlýtur mikilvægt skref í því að læra að nota SQL að vera það að skilja uppbyggingu taflna mjög nákvæmlega.
-
 Lítum fyrst á dæmigerða töflu.
 
 \begin{table}
 \centering
 \caption[Nokkrir starfsmenn Tækniskólans]{Nokkrir starfsmenn Tækniskólans}
-\label{tafla:starfsmenn_ts}
+\label{tafla:starfsmenn-ts}
 \begin{tabular}{lll}
 \toprule
 Nafn&Starfsheiti&Netfang\\
@@ -57,19 +56,19 @@ En þetta á en líka við töflur sem við skilgreinum með SQL-skipunum. SQL-t
 
 Þegar töflur eru sýndar á prenti er venjan að dálkheitin komi fram í fyrstu línu töflunnar (og oftast aðskilin gögnunum með striki). Gögnin koma fram í næstu línum.
 
-Þegar SQL er notað til að lýsa töflum eru dálkheitin og aðrar upplýsingar sem skilgreina töfluna sjálfa búnar til með sérstökum skipunum. Aðrar skipanir eru notaðar til að vinna með gögnin sjálf. Við sjáum dæmi um þessar skipanir í undirkaflanum \nameref{undirkafli:synidaemi_i_sql}. \footnote{Farið í muninn á skipunum sem skilgreina töflur og skipunum sem vinna með gögn í kafla \ref{kafli:uppfaera}.}
+Þegar SQL er notað til að lýsa töflum eru dálkheitin og aðrar upplýsingar sem skilgreina töfluna sjálfa búnar til með sérstökum skipunum. Aðrar skipanir eru notaðar til að vinna með gögnin sjálf. Við sjáum dæmi um þessar skipanir í undirkafla \ref{undirkafli:synidaemi-i-sql}. \footnote{Farið í muninn á skipunum sem skilgreina töflur og skipunum sem vinna með gögn í kafla \ref{kafli:uppfaera}.}
 \section{Fyrirspurnir}
 Ekki er mikið gagn í því að geyma upplýsingar í töfluformi nema að hægt sé að ná í þær aftur.
 
-Einfalt er að fletta upp upplýsingum í litlum töflum á borð við töflu \ref{tafla:starfsmenn_ts} þegar þær eru prentaðar út. Viljum við t.d. komast að því hver er með netfangið ``kng@tskoli.is'' dugar okkur að láta augun reika yfir töfluna þar til við rekumst á netfangið og líta svo í starfsmannadálkinn.
+Einfalt er að fletta upp upplýsingum í litlum töflum á borð við töflu \ref{tafla:starfsmenn-ts} þegar þær eru prentaðar út. Viljum við t.d. komast að því hver er með netfangið ``kng@tskoli.is'' dugar okkur að láta augun reika yfir töfluna þar til við rekumst á netfangið og líta svo í starfsmannadálkinn.
 
 Væri taflan örlítið stærri væri verkefnið strax erfiðara. Væri taflan á stærð við símaskrána væri það nær ómögulegt.
 
-Slíkar uppflettingar, stórar og smáar, eru sérsvið SQL. Þær eru nefndar \emph{fyrirspurnir} og eru framkvæmdar með mjög mikilvægri SQL-skipun sem heitir \emph{SELECT}. Við sjáum dæmi um SELECT-skipun í næsta undirkafla og kynnumst þeim náið í kafla \ref{kafli:select}.
+Slíkar uppflettingar, stórar og smáar, eru sérsvið SQL. Þær eru nefndar \emph{fyrirspurnir} og eru framkvæmdar með mjög mikilvægri SQL-skipun sem heitir \emph{SELECT}. Við sjáum dæmi um SELECT-skipun í næsta undirkafla (\ref{undirkafli:synidaemi-i-sql}) og kynnumst þeim náið í kafla \ref{kafli:select}.
 
 \section{Sýnidæmi í SQL}
-\label{undirkafli:synidaemi_i_sql}
-Skoðum hvernig búa má til töflu \ref{tafla:starfsmenn_ts} með SQL, setja í hana gögn og sækja gögnin aftur. 
+\label{undirkafli:synidaemi-i-sql}
+Skoðum hvernig búa má til töflu \ref{tafla:starfsmenn-ts} með SQL, setja í hana gögn og sækja gögnin aftur. 
 
 Eins og fram hefur komið þarf til þess að nota SQL-skipanir. 
 
@@ -121,7 +120,7 @@ Til að sækja gögn úr töflunni þarf síðan að framkvæma fyrirspurn. Dæm
 Athugum hvað kemur fram í fyrirspurninni. Við getum séð þrjá aðalhluta - lýsingu á því hvað gera skal (finna nafn/\verb|SELECT nafn|), hvaðan upplýsingarnar skulu koma (úr starfsmannatöflunni/\verb|FROM Starfsmenn|) og hvaða \emph{skilyrði} gilda um gögnin sem finna skal (gögnin þar sem netfangið er kng@tskoli.is/\verb|WHERE netfang = "kng@tskoli.is"|). 
 
 \section{Keyrsla í MySQL Workbench}
-\label{undirkafli:keyrslaiworkbench}
+\label{undirkafli:keyrsla-i-workbench}
 Lítum örstutt á hvernig nota má MySQL Workbench til að búa til okkar fyrstu töflu með SQL.
 
 Um nokkur skref er að ræða.
