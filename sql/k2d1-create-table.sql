@@ -1,7 +1,7 @@
 CREATE TABLE Starfsmenn
 (
-    nafn VARCHAR(50),
-    starfsheiti VARCHAR(20),
-    netfang VARCHAR(20),
-    id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT
+  nafn VARCHAR(50),
+  starfsheiti VARCHAR(20),
+  netfang VARCHAR(20),
+  id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT
 );
