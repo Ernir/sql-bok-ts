@@ -1,5 +1,37 @@
+Í kafla \ref{undirkafli:synidaemi-i-sql} sáum við dæmi um hvernig búa má til töflu með SQL-skipun. Hins vegar eyddum við ekki sérstaklega miklum tíma í að reyna að skilja hvernig skipunin er uppbyggð, hvað öll lykilorðin sem fram komu þýddu eða hvað er leyfilegt. Viðfangsefni kaflans sem við erum stödd í núna verður að leiðrétta þennan trassaskap og sökkva okkur í töflugerð.
 \section{Að búa til töflu} % CREATE
-\section{Helstu gagnagerðir} % INT, VARCHAR, CHAR, DATE
+Tökum skref aftur á bak frá og athugum hversu einfalda töflu við getum búið til. Hún er líklega eitthvað á þá leið sem sjá má á sýnidæmi \ref{sql:k3d1-create-table-fallegt}.
+
+\begin{example}[h]
+\caption{Mjög einföld tafla}
+\label{sql:k3d1-create-table-fallegt}
+\centering
+\sql{sql/k3d1-create-table-fallegt.sql}
+\end{example}
+
+Skoðum þessa skipun nú mjög vandlega.
+\begin{itemize}
+ \item Hún hefst á að lýsa yfir hvað gera skal - hér er það \verb|CREATE TABLE|. Næst kemur nafn töflunnar fram.
+ \item Þegar nafn töflunnar hefur verið gefið opnast svigi.
+ \item Inni í sviganum kemur nafnið á einum dálki og orðið \verb|INTEGER|\footnote{Merkingin á þessum lykilorðum sem við höfum séð á eftir dálkheitunum, \emph{INTEGER} og \emph{VARCHAR}, útskýrist í næsta undirkafla (\ref{undirkafli:gagnagerdir}).}. Hér er einungis einn dálkur.
+ \item Skipuninni lýkur á því að sviganum er lokað og semíkomma (;) sett á eftir.
+\end{itemize}
+
+Skoðum næst sýnidæmi \ref{sql:k3d2-create-table-meira-fallegt}, sem er \emph{örlítið} stærra.
+\begin{example}[h]
+\caption{Einföld tafla}
+\label{sql:k3d2-create-table-meira-fallegt}
+\centering
+\sql{sql/k3d2-create-table-meira-fallegt.sql}
+\end{example}
+
+Hér sjáum við ágætlega hvernig bæta má við öðrum dálki. Fyrsta dálklýsingin er skrifuð, síðan kemur komma, síðan fylgir næsta dálklýsing.
+
+Athugum að engin komma er á eftir síðustu dálklýsingunni. Það er vegna þess að dálkarnir eru einungis \emph{aðskildir} með kommum, komman er ekki hluti af dálklýsingunni sjálfri.
+\section{Helstu gagnagerðir} % INTEGER (INT), VARCHAR, CHAR, DATE
+\label{undirkafli:gagnagerdir}
+Einni stórri spurningu um síðustu tvö dæmi er enn ósvarað - hvað er þetta \verb|INTEGER|?
 \section{Tóm gildi} % NULL, NOT NULL
 \section{Innsetning gagna} % INSERT
+\section{Aðallyklar} %PRIMARY KEY
 \section{Að eyða töflum} % DROP
