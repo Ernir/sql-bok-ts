@@ -3,7 +3,7 @@
 Tökum skref aftur á bak frá og athugum hversu einfalda töflu við getum búið til. Hún er líklega eitthvað á þá leið sem sjá má á sýnidæmi \ref{sql:k3d1-create-table-fallegt}.
 
 \begin{example}[h]
-\caption{Mjög einföld tafla}
+\caption[Mjög einföld tafla]{Mjög einföld tafla. Athugum að ``NafnToflu'' og ``nafnDalks'' er ekki hluti af SQL-málinu, heldur bara dæmi um hvernig heiti á töflum og dálkum eru skilgreind.}
 \label{sql:k3d1-create-table-fallegt}
 \centering
 \sql{sql/k3d1-create-table-fallegt.sql}
@@ -31,6 +31,40 @@ Athugum að engin komma er á eftir síðustu dálklýsingunni. Það er vegna �
 \section{Helstu gagnagerðir} % INTEGER (INT), VARCHAR, CHAR, DATE
 \label{undirkafli:gagnagerdir}
 Einni stórri spurningu um síðustu tvö dæmi er enn ósvarað - hvað er þetta \verb|INTEGER|?
+
+Integer er dæmi um svokallaða gagnagerð\footnote{e. \emph{data type}}. Nánar til tekið er þetta gagnagerð sem táknar heiltölur, tölur eins og töluna $1$, töluna $42$ og töluna $-256$. Þegar \verb|INTEGER| kemur fyrir í dálkskilgreiningu erum við sem sagt að segja gagnagrunnskerfinu að við munum einungis geyma heiltölur í þessum dálki.
+
+Skoðum nokkrar helstu gagnagerðir í MySQL og hvenær við notum þær.
+\subsection{INTEGER}
+Fram hefur komið að \verb|INTEGER| dálkur geymi heiltölur. Hann tekur ekki við kommutölum.\footnote{Í stað \emph{INTEGER} má skrifa styttinguna \emph{INT}, sem hefur sömu áhrif.}
+
+Lægsta talan sem slíkur dálkur getur geymt er $-2147483648$ og sú hæsta $2147483647$. Ástæðan fyrir því að lægri og hærri tölur en þessar valda villum er sú að MySQL notar einungis fjögur bæti til að geyma hverja heiltölu - hærri og lægri tölur komast ekki fyrir í svo litlu geymsluplássi.
+
+Sé nauðsynlegt að geyma tölur sem ekki passa inn á þetta bil má nota gagnagerðina \verb|BIGINT| í stað \verb|INTEGER|. Slíkur dálkur geymir einnig heiltölur, en hefur átta bæti til að geyma hverja tölu. \verb|BIGINT| dálkur getur því geymt mun stærri (eða ``lengri'') tölur.
+
+Sé vitað að tölurnar sem fara inn í dálkinn séu allar mjög litlar um sig má nota gagnagerðirnar \verb|TINYINT|, \verb|SMALLINT| og \verb|MEDIUMINT| í MySQL. Þær taka hver um sig $1$, $2$ og $3$ bæti til að geyma hverja tölu. Sjaldnast er ástæða til að nota þessar gagnagerðir í dag. Tafla þyrfti að innihalda tugi milljóna raða\footnote{Reyndar eru í dag til gagnagrunnstöflur til sem innihalda \emph{hundruðir milljarða} raða.} til að plásssparnaðurinn gæti skipt máli á nútíma tölvukerfum.
+
+Ef sérstök skilyrði koma ekki upp er best og einfaldast að halda sig við \verb|INTEGER| til að geyma heiltölur. Þetta getur sérstaklega borgað sig ef seinna reynist nauðsynlegt að færa gagnagrunninn á milli gagnagrunnskerfa - sum gagnagrunnskerfi styðja ekki allar gagnagerðirnar sem MySQL býður upp á. Gamla góða \verb|INTEGER| er hins vegar alltaf til staðar.
+
+\paragraph{Varúð: Íslenskar kennitölur} Freistandi getur verið að geyma kennitölur í heiltöludálkum. Þær eru jú kommulausar tölur, ekki satt? Nokkur atriði leiða þó til þess að þær passa ekki mjög vel í slíka dálka.
+
+\begin{itemize}
+ \item Stærsta tala sem hægt er að geyma í venjulegum \verb|INTEGER| dálki er $2147483647$. Það þýðir að kennitölur allra sem fæddir eru á 22. degi mánaðar eða seinna komast ekki fyrir í dálkinum! \verb|BIGINT| þyrfti að nota.
+ \item Kennitölur eru ekki notaðar eins og flestar tölur. Þær eru t.d. ekki lagðar saman eða bornar saman með $<$ og $>$ virkjum. Við þurfum oftar að skoða ákveðna stafi í kennitölunni (t.d. fimmta og sjötta stafinn til að komast að fæðingarári) frekar en stærð tölunnar sjálfrar.
+ \item Kennitölur eru venjulega skrifaðar með bandstrikum, sem eiga ekki heima í heiltöludálki.
+\end{itemize}
+Vænlegra er að nota \verb|CHAR| dálk til að geyma kennitölur. Lítum á þá gagnagerð í næsta kafla!
+
+\subsection{VARCHAR og CHAR}
+
+\subsection{DOUBLE}
+
+\subsection{DECIMAL}
+
+\subsection{DATE}
+
+\subsection{BOOLEAN}
+
 \section{Tóm gildi} % NULL, NOT NULL
 \section{Innsetning gagna} % INSERT
 \section{Aðallyklar} %PRIMARY KEY
