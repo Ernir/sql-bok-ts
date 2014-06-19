@@ -44,7 +44,32 @@ Sé nauðsynlegt að geyma tölur sem ekki passa inn á þetta bil má nota gagn
 
 Sé vitað að tölurnar sem fara inn í dálkinn séu allar mjög litlar um sig má nota gagnagerðirnar \verb|TINYINT|, \verb|SMALLINT| og \verb|MEDIUMINT| í MySQL. Þær taka hver um sig $1$, $2$ og $3$ bæti til að geyma hverja tölu. Sjaldnast er ástæða til að nota þessar gagnagerðir í dag. Tafla þyrfti að innihalda tugi milljóna raða\footnote{Reyndar eru í dag til gagnagrunnstöflur til sem innihalda \emph{hundruðir milljarða} raða.} til að plásssparnaðurinn gæti skipt máli á nútíma tölvukerfum.
 
+\begin{table}
+\centering
+\caption[Heiltöludálkar]{Heiltölugagnagerðir í MySQL og stærðir þeirra.}
+\label{tafla:heiltolur}
+\begin{tabular}{llll}
+\toprule
+Nafn&Stærð í&Lægsta gildi&Hæsta gildi\\
+&bætum&&\\
+\midrule
+\verb|TINYINT|&1&$-128$&$127$\\
+\verb|SMALLINT|&2&$-32768$&$32767$\\
+\verb|MEDIUMINT|&3&$-8388608$&$8388607$\\
+\verb|INT|&4&$-2147483648$&$2147483647$\\
+\verb|BIGINT|&8&$-9223372036854775808$&$9223372036854775807$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
 Ef sérstök skilyrði koma ekki upp er best og einfaldast að halda sig við \verb|INTEGER| til að geyma heiltölur. Þetta getur sérstaklega borgað sig ef seinna reynist nauðsynlegt að færa gagnagrunninn á milli gagnagrunnskerfa - sum gagnagrunnskerfi styðja ekki allar gagnagerðirnar sem MySQL býður upp á. Gamla góða \verb|INTEGER| er hins vegar alltaf til staðar.
+
+\begin{example}
+\caption[Heiltölur]{CREATE TABLE skipun sem gæti búið til töflu \ref{tafla:heiltolur} í MySQL. Hér er einfaldur \emph{INTEGER} dálkur notaður til að geyma fjölda bæta, \emph{BIGINT} þarf til að geyma lengstu tölurnar.}
+\label{sql:k3d3-heiltolur}
+\centering
+\sql{sql/k3d3-heiltolur.sql}
+\end{example}
 
 \paragraph{Varúð: Íslenskar kennitölur} Freistandi getur verið að geyma kennitölur í heiltöludálkum. Þær eru jú kommulausar tölur, ekki satt? Nokkur atriði leiða þó til þess að þær passa ekki mjög vel í slíka dálka.
 
@@ -56,6 +81,7 @@ Ef sérstök skilyrði koma ekki upp er best og einfaldast að halda sig við \v
 Vænlegra er að nota \verb|CHAR| dálk til að geyma kennitölur. Lítum á þá gagnagerð í næsta kafla!
 
 \subsection{VARCHAR og CHAR}
+
 
 \subsection{DOUBLE}
 
