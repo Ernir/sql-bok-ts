@@ -1,3 +1,3 @@
 SELECT nafn
 FROM Starfsmenn
-WHERE netfang = "kng@tskoli.is";
+WHERE netfang = 'kng@tskoli.is';
