@@ -35,14 +35,14 @@ Einni stórri spurningu um síðustu tvö dæmi er enn ósvarað - hvað er þet
 Integer er dæmi um svokallaða gagnagerð\footnote{e. \emph{data type}}. Nánar til tekið er þetta gagnagerð sem táknar heiltölur, tölur eins og töluna $1$, töluna $42$ og töluna $-256$. Þegar \verb|INTEGER| kemur fyrir í dálkskilgreiningu erum við sem sagt að segja gagnagrunnskerfinu að við munum einungis geyma heiltölur í þessum dálki.
 
 Skoðum nokkrar helstu gagnagerðir í MySQL og hvenær við notum þær.
-\subsection{INTEGER}
+\subsection{Heiltölur - INTEGER}
 Fram hefur komið að \verb|INTEGER| dálkur geymi heiltölur. Hann tekur ekki við kommutölum.\footnote{Í stað \emph{INTEGER} má skrifa styttinguna \emph{INT}, sem hefur sömu áhrif.}
 
 Lægsta talan sem slíkur dálkur getur geymt er $-2147483648$ og sú hæsta $2147483647$. Ástæðan fyrir því að lægri og hærri tölur en þessar valda villum er sú að MySQL notar einungis fjögur bæti til að geyma hverja heiltölu - hærri og lægri tölur komast ekki fyrir í svo litlu geymsluplássi.
 
 Sé nauðsynlegt að geyma tölur sem ekki passa inn á þetta bil má nota gagnagerðina \verb|BIGINT| í stað \verb|INTEGER|. Slíkur dálkur geymir einnig heiltölur, en hefur átta bæti til að geyma hverja tölu. \verb|BIGINT| dálkur getur því geymt mun stærri (eða ``lengri'') tölur.
 
-Sé vitað að tölurnar sem fara inn í dálkinn séu allar mjög litlar um sig má nota gagnagerðirnar \verb|TINYINT|, \verb|SMALLINT| og \verb|MEDIUMINT| í MySQL. Þær taka hver um sig $1$, $2$ og $3$ bæti til að geyma hverja tölu. Sjaldnast er ástæða til að nota þessar gagnagerðir í dag. Tafla þyrfti að innihalda tugi milljóna raða\footnote{Reyndar eru í dag til gagnagrunnstöflur til sem innihalda \emph{hundruðir milljarða} raða.} til að plásssparnaðurinn gæti skipt máli á nútíma tölvukerfum.
+Sé vitað að tölurnar sem fara inn í dálkinn séu allar mjög litlar um sig má nota gagnagerðirnar \verb|TINYINT|, \verb|SMALLINT| og \verb|MEDIUMINT| í MySQL. Þær taka hver um sig $1$, $2$ og $3$ bæti til að geyma hverja tölu. Sjaldnast er ástæða til að nota þessar gagnagerðir í dag. Tafla þyrfti að innihalda tugi milljóna raða\footnote{Reyndar eru í dag til gagnagrunnstöflur sem innihalda \emph{hundruðir milljarða} raða.} til að plásssparnaðurinn gæti skipt máli á nútíma tölvukerfum.
 
 \begin{table}
 \centering
@@ -71,7 +71,7 @@ Ef sérstök skilyrði koma ekki upp er best og einfaldast að halda sig við \v
 \sql{sql/k3d3-heiltolur.sql}
 \end{example}
 
-\paragraph{Varúð: Íslenskar kennitölur} Freistandi getur verið að geyma kennitölur í heiltöludálkum. Þær eru jú kommulausar tölur, ekki satt? Nokkur atriði leiða þó til þess að þær passa ekki mjög vel í slíka dálka.
+\newthought{Íslenskar kennitölur} eru varhugaverðar. Freistandi getur verið að geyma kennitölur í heiltöludálkum. Þær eru jú kommulausar tölur, ekki satt? Nokkur atriði leiða þó til þess að þær passa ekki mjög vel í slíka dálka.
 
 \begin{itemize}
  \item Stærsta tala sem hægt er að geyma í venjulegum \verb|INTEGER| dálki er $2147483647$. Það þýðir að kennitölur allra sem fæddir eru á 22. degi mánaðar eða seinna komast ekki fyrir í dálkinum! \verb|BIGINT| þyrfti að nota.
@@ -80,18 +80,33 @@ Ef sérstök skilyrði koma ekki upp er best og einfaldast að halda sig við \v
 \end{itemize}
 Vænlegra er að nota \verb|CHAR| dálk til að geyma kennitölur. Lítum á þá gagnagerð í næsta kafla!
 
-\subsection{VARCHAR og CHAR}
+\subsection{Texti - VARCHAR og CHAR}
+Í forritun lítum við oftast á texta sem safn af stöfum, SQL er hér engin undantekning. Slíkt safn er kallað strengur\footnote{e. \emph{string}}. \verb|'Ari'|, \verb|'Ari sá sól'| og \verb|'Ari á 10 krónur'| eru allt dæmi um strengi. 
 
+Eins og sjá má eru strengir afmarkaðir með gæsalöppum. Mikilvægt er að gleyma þeim ekki þegar strengir eru slegnir inn (sjá kafla \ref{undirkafli:innsetning}). Þær eru aðalleiðin sem gagnagrunnskerfið hefur til að vita hvort að um streng eða dálkheiti sé að ræða. 
 
-\subsection{DOUBLE}
+Venja er að nota einfaldar gæsalappir (\verb|'|) í SQL til að afmarka strengi. Tvöfaldar gæsalappir (\verb|"|) virka líka í MySQL.
 
-\subsection{DECIMAL}
+Talað er um að strengur hafi ákveðna \emph{lengd}. Lengd strengs er fjöldi stafa í strengnum, að bilum meðtöldum. Gæsalappirnar eru ekki taldar með, þær umlykja strenginn en eru ekki hluti af honum. Þannig er \verb|'Ari'| strengur af lengd 3, \verb|'Ari sá sól'| er strengur af lengd 10.
 
-\subsection{DATE}
+Strengir geta innihaldið næstum hvaða stafi sem er, líka tölustafi. \verb|'Ari á 10 krónur'| er löglegur strengur. Strengur getur meira að segja innihaldið ekkert nema tölustafi. \verb|"10"| er strengur, $10$ er heiltala.
 
-\subsection{BOOLEAN}
+\newthought{Til að geyma texta} höfum við nokkrar gagnagerðir, líkt og við höfum nokkrar gagnagerðir til að geyma heiltölur. Þær helstu eru \verb|CHAR| og \verb|VARCHAR|. ``Char'' stendur hér fyrir enska orðið ``character'', sem þýða má sem ``stafur''. ``Var'' í \verb|VARCHAR| stendur fyrir ``variable''. 
+
+Þegar \verb|CHAR| og \verb|VARCHAR| gagnagerðirnar eru notaðar þurfum við að taka fram hversu langa strengi dálkurinn á að geta tekið við\footnote{Oft er talað um ``breidd'' á þessum dálkum. Til að strengur af lengd $5$ komist inn í dálk þarf dálkurinn að vera $5$ stafa breiður.}. Þetta er gert með því að setja hámarkslengdina inn í sviga. \verb|CHAR(3)| er dálkur sem tekur við strengjum af lengd 3.
+
+Sé strengur sem er of langur settur inn í \verb|CHAR| dálk er klippt af hægri enda hans svo að hann passi. Væri t.d. reynt að geyma \verb|'Ari sá sól'| í \verb|CHAR(5)| dálk væri útkoman \verb|'Ari s'|. Sé strengurinn of stuttur er bilum bætt við til hægri. Þannig yrði strengurinn \verb*|'Ari sá sól'| að \verb*|'Ari sá sól     '| væri hann settur inn í \verb|CHAR(15)| dálk.
+
+\subsection{Tugabrot - DECIMAL}
+
+\subsection{Rauntölur - DOUBLE}
+
+\subsection{Dagsetningar - DATE}
+
+\subsection{Rökbreytur - BOOLEAN}
 
 \section{Tóm gildi} % NULL, NOT NULL
 \section{Innsetning gagna} % INSERT
+\label{undirkafli:innsetning}
 \section{Aðallyklar} %PRIMARY KEY
 \section{Að eyða töflum} % DROP
