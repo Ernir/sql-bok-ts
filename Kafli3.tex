@@ -2,7 +2,7 @@
 \section{Að búa til töflu} % CREATE
 Tökum skref aftur á bak frá og athugum hversu einfalda töflu við getum búið til. Hún er líklega eitthvað á þá leið sem sjá má á sýnidæmi \ref{sql:k3d1-create-table-fallegt}.
 
-\begin{example}[h]
+\begin{example}
 \caption[Mjög einföld tafla]{Mjög einföld tafla. Athugum að ``NafnToflu'' og ``nafnDalks'' er ekki hluti af SQL-málinu, heldur bara dæmi um hvernig heiti á töflum og dálkum eru skilgreind.}
 \label{sql:k3d1-create-table-fallegt}
 \centering
@@ -18,7 +18,7 @@ Skoðum þessa skipun nú mjög vandlega.
 \end{itemize}
 
 Skoðum næst sýnidæmi \ref{sql:k3d2-create-table-meira-fallegt}, sem er \emph{örlítið} stærra.
-\begin{example}[h]
+\begin{example}
 \caption{Einföld tafla}
 \label{sql:k3d2-create-table-meira-fallegt}
 \centering
@@ -28,11 +28,90 @@ Skoðum næst sýnidæmi \ref{sql:k3d2-create-table-meira-fallegt}, sem er \emph
 Hér sjáum við ágætlega hvernig bæta má við öðrum dálki. Fyrsta dálklýsingin er skrifuð, síðan kemur komma, síðan fylgir næsta dálklýsing.
 
 Athugum að engin komma er á eftir síðustu dálklýsingunni. Það er vegna þess að dálkarnir eru einungis \emph{aðskildir} með kommum, komman er ekki hluti af dálklýsingunni sjálfri.
-\section{Helstu gagnagerðir} % INTEGER (INT), VARCHAR, CHAR, DATE
-\label{undirkafli:gagnagerdir}
-Einni stórri spurningu um síðustu tvö dæmi er enn ósvarað - hvað er þetta \verb|INTEGER|?
+\section{Innsetning gagna} % INSERT
+\label{undirkafli:innsetning}
+Þegar töflur eru búnar til með \verb|CREATE TABLE| skipun eru þær tómar. Til að fylla töflu með gögnum þarf að nota aðra skipun - \verb|INSERT|. Til að setja töluna $1$ inn í töfluna sem við bjuggum til með sýnidæmi \ref{sql:k3d1-create-table-fallegt} mætti nota \verb|INSERT| skipunina í sýnidæmi \ref{sql:k3d8-insert-einfalt}.
 
-Integer er dæmi um svokallaða gagnagerð\footnote{e. \emph{data type}}. Nánar til tekið er þetta gagnagerð sem táknar heiltölur, tölur eins og töluna $1$, töluna $42$ og töluna $-256$. Þegar \verb|INTEGER| kemur fyrir í dálkskilgreiningu erum við sem sagt að segja gagnagrunnskerfinu að við munum einungis geyma heiltölur í þessum dálki.
+\begin{example}
+\caption[INSERT í einfalda töflu]{INSERT í einfalda töflu. Þessi skipun setur töluna $1$ inn dálkinn \emph{nafnDalks}. Niðurstaðan er tafla \ref{tafla:insert-einfalt}.}
+\label{sql:k3d8-insert-einfalt}
+\centering
+\sql{sql/k3d8-insert-einfalt.sql}
+\end{example}
+
+Skoðum þessa skipun í smáatriðum líka. 
+
+\begin{itemize}
+ \item Aftur hefst skipunin á því að lýsa því yfir hvað gera skal. Hér ætlum við að setja inn gögn - \verb|INSERT|. Við ætlum að setja gögnin inn í eitthvað, svo við segjum \verb|INSERT INTO|.
+ \item Næst kemur nafn töflunnar sem gögnin eiga að fara í. %Gagnagrunnskerfið getur ekki giskað á hvert gögnin eiga að fara. %Við verðum að taka það fram.
+ \item Svigi opnast, nafn dálksins sem gögnin eiga að fara inn í er skrifað og sviginn lokast.\footnote{Strangt til tekið er hægt að sleppa þessum sviga. Gagnagrunnskerfið reynir þá að setja gögnin inn í þá dálka sem það finnur í töflunni. Þessar ágiskanir geta verið til vandræða, betra er að venja sig á að taka dálkheitin alltaf fram.}
+ \item Að lokum segjum við hvað við ætlum að setja inn. Það eru gögn (eða ``gildi'', \verb|VALUES|). Gögnin sem við ætlum að setja inn er ein lína, sem við afmörkum með svigum. Línan samanstendur af einni tölu. Sem fyrr lokum við skipuninni með semíkommu.
+\end{itemize}
+
+\begin{table}
+\centering
+\caption[Eftir einfalt INSERT]{Niðurstaðan eftir að sýnidæmi \ref{sql:k3d1-create-table-fallegt} og \ref{sql:k3d8-insert-einfalt} hafa verið keyrð - ofurlítil tafla með einum dálki og einni línu af gögnum.}
+\label{tafla:insert-einfalt}
+\begin{tabular}{l}
+\toprule
+nafnDalks\\
+\midrule
+1\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Mikilvægt er að vita að \verb|INSERT| skipun setur alltaf inn \emph{heila línu} af gögnum í töfluna. Sé taflan með fleiri en einn dálk (Flestar töflur sem ekki eru gagnslausar hafa fleiri en einn dálk.) þarf að skilgreina öll gögnin í einu. Sýnidæmi \ref{sql:k3d9-insert-margir-dalkar} er dæmi um slíkt.
+
+\begin{example}
+\caption[INSERT í tvo dálka í einu]{INSERT í tvo dálka í einu. Þessi skipun setur tölurnar $1$ og $2$ inn í sömu línu. Niðurstaðan er tafla \ref{tafla:insert-margir-dalkar}.}
+\label{sql:k3d9-insert-margir-dalkar}
+\centering
+\sql{sql/k3d9-insert-margir-dalkar.sql}
+\end{example}
+
+\begin{table}
+\centering
+\caption[Eftir INSERT á línu]{Niðurstaðan eftir að sýnidæmi \ref{sql:k3d2-create-table-meira-fallegt} og \ref{sql:k3d9-insert-margir-dalkar} hafa verið keyrð. Tafla með tveimur dálkum og einni línu af gögnum.}
+\label{tafla:insert-margir-dalkar}
+\begin{tabular}{ll}
+\toprule
+nafnFyrstaDalks&nafnAnnarsDalks\\
+\midrule
+1&2\\
+\bottomrule
+\end{tabular}
+\end{table}
+Til að skrifa meira en eina línu af gögnum inn í gagnagrunn má keyra \verb|INSERT| skipun oftar en einu sinni. Væri skipunin í sýnidæmi \ref{tafla:insert-margir-dalkar} keyrð tvisvar myndi línan sem hún lýsir vera tvítekin í töflunni.
+
+Það að skrifa alla \verb|INSERT INTO| romsuna upp upp á nýtt fyrir hverja línu sem setja skal inn getur verið þreytandi. Þess vegna býður MySQL upp á leið til að setja inn margar línur í einu. Við sjáum dæmi um það í sýnidæmi \ref{sql:k3d10-insert-margar-linur}.
+
+\begin{example}
+\caption[INSERT í tvo dálka í einu]{INSERT í tvo dálka í einu. Þessi skipun setur tölurnar $1$ og $2$ inn í eina línu og tölurnar $3$ og $4$ í þá næstu. Niðurstaðan er tafla \ref{tafla:insert-margar-linur}.}
+\label{sql:k3d10-insert-margar-linur}
+\centering
+\sql{sql/k3d10-insert-margar-linur.sql}
+\end{example}
+
+\begin{table}
+\centering
+\caption[Eftir INSERT á tveimur línum]{Niðurstaðan eftir að sýnidæmi \ref{sql:k3d2-create-table-meira-fallegt} og \ref{sql:k3d10-insert-margar-linur} hafa verið keyrð. Tafla með tveimur dálkum og tveimur línum af gögnum.}
+\label{tafla:insert-margar-linur}
+\begin{tabular}{ll}
+\toprule
+nafnFyrstaDalks&nafnAnnarsDalks\\
+\midrule
+1&2\\
+3&4\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Algengar gagnagerðir: Tölur og texti} % INTEGER (INT), VARCHAR, CHAR
+\label{undirkafli:gagnagerdir}
+Einni stórri spurningu um \verb|CREATE TABLE| dæmin framar í þessum kafla er enn ósvarað - hvað er þetta \verb|INTEGER|?
+
+Integer er dæmi um svokallaða gagnagerð\footnote{e. \emph{data type}}. Nánar til tekið er þetta gagnagerð sem táknar heiltölur, tölur eins og töluna $1$, töluna $-256$ og allar tölur sem við höfum sett inn í töflur framar í bókinni. Þegar \verb|INTEGER| kemur fyrir í dálkskilgreiningu erum við sem sagt að segja gagnagrunnskerfinu að við munum einungis geyma heiltölur í þessum dálki.
 
 Skoðum nokkrar helstu gagnagerðir í MySQL og hvenær við notum þær.
 \subsection{Heiltölur - INTEGER}
@@ -64,13 +143,6 @@ Nafn&Stærð í&Lægsta gildi&Hæsta gildi\\
 
 Ef sérstök skilyrði koma ekki upp er best og einfaldast að halda sig við \verb|INTEGER| til að geyma heiltölur. Þetta getur sérstaklega borgað sig ef seinna reynist nauðsynlegt að færa gagnagrunninn á milli gagnagrunnskerfa - sum gagnagrunnskerfi styðja ekki allar gagnagerðirnar sem MySQL býður upp á. Gamla góða \verb|INTEGER| er hins vegar alltaf til staðar.
 
-\begin{example}
-\caption[Heiltölur]{CREATE TABLE skipun sem gæti búið til töflu \ref{tafla:heiltolur} í MySQL. Hér er einfaldur \emph{INTEGER} dálkur notaður til að geyma fjölda bæta, \emph{BIGINT} þarf til að geyma lengstu tölurnar.}
-\label{sql:k3d3-heiltolur}
-\centering
-\sql{sql/k3d3-heiltolur.sql}
-\end{example}
-
 \newthought{Íslenskar kennitölur} eru varhugaverðar. Freistandi getur verið að geyma kennitölur í heiltöludálkum. Þær eru jú kommulausar tölur, ekki satt? Nokkur atriði leiða þó til þess að þær passa ekki mjög vel í slíka dálka.
 
 \begin{itemize}
@@ -95,18 +167,131 @@ Strengir geta innihaldið næstum hvaða stafi sem er, líka tölustafi. \verb|'
 
 Þegar \verb|CHAR| og \verb|VARCHAR| gagnagerðirnar eru notaðar þurfum við að taka fram hversu langa strengi dálkurinn á að geta tekið við\footnote{Oft er talað um ``breidd'' á þessum dálkum. Til að strengur af lengd $5$ komist inn í dálk þarf dálkurinn að vera $5$ stafa breiður.}. Þetta er gert með því að setja hámarkslengdina inn í sviga. \verb|CHAR(3)| er dálkur sem tekur við strengjum af lengd 3.
 
-Sé strengur sem er of langur settur inn í \verb|CHAR| dálk er klippt af hægri enda hans svo að hann passi. Væri t.d. reynt að geyma \verb|'Ari sá sól'| í \verb|CHAR(5)| dálk væri útkoman \verb|'Ari s'|. Sé strengurinn of stuttur er bilum bætt við til hægri. Þannig yrði strengurinn \verb*|'Ari sá sól'| að \verb*|'Ari sá sól     '| væri hann settur inn í \verb|CHAR(15)| dálk.
+Sé strengur sem er of langur settur inn í \verb|CHAR| eða \verb|VARCHAR| dálk er klippt af hægri enda hans svo að hann passi. Væri t.d. reynt að geyma \verb|'Ari sá sól'| í \verb|CHAR(5)| dálk væri útkoman \verb|'Ari s'|. 
 
+Munurinn á \verb|CHAR| og \verb|VARCHAR| kemur fyrst og fremst fram þegar of \emph{stuttir} strengir eru settir inn í dálkinn. 
+\begin{itemize}
+ \item Sé strengur styttri en breidd \verb|CHAR| dálks sem hann er settur inn í er bilum bætt við hægri enda strengsins svo hann passi nákvæmlega. Þannig yrði strengurinn \verb|'Ari sá sól'| að \verb|'Ari sá sól     '| væri hann settur inn í \verb|CHAR(15)| dálk.
+ \item Sé strengur sem er of stuttur settur inn í \verb|VARCHAR| dálk er hann einfaldlega geymdur eins og hann er. \verb|VARCHAR| dálkur getur geymt ``of stutta'' strengi.
+\end{itemize}
+\verb|CHAR| dálkur getur verið að hámarki 255 stafir að breidd. \verb|VARCHAR| dálkur getur verið allt að 65.535 stafa breiður.
+
+Hljómi \verb|VARCHAR| hér eins og almennt gagnlegri gagnagerð er það líklega vegna þess að það er rétt. \verb|VARCHAR| eyðir minna plássi og breytir strengjum ekki að óþörfu. \verb|CHAR| dálkar eru gagnlegir þegar vitað er fyrirfram að allir strengir sem eiga að fara inn í dálkinn séu af sömu lengd eða ef seinni tíma vinnsla krefst þess að gögnin séu sjálum sér mjög samkvæm. Leiki vafi á er einfaldast að nota bara \verb|VARCHAR|.
+\begin{marginfigure}
+\caption[CHAR og VARCHAR]{Hvernig CHAR og VARCHAR dálkar geyma texta. Talan til vinstri táknar lengd strengsins eins og hann er geymdur.}
+\label{mynd:char-varchar}
+\centering
+\includegraphics[width=\linewidth]{myndir/char-varchar}
+\end{marginfigure}
+
+\newthought{Mjög langur texti} getur verið erfiður í meðförum. Sé ætlunin t.d. að geyma bækur, bloggfærslur eða fréttagreinar í gagnagrunni, hversu stóran \verb|VARCHAR| dálk þyrfti til að halda utan um textann? Svarið er: Of stóran.
+
+MySQL býður upp á aðrar gagnagerðir sem eru meira viðeigandi fyrir slíka vinnslu - hér eru helstar \verb|TEXT| og \verb|LONGTEXT|. \verb|LONGTEXT| dálkur er fær um að geyma strengi sem eru allt að 4 GiB að lengd.
+
+Sé ætlunin að geyma upplýsingar sem almennt eru af skynsamlegri stærð, t.d. mannanöfn, þá er hagkvæmara að nota \verb|VARCHAR| dálk.
+
+\section{Dæmi um töflur með tölum og texta}
+Ýmsar töflur má búa til með tölum og texta. Fyrsta taflan sem við sáum, tafla \ref{tafla:starfsmenn-ts}, er dæmi um slíka töflu. Lítum á nokkur fleiri dæmi.
+% TODO tengja þetta í texta
+
+
+\begin{example}
+\caption[Heiltölur]{CREATE TABLE skipun sem gæti búið til töflu \ref{tafla:heiltolur} í MySQL. Hér er einfaldur \emph{INTEGER} dálkur notaður til að geyma fjölda bæta, \emph{BIGINT} þarf til að geyma lengstu tölurnar.}
+\label{sql:k3d3-heiltolur}
+\centering
+\sql{sql/k3d3-heiltolur.sql}
+\end{example}
+
+\begin{figure}
+\caption[High Score tafla]{``High score'' tafla fyrir tölvuleik. Fyrir nokkrum áratugum litu high score listar í spilakössum yfirleitt út á þennan hátt. Hver lína samanstóð af þremur upphafsstöfum og stigafjölda. Hana mætti búa til með skipuninni í sýnidæmi \ref{sql:k3d4-high-score}.}
+\label{mynd:high-score}
+\includegraphics{myndir/high-score}
+\end{figure}
+
+\begin{example}
+\caption[High Score tafla]{High score taflan á mynd \ref{mynd:high-score} búin til með SQL-skipun. Hér vitum við að spilararnir nota alltaf nákvæmlega þrjá upphafsstafi til að auðkenna sig, svo \emph{CHAR} dálkur er viðeigandi. Stigin sjálf eru geymd í \emph{INTEGER} dálki.}
+\label{sql:k3d4-high-score}
+\centering
+\sql{sql/k3d4-high-score.sql}
+\end{example}
+
+\begin{figure}
+\caption[Matseðill]{Hamborgaramatseðill á veitingastað. Töflur geta litið út á ýmsan hátt. Matseðil af þessari gerð mætti geyma í gagnagrunni, þó að hann líti e.t.v. ekki út eins og tafla við fyrstu sýn. Töflu sem heldur utan um upplýsingarnar á honum má sjá á sýnidæmi \ref{sql:k3d5-matsedill}. }
+\label{mynd:matsedill}
+\includegraphics[width=\textwidth]{myndir/matsedill}
+\end{figure}
+
+\begin{example}
+\caption[Matseðill]{SQL-framsetning á matseðlinum á mynd \ref{mynd:matsedill}. Við gerum ráð fyrir að lýsingin á réttinum þurfi meira pláss en nafn hans.}
+\label{sql:k3d5-matsedill}
+\centering
+\sql{sql/k3d5-matsedill.sql}
+\end{example}
+
+\section{Fleiri gagnagerðir}
+Þó að ýmislegt sé hægt að gera með einungis texta og heiltölum, þá býður MySQL upp á mun fleiri gagnagerðir. Lítum stuttlega á nokkrar.
 \subsection{Tugabrot - DECIMAL}
+Til að geyma tugabrot (kommutölur, t.d. $1,5$ og $5,2$) dugar \verb|INTEGER| dálkur ekki. Til þess getum við notað \verb|DECIMAL| dálk.
+
+Til að búa til \verb|DECIMAL| dálk þurfum við að skilgreina tvær tölur. Sú fyrri er heildarfjöldi tölustafa sem mega vera í tölunni, sú seinni er fjöldi tölustafa ``hægra megin'' við kommuna. Þannig myndi \verb|DECIMAL(5,2)| dálkur passa akkúrat utan um töluna $123,45$.
+
+\begin{table}
+\centering
+\caption[Eldsneyti]{Eldsneytisverð á bensínstöð. \emph{DECIMAL} dálkur er notaður til að halda utan um bensínverðið með nákvæmlega 1 aukastaf.}
+\label{tafla:eldsneyti}
+\begin{tabular}{lr}
+\toprule
+Gerð&Verð (kr.)\\
+\midrule
+95 oktan&$252,9$\\
+Dísel&$242,3$\\
+Vélaolía&$174,3$\\
+98 oktan&$298,9$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{example}
+\caption[Eldsneytisverð]{SQL-framsetning á eldsneytisverðinu í töflu \ref{tafla:eldsneyti}. Verðið er geymt í dálki sem tekur við tugabroti með fjóra markverða stafi, þar af einum fyrir aftan kommu. \emph{INSERT} skipun fylgir með (sjá nánar í kafla \ref{undirkafli:innsetning}). Athugum að \emph{INSERT} skipunin tekur við tölum á ensku formi, sem notar punkta þar sem kommur eru notaðar í íslensku (og öfugt). Væri reynt að setja tugabrotið inn með kommu væri það túlkað sem skipting á milli dálka!}
+\label{sql:k3d6-eldsneyti}
+\centering
+\sql{sql/k3d6-eldsneyti.sql}
+\end{example}
 
 \subsection{Rauntölur - DOUBLE}
+Það að þurfa að taka fram stærð talna getur verið mjög takmarkandi. Hvað ef skali talnanna er mjög mismunandi eða ef geyma þarf gríðarlega ``langar'' tölur? 
+
+Massi sólarinnar er í kringum $1988550000000000000000000000000$ kg. Þessi tala passar ekki í nokkurn \verb|INTEGER| dálk - við þurfum að leita að öðrum lausnum.
+
+\verb|DOUBLE| gagnagerðin getur geymt flestar tölur. Gallinn er sá að tölurnar í \verb|DOUBLE| dálki eru geymdar sem svokallaðar fleytitölur\footnote{e. \emph{floating point numbers}}, sem eru ekki fullkomlega nákvæmar. Þessi ónákvæmni er oftast afar smá, en getur verið til vandræða. Betra er að nota nákvæmar gagnagerðir (t.d. \verb|INTEGER| eða \verb|DECIMAL|) sé það mögulegt.
+
+\begin{table}
+\centering
+\caption[Plánetur utan sólkerfisins.]{Nokkrar plánetur utan sólkerfisins sem líkjast jörðinni að einhverju leyti.}
+\label{tafla:planetur}
+\begin{tabular}{lll}
+\toprule
+Nafn&Fjarlægð (m)&Massi (kg)\\
+\midrule
+Gliese 667 Cc&$2,1475\cdot 10^{17}$&$2,6218\cdot10^{25}$\\
+Kepler-62e   &$1,1353\cdot 10^{19}$&$2,1321\cdot10^{25}$\\
+Tau Ceti e   &$1,1263\cdot 10^{17}$&$2,5680\cdot10^{25}$\\
+Gliese 581 d &$1,9110\cdot 10^{17}$&$4,1686\cdot10^{25}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{example}
+\caption[Plánetur]{SQL-tafla sem haldið getur utan um pláneturnar í töflu \ref{tafla:planetur}. Fjarlægð þeirra frá okkar sólkerfi (í metrum) og massi þeirra (í kílóum) eru mjög óþjálar tölur, sem krefjast fleytitalna.}
+\label{sql:k3d7-planetur}
+\centering
+\sql{sql/k3d7-planetur.sql}
+\end{example}
 
 \subsection{Dagsetningar - DATE}
 
 \subsection{Rökbreytur - BOOLEAN}
 
 \section{Tóm gildi} % NULL, NOT NULL
-\section{Innsetning gagna} % INSERT
-\label{undirkafli:innsetning}
 \section{Aðallyklar} %PRIMARY KEY
 \section{Að eyða töflum} % DROP
