@@ -314,7 +314,27 @@ Sé annað ekki tekið fram gerir MySQL ráð fyrir því að \verb|NULL| sé le
 
 \newthought{Þó að \emph{NULL} eigi sinn sess í gagnagrunnum} er það ekki endilega alltaf æskilegt. \verb|NULL| getur valdið vandræðum við samanburð og talningu, sjá kafla \ref{kafli:select}. Einnig getur mikill fjöldi \verb|NULL| dálka bent til þess að gagnagrunninum ætti að skipta upp í fleiri töflur, sjá kafla \ref{kafli:uppsetninggagnagrunns}.
 
-\section{Aðallyklar} %PRIMARY KEY
+\section{Aðallyklar - PRIMARY KEY} %PRIMARY KEY
+\label{undirkafli:adallyklar-kynning}
+Lyklar eru mikilvægt atriði sem við höfum ekki enn skoðað.
+
+Líta má á lykil\footnote{e. \emph{key} eða \emph{index}} sem ``efnisyfirlit'' fyrir töflu. Þessi lykill gerir gagnagrunnskerfinu auðveldara að leita í töflunum sem honum tilheyra.
+
+Ein gerð af lyklum er svokallaður aðallykill\footnote{e. \emph{primary key}}. Aðallykill hefur það hlutverk að einkenna hverja línu í gagnagrunninum fyrir sig, að vera nokkurs konar raðnúmer línunnar. Við höfum séð eitt dæmi um aðallykil í töflu fyrr í bókinni, í dæmi \ref{sql:k2d1-create-table}.
+
+Þar er það línan \verb|id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT| sem býr til aðallykilinn. Skoðum þá línu aðeins betur:
+
+\begin{itemize}
+ \item Fyrsti hluti línunnar, \verb|id INTEGER|, segir okkur að um venjulegan heiltöludálk er að ræða. Hann heitir hér \emph{id} (``auðkenni'' á íslensku). 
+ \item Næst er okkur sagt að dálkurinn skuli vera \verb|NOT NULL|. Þetta er mikilvægt vegna þess að við ætluðum að nota aðallykilinn sem raðnúmer sem getur auðkennt hverja einustu línu. Myndum við leyfa \verb|NULL| gildi gætum við lent í því að fá tvö \verb|NULL| gildi - sem eru alveg eins.
+ \item Þá kemur loks \verb|PRIMARY KEY| skilgreiningin. Hún segir okkur að dálkurinn sem við vorum að búa til sé aðallykill. Þá veit gagnagrunnskerfið að það getur notað þennan dálk til að þekkja hverja línu fyrir sig.
+ \item Það síðasta, \verb|AUTO_INCREMENT|, er bara til þess að aðstoða okkur við að setja inn gögn. Sé dálkur merktur með \verb|AUTO_INCREMENT| þýðir það að við þurfum ekki að setja gildi inn í hann sjálf, gagnagrunnskerfið sér um að finna viðeigandi raðnúmer fyrir okkur. Þetta sést til dæmis á sýnidæmi \ref{sql:k2d2-insert}. Þar er lykildálkinum einfaldlega sleppt í \verb|INSERT| skipuninni.
+\end{itemize} 
+Romsan \verb|id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT| skilgreinir sem sagt heiltöludálk sem má ekki fá \verb|NULL|, sem gegnir hlutverki aðallykils og uppfærist sjálfur.
+
+Allar töflur sem fara í notkun við raunverulegar aðstæður ættu að hafa aðallykil. Öll sýnidæmi í bókinni héðan í frá munu innihalda aðallykil.
+
+Við kynnumst aðallyklum og öðrum lyklum betur í undirkafla \ref{undirkafli:lyklar}.
 \section{Að eyða töflum} % DROP
 Það að gera villur er eðlilegur hluti af því að byrja að læra á SQL. Því miður er oft erfiðara að bakka frá villum í \verb|CREATE| og \verb|INSERT| skipunum heldur en villum í öðrum forritunarmálum. Þegar \verb|CREATE| eða \verb|INSERT| skipun hefur verið keyrð er sjaldnast hægt að ýta bara á ``Undo'' takka til að komast til baka - upplýsingarnar eru komnar inn í gagnagrunninn.
 
