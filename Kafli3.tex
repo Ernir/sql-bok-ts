@@ -361,7 +361,19 @@ Fyrsta trikkið sem við lærum til að leiðrétta mistök er að losa okkur ei
 \caption[DROP TABLE]{Töflu með nafnið NafnToflu er eytt úr gagnagrunninum. Þetta ber að gera með varúð - það að eyða töflu er alveg jafn varanlegt og það að búa hana til. Til að fá gögnin aftur inn í gagnagrunninn þyrfti að keyra aftur SQL-skipanirnar sem bjuggu hana til.}
 \label{sql:k3d12-drop}
 \centering
-\sql{sql/k3d12-drop.sql}
+\sql{sql/k3d13-drop.sql}
 \end{example}
 
 Við sjáum fleiri leiðir til að uppfæra gagnagrunna í kafla \ref{kafli:uppfaera}. Til að byrja með látum við það að henda töflunum út í heilu lagi og búa þær til aftur duga til að komast í gegnum fyrsta hjallann.
+
+\section{Yfirlit}
+Í þessum kafla kynntumst við helstu atriðum sem snúa að töflugerð í MySQL.
+
+\begin{itemize}
+ \item Búa má til töflur með \verb|CREATE TABLE| skipuninni.
+ \item Setja má gögn inn í töflur með \verb|INSERT| skipuninni.
+ \item Nokkrar gagnagerðir í MySQL eru \verb|INTEGER|, \verb|CHAR|, \verb|VARCHAR|, \verb|DECIMAL|, \verb|DOUBLE| og \verb|DATE|. Gagnagerðin er ákveðin fyrir hvern dálk í töflu. Hún er tekin fram sem hluti af \verb|CREATE TABLE| skipuninni.
+ \item Ekki-gildið \verb|NULL| táknar gögn sem eru óþekkt eða ekki til. Banna má dálki að taka við \verb|NULL| með því að skrifa \verb|NOT NULL| fyrir aftan gagnagerðina.
+ \item Lyklar auðvelda gagnagrunnskerfinu að vinna með töflur. Allar alvöru töflur eiga að hafa aðallykil, \verb|PRIMARY KEY|.
+ \item Töflum má eyða með \verb|DROP TABLE| skipun.
+\end{itemize}
