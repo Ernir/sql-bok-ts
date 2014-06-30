@@ -153,6 +153,7 @@ Ef sérstök skilyrði koma ekki upp er best og einfaldast að halda sig við \v
 Vænlegra er að nota \verb|CHAR| dálk til að geyma kennitölur. Lítum á þá gagnagerð í næsta kafla!
 
 \subsection{Texti - VARCHAR og CHAR}
+\label{undirkafli:texti}
 Í forritun lítum við oftast á texta sem safn af stöfum, SQL er hér engin undantekning. Slíkt safn er kallað strengur\footnote{e. \emph{string}}. \verb|'Ari'|, \verb|'Ari sá sól'| og \verb|'Ari á 10 krónur'| eru allt dæmi um strengi. 
 
 Eins og sjá má eru strengir afmarkaðir með gæsalöppum. Mikilvægt er að gleyma þeim ekki þegar strengir eru slegnir inn (sjá kafla \ref{undirkafli:innsetning}). Þær eru aðalleiðin sem gagnagrunnskerfið hefur til að vita hvort að um streng eða dálkheiti sé að ræða. 
@@ -280,7 +281,24 @@ Gliese 581 d &$1,9110\cdot 10^{17}$&$4,1686\cdot10^{25}$\\
 \end{example}
 
 \subsection{Dagsetningar - DATE}
+Oft þarf að meðhöndla dagsetningar í forritum.
 
+MySQL notar sérstaka gagnagerð til að meðhöndla dagsetningar. Hún heitir \verb|DATE|.
+
+Dagsetningar eru mjög svipaðar strengjum (sjá undirkafla \ref{undirkafli:texti}) að útlitinu til, vegna þess að þær eru afmarkaðar með gæsalöppum. Þær eru þó meðhöndlaðar á allt annan hátt af gagnagrunnskerfinu.
+
+\begin{example}
+\caption[Afmælisdagar]{SQL-tafla sem táknar afmæli. Hér er dagsetningin 21. október árið 1987 sett inn í gagnagrunninn.}
+\label{sql:k3d14-afmaeli}
+\centering
+\sql{sql/k3d14-afmaeli.sql}
+\end{example}
+
+MySQL gerir ráð fyrir að fá dagsetningar á ákveðnu sniði. Það snið er: \verb|'ÁÁÁÁ-MM-DD'| þar sem \verb|ÁÁÁÁ| stendur fyrir árið, \verb|MM| fyrir mánuðinn og \verb|DD| fyrir daginn. Þannig myndi \verb|'2008-07-01'| tákna dagsetninguna 1. júlí árið 2008.\footnote{MySQL \emph{getur} skilið dagsetningar á nokkrum öðrum sniðum. Betra er að halda sig við stöðluðu útgáfuna.}
+
+Sem fyrr segir, þá eru dagsetningar meðhöndlaðar á allt annan hátt en strengir, þó þær líti svipað út. Oft geymir gagnagrunnskerfið dagsetningar sem heiltölur (en \emph{sýnir} þær líkt og strengi). Þetta gerir það að verkum að t.d. er hægt að bera saman dagsetningar til að athuga hvor þeirra sé stærri.
+
+MySQL hefur fleiri gagnagerðir sem meðhöndla tíma, t.d. \verb|TIME| og \verb|TIMESTAMP|. Við förum ekki sérstaklega yfir þær í þessari bók. Flestar hafa þær svipaða eiginleika og \verb|DATE|.
 \subsection{Rökbreytur - BOOLEAN}
 
 \section{Tóm gildi} % NULL, NOT NULL
