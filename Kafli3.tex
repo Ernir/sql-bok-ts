@@ -28,6 +28,14 @@ Skoðum næst sýnidæmi \ref{sql:k3d2-create-table-meira-fallegt}, sem er \emph
 Hér sjáum við ágætlega hvernig bæta má við öðrum dálki. Fyrsta dálklýsingin er skrifuð, síðan kemur komma, síðan fylgir næsta dálklýsing.
 
 Athugum að engin komma er á eftir síðustu dálklýsingunni. Það er vegna þess að dálkarnir eru einungis \emph{aðskildir} með kommum, komman er ekki hluti af dálklýsingunni sjálfri.
+
+\begin{marginfigure}
+\caption[Að sjá töflu í Workbench]{Er erfitt að vita hvort að skipunin tókst eða ekki? Hægt er að hægri-smella á nafn töflu í MySQL workbench og biðja um ``show rows''. Þetta birtir fyrstu þúsund línur sem eru í viðkomandi töflu - sem dugar oftast til að fá yfirlit.}
+\label{mynd:}
+\centering
+\includegraphics[width=\linewidth]{myndir/workbench-select-rows}
+\end{marginfigure}
+
 \section{Innsetning gagna} % INSERT
 \label{undirkafli:innsetning}
 Þegar töflur eru búnar til með \verb|CREATE TABLE| skipun eru þær tómar. Til að fylla töflu með gögnum þarf að nota aðra skipun - \verb|INSERT|. Til að setja töluna $1$ inn í töfluna sem við bjuggum til með sýnidæmi \ref{sql:k3d1-create-table-fallegt} mætti nota \verb|INSERT| skipunina í sýnidæmi \ref{sql:k3d8-insert-einfalt}.
