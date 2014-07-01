@@ -1,0 +1,2 @@
+SELECT nafn
+FROM Nemendur; 
