@@ -5,7 +5,7 @@ Byrjum á að skoða grundvallaraðgerðirnar í SQL - það að búa gagnagrunn
 \section{Gagnagrunnar}
 Fram kom í kafla \ref{kafli:inngangur} að gagnagrunnur sé \emph{skipulagt samansafn af upplýsingum}. Einnig kom fram að upplýsingarnar eru hlutaðar niður með ``töflum''.
 \begin{marginfigure}
-\caption[Uppbygging gagnagrunns]{Uppbygging einfalds gagnagrunns með þremur töflum}
+\caption[Uppbygging gagnagrunns]{Uppbygging einfalds gagnagrunns með þremur töflum.}
 \label{mynd:uppbygging-gagnagrunns}
 \centering
 \includegraphics[width=\linewidth]{myndir/uppbygging-gagnagrunns}
@@ -24,7 +24,7 @@ Lítum fyrst á dæmigerða töflu.
 
 \begin{table}
 \centering
-\caption[Nokkrir starfsmenn Tækniskólans]{Nokkrir starfsmenn Tækniskólans}
+\caption[Nokkrir starfsmenn Tækniskólans]{Nokkrir starfsmenn Tækniskólans.}
 \label{tafla:starfsmenn-ts}
 \begin{tabular}{lll}
 \toprule
@@ -64,7 +64,7 @@ Einfalt er að fletta upp upplýsingum í litlum töflum á borð við töflu \r
 
 Væri taflan örlítið stærri væri verkefnið strax erfiðara. Væri taflan á stærð við símaskrána væri það nær ómögulegt.
 
-Slíkar uppflettingar, stórar og smáar, eru sérsvið SQL. Þær eru nefndar \emph{fyrirspurnir} og eru framkvæmdar með mjög mikilvægri SQL-skipun sem heitir \emph{SELECT}. Við sjáum dæmi um SELECT-skipun í næsta undirkafla (\ref{undirkafli:synidaemi-i-sql}) og kynnumst þeim náið í kafla \ref{kafli:select}.
+Slíkar uppflettingar, stórar og smáar, eru sérsvið SQL. Þær eru nefndar \emph{fyrirspurnir} og eru framkvæmdar með mjög mikilvægri SQL-skipun sem heitir \emph{SELECT}. Við sjáum dæmi um slíka skipun í næsta undirkafla (\ref{undirkafli:synidaemi-i-sql}) og kynnumst þeim náið í kafla \ref{kafli:select}.
 
 \section{Sýnidæmi í SQL}
 \label{undirkafli:synidaemi-i-sql}
@@ -76,7 +76,7 @@ Eins og fram hefur komið þarf til þess að nota SQL-skipanir.
 Okkar fyrsta verk verður að vera að búa til gagnagrunn til að setja hana í. Slíka skipun má sjá á sýnidæmi \ref{sql:k2d4-create-database}.
 
 \begin{example}
-\caption{CREATE DATABASE skipun fyrir Tækniskólagagnagrunninn}
+\caption{CREATE DATABASE skipun fyrir Tækniskólagagnagrunninn.}
 \label{sql:k2d4-create-database}
 \centering
 \sql{sql/k2d4-create-database.sql}
@@ -90,7 +90,7 @@ Skipunin er ein lína. Hér vill reyndar svo til að hún er nálægt því að 
 Skipunina til að skilgreina töfluna má sjá á SQL-sýnidæmi \ref{sql:k2d1-create-table}. Þetta er mjög dæmigerð skipun til að búa til töflu. Þar kemur fram hvað gera skal (búa til töflu $\rightarrow$ \verb|CREATE TABLE|) og hver dálkheitin eru (nafn, Starfsheiti og netfang). Í kafla \ref{kafli:uppsetningtaflna} skoðum við hin orðin sem koma fyrir í skipuninni og í næsta undirkafla sjáum við hvernig koma má skipuninni í gagnið.
 
 \begin{example}[h]
-\caption{CREATE TABLE skipun fyrir starfsmannatöfluna}
+\caption{CREATE TABLE skipun fyrir starfsmannatöfluna.}
 \label{sql:k2d1-create-table}
 \centering
 \sql{sql/k2d1-create-table.sql}
@@ -99,7 +99,7 @@ Skipunina til að skilgreina töfluna má sjá á SQL-sýnidæmi \ref{sql:k2d1-c
 Hér ber að athuga að enn eru engin gögn komin inn í töfluna. Það má gera með skipuninni í SQL-sýnidæmi \ref{sql:k2d2-insert}.
 
 \begin{example}[h]
-\caption{INSERT skipun fyrir starfsmannatöfluna}
+\caption{INSERT skipun fyrir starfsmannatöfluna.}
 \label{sql:k2d2-insert}
 \centering
 {\small
@@ -111,13 +111,19 @@ Hér ber að athuga að enn eru engin gögn komin inn í töfluna. Það má ger
 Til að sækja gögn úr töflunni þarf síðan að framkvæma fyrirspurn. Dæmi um fyrirspurn (SQL-skipun) sem finnur nafn þess starfsmanns sem er með netfangið ``kng@tskoli.is'' má sjá á sýnidæmi \ref{sql:k2d3-select}.
 
 \begin{example}[h]
-\caption{SELECT skipun sem finnur Konráð kennara í starfsmannatöflunni}
+\caption{SELECT skipun sem finnur Konráð kennara í starfsmannatöflunni.}
 \label{sql:k2d3-select}
 \centering
 \sql{sql/k2d3-select.sql}
 \end{example}
 
 Athugum hvað kemur fram í fyrirspurninni. Við getum séð þrjá aðalhluta - lýsingu á því hvað gera skal (finna nafn/\verb|SELECT nafn|), hvaðan upplýsingarnar skulu koma (úr starfsmannatöflunni/\verb|FROM Starfsmenn|) og hvaða \emph{skilyrði} gilda um gögnin sem finna skal (gögnin þar sem netfangið er kng@tskoli.is/\verb|WHERE netfang = "kng@tskoli.is"|). 
+\marginnote{Við getum spurt okkur af hverju öll SQL-sýnidæmin eru með sum orðin í hástöfum og af hverju svona fá orð eru í hverri línu. Þetta er vegna þess að 
+\begin{enumerate}
+ \item Löng hefð er fyrir því að skrifa SQL-lykilorð í hástöfum.
+ \item Línubilin eru á þeim stöðum sem höfundi þykir hjálpa mest upp á læsileika.
+\end{enumerate}
+Hvorugt er strangt til tekið nauðsynlegt.}
 
 \section{Keyrsla í MySQL Workbench}
 \label{undirkafli:keyrsla-i-workbench}
