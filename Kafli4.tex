@@ -41,10 +41,10 @@ numer&nafn&kennitala&innritun\\
 2&Sigurður Ómarsson&251198-1369& 2014-06-04\\
 3&Róbert Marinó Björnsson&060998-2489& 2014-07-14\\
 4&Konráð Hreinn Aðalsteinsson&120498-8869& 2014-06-02\\
-5&Kári Jensson&230598-2159& 2014-07-03\\
+5&Jón Guðmundsson&230598-2159& 2014-07-03\\
 6&Birgir Torfason&170798-7249& 2014-06-06\\
 7&Höskuldur Frímann Ásmundsson&020298-4139& 2014-07-08\\
-8&Styrmir Hreinsson&210498-7889& 2014-06-11\\
+8&Jón Guðmundsson&210498-7889& 2014-06-11\\
 9&Hilmar Hjartarson&020798-4599& 2014-07-16\\
 10&Reynir Rafn Sigurgeirsson&211298-7239& 2014-06-12\\
 11&Ingunn Rún Andradóttir&161298-1589& 2014-07-05\\
@@ -122,11 +122,64 @@ Hafrún Þorláksdóttir&250498-2849\\
 \centering
 \includegraphics[width=\linewidth]{myndir/workbench-nidurstada-margir-dalkar}
 \end{figure*}
-\subsection{SELECT - FROM - WHERE}
-\section{ORDER BY}
-\subsection{LIMIT}
+\subsection{WHERE klausan}
+Hingað til höfum við valið heila dálka með \verb|SELECT| skipunum. Það sem við viljum hins vegar oftast gera er að finna ákveðnar upplýsingar í töflunni, frekar en að fá þær allar.
+
+Til þess að fá bara þær upplýsingar sem við viljum búum við til ``síu'' sem hleypir engum upplýsingum í gegn nema þeim sem við viljum.
+
+Slík sía þarf að innihalda lýsingu á þeim gögnum sem hleypa á í gegn. Það er gert í klausu sem við köllum \verb|WHERE| klausu og kemur fyrir aftan \verb|FROM| klausuna. Dæmi um þetta má sjá í sýnidæmum \ref{sql:k4d4-where-numer} til \ref{mynd:workbench-nidurstada-jon}.
+
+\begin{example}
+\caption[SELECT með WHERE klausu - eftir númeri]{\emph{SELECT} skipun með \emph{WHERE} klausu sem nær í nafn nemanda (úr töflu \ref{tafla:nemendur}) þar sem ``numer'' dálkurinn er með gildið 11. Hún skilar einni línu, nafninu Ingunn Rún Andradóttir.}
+\label{sql:k4d4-where-numer}
+\centering
+\sql{sql/k4d4-where-numer.sql}
+\end{example}
+
+\begin{example}
+\caption[SELECT með WHERE klausu - eftir nafni]{\emph{SELECT} skipun með \emph{WHERE} klausu sem nær í kennitölu nemanda eftir nafni hans. Hún skilar einni línu, kennitölunni 251198-1369.}
+\label{sql:k4d5-where-nafn}
+\centering
+\sql{sql/k4d5-where-nafn.sql}
+\end{example}
+
+\begin{example}
+\caption[SELECT með WHERE klausu - endurtekin gildi]{Skilyrðið sem sett er fram í \emph{WHERE} klausu getur átt við meira en eina línu í töflunni. Þessi skipun finnur nöfn og kennitölu allra sem heita Jón Guðmundsson. Þeir reynast vera tveir, með kennitölurnar 230598-2159 og 210498-7889.}
+\label{sql:k4d6-where-nafn-endurtekid}
+\centering
+\sql{sql/k4d6-where-nafn-endurtekid.sql}
+\end{example}
+
+\begin{figure*}[h]
+\caption[Niðurstöður margra dálka SELECT í Workbench]{Hér sést sýnidæmi \ref{sql:k4d6-where-nafn-endurtekid} í MySQL Workbench.}
+\label{mynd:workbench-nidurstada-jon}
+\centering
+\includegraphics[width=\linewidth]{myndir/workbench-nidurstada-jon}
+\end{figure*}
+\subsection{Samanburðir í WHERE}
+Í öllum \verb|WHERE| klausunum hér á undan er um að ræða síur sem henda öllu sem ekki uppfylla eitt, nákvæmt skilyrði. Skilyrðið í sýnidæmi \ref{sql:k4d4-where-numer}, \verb|numer = 11|, hleypir til dæmis einungis þeim nemanda sem er með nákvæmlega númerið 11 í gegn.
+
+Skilyrðin geta þó verið margs konar. Skilyrðið \verb|numer > 11| hleypir til dæmis öllum línum í gegn þar sem gildið í ``numer'' dálkinum er stærra en 11. Yfirlit yfir mögulega samanburði má sjá á töflu \ref{tafla:samanburdir}.
+
+\begin{table*}
+\centering
+\caption[Samanburðir]{Samanburðir sem nota mætti í \emph{WHERE} klausu \emph{SELECT} skipunar. Hér er \emph{numer} nafnið á dálki sem inniheldur tölur.}
+\label{tafla:samanburdir}
+\begin{tabular}{ll}
+\toprule
+Dæmi&Útskýring\\
+\midrule
+\emph{numer} = 5&Hleypir þeim línum í gegn þar sem gildið í \emph{numer} er nákvæmlega 5.\\
+\emph{numer} > 5&Hleypir þeim línum í gegn þar sem gildið í \emph{numer} er stærra en 5.\\
+\emph{numer} < 5&Hleypir þeim línum í gegn þar sem gildið í \emph{numer} er minna en 5.\\
+\emph{numer} >= 5&Hleypir þeim línum í gegn þar sem gildið í \emph{numer} er 5 eða stærra.\\
+\emph{numer} >= 5&Hleypir þeim línum í gegn þar sem gildið í \emph{numer} er 5 eða minna.\\
+\emph{numer} != 5 eða \emph{numer} <> 5&Hleypir þeim línum í gegn þar sem gildið í \emph{numer} er ekki 5.\\
+\bottomrule
+\end{tabular}
+\end{table*}
 \section{LIKE og ``wildcards''}
-\section{AND, OR og IN}
+\section{Mörg aðskilin skilyrði} % AND, OR, IN
 \section{Helstu einindaföll}
 \subsection{LENGTH}
 \subsection{ROUND}
@@ -137,3 +190,7 @@ Hafrún Þorláksdóttir&250498-2849\\
 \subsection{MIN og MAX}
 \subsection{COUNT}
 \section{HAVING}
+\section{ORDER BY}
+\subsection{LIMIT}
+\section{Yfirlit}
+\subsection{Uppbygging SELECT skipunarinnar}
