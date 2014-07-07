@@ -229,9 +229,56 @@ Segð&Gildi\\
 \end{example}
 
 \subsection{LIKE og ``wildcards''}
+Táknin sem við höfum séð í \verb|WHERE| klausum (t.d. $=$ og $>$) hafa gert okkur kleift að skrifa margar mismunandi röksegðir.
 
+Ein gerð af segð sem við höfum ekki getað gert er að athuga hvort að strengur passi við hluta af öðrum streng. Til þess höfum við ákveðið lykilorð sem heitir \verb|LIKE|.
+
+Það að nota \verb|LIKE| í röksegð er líkt og að nota \verb|=|. \verb|LIKE| hefur þó ákveðinn möguleika sem \verb|=| hefur ekki - þann að skilja eftir ``óþekkta'' stafi í strengnum sem notaður er til samanburðar. Þessi óvissutákn geta komið í stað hvaða stafs sem er. Þau eru kölluð ``wildcards'' á ensku. Við skoðum tvö mismunandi wildcards í þessum undirkafla. 
+
+Annars vegar er táknið \verb|_| (strik niðri). \verb|_| getur komið í staðinn fyrir hvaða \emph{einn} staf sem er í strengnum.
+
+Hins vegar er táknið \verb|%| (prósentumerki). \verb|%| getur komið í staðinn fyrir hvaða fjölda stafa sem er.
+
+Dæmi \ref{sql:k4d8-like-upphaf} til \ref{sql:k4d12-like-kennitala} sýna notkun \verb|LIKE| og wildcard-tákna.
+
+\begin{example}
+\caption[LIKE til að finna orð sem byrja á sama staf]{\emph{SELECT} skipun sem finnur alla nemendur í nemendatöflunni sem byrja á stafnum \emph{K}. Til þess er notaður samanburðarstrengur sem hefur wildcard-táknið \emph{\%} á eftir stafnum \emph{K}, svo að \emph{\%} komi í staðinn fyrir allt sem á eftir \emph{K} kemur.}
+\label{sql:k4d8-like-upphaf}
+\centering
+\sql{sql/k4d8-like-upphaf.sql}
+\end{example}
+
+\begin{example}
+\caption[LIKE til að finna orð sem enda eins]{\emph{SELECT} skipun sem finnur alla nemendur í nemendatöflunni sem enda á \emph{``dóttir''}. \emph{\%} kemur hér á undan \emph{``dóttir''} svo að það geti komið í staðinn fyrir alla stafi sem gætu verið þar á undan.}
+\label{sql:k4d9-like-lok}
+\centering
+\sql{sql/k4d9-like-lok.sql}
+\end{example}
+
+\begin{example}
+\caption[LIKE einhvers staðar í streng]{\emph{SELECT} skipun sem finnur alla nemendur í nemendatöflunni sem innihalda strenginn ``geir'' einhvers staðar í nafni sínu. Segðin í \emph{WHERE}-klausunni er t.d. sönn fyrir nemandann sem heitir Ásgeir að millinafni og nemandann sem er Sigurgeirsson.}
+\label{sql:k4d10-like-midja}
+\centering
+\sql{sql/k4d10-like-midja.sql}
+\end{example}
+
+\begin{example}
+\caption[LIKE til að finna strengi af ákveðinni lengd]{\emph{SELECT} skipun sem finnur alla nemendur sem eru með nákvæmlega 17 stafi í nafni sínu (að bilum meðtöldum). Hvert \_ tákn kemur í stað nákvæmlega eins stafs. Við sjáum aðra leið til að gera þetta í undirkafla \ref{undirkafli:einindafoll}.}
+\label{sql:k4d11-like-nakvaemt}
+\centering
+\sql{sql/k4d11-like-nakvaemt.sql}
+\end{example}
+
+\begin{example}
+\caption[LIKE með nákvæmum stafafjölda]{\emph{SELECT} skipun sem finnur alla nemendur í nemendatöflunni sem fæddir eru í apríl (með stafina 04 í þriðja og fjórða sæti í kennitölu sinni). Hún finnur einungis þá nemendur, vegna þess að \_ táknin tvö geta komið í staðinn fyrir nákvæmlega tvö önnur tákn, hvorki fleiri né færri.}
+\label{sql:k4d12-like-kennitala}
+\centering
+\sql{sql/k4d12-like-kennitala.sql}
+\end{example}
 \subsection{Mörg aðskilin skilyrði} % AND, OR, IN
+
 \section{Helstu einindaföll}
+\label{undirkafli:einindafoll}
 \subsection{LENGTH}
 \subsection{ROUND}
 \subsection{UCASE og LCASE}
