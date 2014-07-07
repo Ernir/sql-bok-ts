@@ -156,28 +156,78 @@ Slík sía þarf að innihalda lýsingu á þeim gögnum sem hleypa á í gegn. 
 \centering
 \includegraphics[width=\linewidth]{myndir/workbench-nidurstada-jon}
 \end{figure*}
-\subsection{Samanburðir í WHERE}
+\subsection{Röksegðir}
 Í öllum \verb|WHERE| klausunum hér á undan er um að ræða síur sem henda öllu sem ekki uppfylla eitt, nákvæmt skilyrði. Skilyrðið í sýnidæmi \ref{sql:k4d4-where-numer}, \verb|numer = 11|, hleypir til dæmis einungis þeim nemanda sem er með nákvæmlega númerið 11 í gegn.
 
-Skilyrðin geta þó verið margs konar. Skilyrðið \verb|numer > 11| hleypir til dæmis öllum línum í gegn þar sem gildið í ``numer'' dálkinum er stærra en 11. Yfirlit yfir mögulega samanburði má sjá á töflu \ref{tafla:samanburdir}.
+Skilyrðin geta þó verið margs konar. \verb|WHERE| klausan tekur nefnilega við næstum hvaða röksegð\footnote{e. \emph{boolean expression}} sem er, þ.e.a.s. alls kyns samanburðum og staðhæfingum sem að lokum gefa gildin ``satt'' eða ``ósatt''.
 
-\begin{table*}
+Orðið ``röksegð'' kann að hljóma undarlega, en um kunnuglegt fyrirbæri er að ræða. ``Skilyrðið'' \verb|numer = 11| er til dæmis röksegð. Segðin er sönn þegar \verb|numer| tekur gildið 11, annars ekki. Fleiri dæmi um segðir má sjá á töflu \ref{tafla:samanburdir}.
+
+\begin{table}
 \centering
-\caption[Samanburðir]{Samanburðir sem nota mætti í \emph{WHERE} klausu \emph{SELECT} skipunar. Hér er \emph{numer} nafnið á dálki sem inniheldur tölur.}
+\caption[Röksegðir]{Röksegðir sem nota mætti í \emph{WHERE} klausu \emph{SELECT} skipunar. Hér er \emph{numer} nafnið á dálki sem inniheldur tölur.}
 \label{tafla:samanburdir}
 \begin{tabular}{ll}
 \toprule
-Dæmi&Útskýring\\
+Segð&Útskýring\\
 \midrule
-\emph{numer} = 5&Hleypir þeim línum í gegn þar sem gildið í \emph{numer} er nákvæmlega 5.\\
-\emph{numer} > 5&Hleypir þeim línum í gegn þar sem gildið í \emph{numer} er stærra en 5.\\
-\emph{numer} < 5&Hleypir þeim línum í gegn þar sem gildið í \emph{numer} er minna en 5.\\
-\emph{numer} >= 5&Hleypir þeim línum í gegn þar sem gildið í \emph{numer} er 5 eða stærra.\\
-\emph{numer} >= 5&Hleypir þeim línum í gegn þar sem gildið í \emph{numer} er 5 eða minna.\\
-\emph{numer} != 5 eða \emph{numer} <> 5&Hleypir þeim línum í gegn þar sem gildið í \emph{numer} er ekki 5.\\
+\emph{numer} = 5&Sönn þegar gildið í \emph{numer} er nákvæmlega 5.\\
+\emph{numer} > 5&Sönn þegar gildið í \emph{numer} er stærra en 5.\\
+\emph{numer} < 5&Sönn þegar gildið í \emph{numer} er minna en 5.\\
+\emph{numer} >= 5&Sönn þegar gildið í \emph{numer} er 5 eða stærra.\\
+\emph{numer} <= 5&Sönn þegar gildið í \emph{numer} er 5 eða minna.\\
+\emph{numer} != 5&Sönn þegar gildið í \emph{numer} er ekki 5.\\
 \bottomrule
 \end{tabular}
-\end{table*}
+\end{table}
+
+Þegar dálkheiti eru notuð í \verb|WHERE| klausu má því líta á það sem svo að við skoðum öll gildi sem eru í dálkinum, eitt í einu\footnote{Reyndar getur gagnagrunnskerfi oft gert mun betur en svo að þurfa að skoða öll gildin. Þetta tengist sérstaklega \emph{lyklum}, sem við lítum á í undirkafla \ref{undirkafli:lyklar}.}, skiptum dálkheitinu út fyrir gildið og athugum hvort að segðin sé sönn. Ef segðin sem fæst út línu í gagnagrunninum er sönn, þá fær línan að fara áfram í niðurstöðurnar. Dæmi um hvernig flokkun af þessu tagi fer fram má sjá á mynd \ref{mynd:roksegd}.
+
+\begin{figure}
+\caption[Röksegð í WHERE klausu]{Röksegð í WHERE klausu.}
+\label{mynd:roksegd}
+\centering
+\includegraphics[width=\linewidth]{myndir/roksegd}
+\end{figure}
+
+Eins og við höfum t.d. séð á sýnidæmi \ref{sql:k4d6-where-nafn-endurtekid} þarf röksegð ekki að innihalda eingöngu samanburði með tölum. T.d. er hægt að bera saman strengi og dagsetningar.
+
+Dagsetningar eru bornar saman líkt og tölur. Strengir eru hins vegar bornir saman í stafrófsröð. Dæmi um segðir sem innihalda strengi má sjá á töflu \ref{tafla:samanburdir-strengir}.
+
+Nokkur atriði ber þó að varast þegar strengir eru notaðir til samanburðar í MySQL.
+
+\newthought{Sérstakir stafir og tákn} á borð við upphrópunarmerki og bil eru ekki alltaf borin saman á þann hátt sem við giskum á. Stafrófsröð er ekki skilgreind fyrir þessi tákn. Pössum okkur þegar við notum $>$ eða $<$ til að bera saman strengi sem ekki innihalda bókstafi eingöngu.\footnote{Gagnlegt getur verið að lesa sér til um \emph{Collations} í MySQL til að öðlast frekari skilning á strengjasamanburðum. Ekki er fjallað um það í þessari bók.}
+
+\newthought{Séu strengir af mismunandi lengdum bornir saman} er bilum bætt við hægra megin við styttri strenginn áður en samanburðurinn er framkvæmdur. Þannig myndi \verb|'a' > 'aa'| vera breytt í \verb|'a ' > 'aa'|. Þetta getur leitt til óvæntra niðurstaðna. Dæmi um niðurstöðu sem við fyrstu sýn kann að virðast undarleg má sjá á sýnidæmi \ref{sql:k4d7-where-nafn-staerra-en}.
+
+\begin{table}
+\centering
+\caption[Röksegðir með strengjum]{Dæmi um hvernig MySQL meðhöndlar röksegðir með strengjum.}
+\label{tafla:samanburdir-strengir}
+\begin{tabular}{ll}
+\toprule
+Segð&Gildi\\
+\midrule
+\verb|'a' = 'a'|&Satt.\\
+\verb|'a' >= 'a'|&Satt.\\
+\verb|'b' > 'a'|&Satt, af því að $b$ er á eftir $a$ í stafrófinu.\\
+\verb|'a' > 'b'|&Ósatt, af því að $b$ er á eftir $a$ í stafrófinu.\\
+\verb|'ab' > 'aa'|&Satt, af því að aftari stafir útkljá jafntefli.\\
+\verb|'a b' > 'a a'|&Satt, af því að bil er sagt minna en $a$.\\
+\verb|'a b' > 'aaa'|&Ósatt, af því að bil er sagt minna en $a$.\\
+\verb|'ab' > 'aabbb'|&Satt, af því að í samanburði mislangra strengja\\
+&er bilum bætt við hægra megin við styttri strenginn.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{example}
+\caption[Stærra-en samanburður við streng]{\emph{SELECT}-skipun sem ber saman öll nöfn við strenginn \emph{'M'}. Skipunin skilar nöfnum allra nemanda sem eru á eftir \emph{M} í stafrófinu, \emph{að nemendum sem byrja á M meðtöldum!} Þetta er vegna þess að strengurinn \emph{M} er lengdur með bilum áður en samanburðurinn er framkvæmdur. Bil er álitið ``minna'' en allir bókstafir, svo segðin verður sönn fyrir öll nöfn sem byrja á \emph{M}.}
+\label{sql:k4d7-where-nafn-staerra-en}
+\centering
+\sql{sql/k4d7-where-nafn-staerra-en.sql}
+\end{example}
+
 \subsection{LIKE og ``wildcards''}
 
 \subsection{Mörg aðskilin skilyrði} % AND, OR, IN
