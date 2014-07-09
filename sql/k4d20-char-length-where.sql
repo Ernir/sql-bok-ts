@@ -1,0 +1,3 @@
+SELECT nafn
+FROM Nemendur
+WHERE CHAR_LENGTH(nafn) = 16;

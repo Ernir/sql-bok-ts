@@ -159,7 +159,7 @@ Slík sía þarf að innihalda lýsingu á þeim gögnum sem hleypa á í gegn. 
 \subsection{Röksegðir}
 Í öllum \verb|WHERE| klausunum hér á undan er um að ræða síur sem henda öllu sem ekki uppfylla eitt, nákvæmt skilyrði. Skilyrðið í sýnidæmi \ref{sql:k4d4-where-numer}, \verb|numer = 11|, hleypir til dæmis einungis þeim nemanda sem er með nákvæmlega númerið 11 í gegn.
 
-Skilyrðin geta þó verið margs konar. \verb|WHERE| klausan tekur nefnilega við næstum hvaða röksegð\footnote{e. \emph{boolean expression}} sem er, þ.e.a.s. alls kyns samanburðum og staðhæfingum sem að lokum gefa gildin ``satt'' eða ``ósatt''.
+Skilyrðin geta þó verið margs konar. \verb|WHERE| klausan tekur nefnilega við næstum hvaða röksegð\footnote{e. \emph{boolean expression}} sem er, þ.e.a.s. alls kyns samanburðum og staðhæfingum sem að lokum gefa gildin ``satt'' eða ``ósatt''.\footnote{Í MySQL er ``satt'' táknað með tölunni $1$ eða orðinu \emph{TRUE}. ``Ósatt'' er táknað með $0$ eða \emph{FALSE}.}
 
 Orðið ``röksegð'' kann að hljóma undarlega, en um kunnuglegt fyrirbæri er að ræða. ``Skilyrðið'' \verb|numer = 11| er til dæmis röksegð. Segðin er sönn þegar \verb|numer| tekur gildið 11, annars ekki. Fleiri dæmi um segðir má sjá á töflu \ref{tafla:samanburdir}.
 
@@ -275,13 +275,212 @@ Dæmi \ref{sql:k4d8-like-upphaf} til \ref{sql:k4d12-like-kennitala} sýna notkun
 \centering
 \sql{sql/k4d12-like-kennitala.sql}
 \end{example}
-\subsection{Mörg aðskilin skilyrði} % AND, OR, IN
 
-\section{Helstu einindaföll}
+\FloatBarrier
+\subsection{Mörg aðskilin skilyrði} % AND, OR
+Hver \verb|SELECT| skipun getur einungis haft eina \verb|WHERE| klausu. Engu að síður er hægt að setja mörg skilyrði um þær raðir sem eiga að birtast í niðurstöðum skipunarinnar með því að tengja margar röksegðir saman. Það má gera með lykilorðunum \verb|AND| og \verb|OR|\footnote{Fleiri lykilorð af þessum toga eru til, til dæmis \emph{XOR}.}. Þannig mætti til dæmis búa til samsettu röksegðina \verb|x < 1 OR x > 5| úr segðunum \verb|x < 1|, \verb|x > 5| og lykilorðinu \verb|OR|.
+
+\begin{marginfigure}
+\caption[Samsett röksegð]{Hér sést hvernig lesa má út úr samsettri röksegð.}
+\label{mynd:samsett-segd}
+\centering
+\includegraphics[width=\linewidth]{myndir/samsett-segd}
+\end{marginfigure}
+
+Þegar skoða á hvort að samsett segð sé sönn eða ósönn þarf fyrst að athuga hvort að segðirnar sem hún er búin til úr séu sannar eða ósannar. Þá verður úr röð af gildunum ``satt'' og ``ósatt'', með \verb|AND| og \verb|OR| á milli. 
+
+Næst þarf að athuga öll \verb|AND| í röðinni. Þegar \verb|AND| stendur á milli tveggja gilda sem eru sönn mynda þau saman gildið ``satt'', annars gildið ``ósatt''.
+
+Að lokum eru öll \verb|OR| skoðuð. Þegar \verb|OR| stendur á milli tveggja gilda er nóg að annað gildanna sé ``satt'' til að þau myndi saman gildið ``satt''. Séu bæði gildin ósönn mynda þau gildið ``ósatt''.
+
+\begin{table}
+\centering
+\begin{tabular}{ccc}
+\multicolumn{3}{c}{Útkoma \emph{AND}}\\
+\toprule
+$x$&$y$&$x$ \emph{AND} $y$\\
+\midrule
+1&1&1\\
+1&0&0\\
+0&1&0\\
+0&0&0\\
+\bottomrule
+\end{tabular}
+\hspace{1cm}
+\begin{tabular}{ccc}
+\multicolumn{3}{c}{Útkoma \emph{OR}}\\
+\toprule
+$x$&$y$&$x$ \emph{OR} $y$\\
+\midrule
+1&1&1\\
+1&0&1\\
+0&1&1\\
+0&0&0\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\newthought{Allt þetta tal} um segðir og samsetningar kann að hljóma þurrt. Þetta á sér þó hliðstæður í mun raunverulegri aðstæðum.
+
+Skoðum dæmi \ref{sql:k4d8-like-upphaf} og \ref{sql:k4d9-like-lok} aftur. Í fyrra dæminu finnum við alla nemendur sem heita nafni sem byrjar á bókstafnum \emph{``K''}, í seinna dæminu finnum við alla nemendur sem heita nafni sem endar á \emph{``dóttir''}. Viljum við finna alla nemendur með nafn sem bæði byrjar á \emph{``K''} og endar á \emph{``dóttir''} getum við tengt skilyrðin tvö saman. Úr verður \verb|WHERE| klausan í sýnidæmi \ref{sql:k4d13-where-and}.
+
+\verb|OR| kemur fyrir þegar einungis eitt af tveimur skilyrðum þarf að vera uppfyllt. Lítum aftur á dæmi \ref{sql:k4d12-like-kennitala}, þar sem allir nemendur sem fæddir eru í apríl eru valdir. Vildum við líka ná í alla nemendur sem fæddir eru í júní gætum við notað \verb|OR| á svipaðan hátt og gert er í dæmi \ref{sql:k4d14-where-or}.
+
+\begin{example}
+\caption[WHERE með AND]{\emph{SELECT} skipun sem finnur alla nemendur í nemendatöflunni sem heita nafni sem bæði byrjar á \emph{``K''} og endar á \emph{``dóttir''}.}
+\label{sql:k4d13-where-and}
+\centering
+\sql{sql/k4d13-where-and.sql}
+\end{example}
+
+\begin{example}
+\caption[WHERE með OR]{\emph{SELECT} skipun sem finnur alla nemendur í nemendatöflunni sem fæddir eru í apríl eða júní.}
+\label{sql:k4d14-where-or}.
+\centering
+\sql{sql/k4d14-where-or.sql}
+\end{example}
+
+Freistandi getur verið að skrifa \verb|WHERE| klausur þar sem mörg samanburðar\emph{gildi} eru talin upp hvert af öðru, tengd með \verb|AND| eða \verb|OR|. Þetta gengur ekki! Munum alltaf að það eru röksegðir sem \verb|AND| og \verb|OR| tengja saman, það að reyna að nota þau til að tengja saman almenna strengi eða tölur getur leitt til óvæntra niðurstaðna. \footnote{Dæmi um þessa villu væri t.d. að skrifa \emph{WHERE x = 1 OR 2} til að finna línurnar þar sem $x$ er $1$ eða $2$. Réttara væri að skrifa \emph{WHERE x = 1 OR x = 2}.}
+
+Munum líka að \verb|OR| í röksegð er ekki alveg það sama og ``eða'' í talmáli. Í talmáli þýðir ``eða'' oft val á milli tveggja möguleika (má bjóða þér salat eða franskar með hamborgaranum?) en í röksegðum skilar samsett segð sönnu svo lengi sem annar ``möguleikinn'' á við. \footnote{Um þetta er til gamall brandari.
+
+Eiginmaður tölvunarfræðings spyr: ``Langar þig í fisk eða kjöt í kvöldmat?'' Tölvunarfræðinginn langar í kjöt, svo hún svarar: ``Já.''}
+\subsection{Að velja úr mengi - IN} %IN
+Oft þarf að gera mjög marga samanburði í \verb|WHERE| klausu. Þá getur orðið flókið að koma skilyrðunum fyrir.
+
+Hægt er að gera suma samanburði (sérstaklega þá sem annars þyrftu mörg \verb|OR| skilyrði) einfaldari með því að nota lykilorðið \verb|IN|. Segð sem inniheldur \verb|IN| ber saman gildi við ``mengi'' gilda og skilar sönnu ef samanburðargildið er í menginu. \footnote{\emph{IN} getur verið sérstaklega gagnlegt þegar undirfyrirspurnir koma við sögu. Sjá kafla \ref{undirkafli:undirfyrirspurnir}.}
+
+Dæmi um notkun \verb|IN| má sjá á sýnidæmi \ref{sql:k4d15-where-in}.
+
+\begin{example}
+\caption[WHERE með IN]{Tvær \emph{SELECT} skipanir sem gera sama hlutinn. Þær finna báðar nemendurna með númerin 1, 3, 5 og 7. Seinni skipunin er þó töluvert betri!}
+\label{sql:k4d15-where-in}.
+\centering
+\sql{sql/k4d15-where-in.sql}
+\end{example}
+\subsection{Að snúa við skilyrði - NOT}
+Merkingu flestra röksegða má snúa við með því að setja lykilorðið \verb|NOT| fyrir framan segðina. Hafi segðin áður skilað sönnu skilar hún þess í stað ósönnu, hafi hún skilað ósönnu skilar hún sönnu. Dæmi um notkun \verb|NOT| má sjá á sýnidæmi \ref{sql:k4d15-where-in}.
+
+\begin{example}
+\caption[NOT lykilorðið]{\emph{SELECT} skipun sem finnur alla nemendur sem \emph{ekki} byrja á stafnum \emph{``K''}.}
+\label{sql:k4d16-not}.
+\centering
+\sql{sql/k4d16-not.sql}
+\end{example}
+\section{Helstu ``scalar'' föll}
 \label{undirkafli:einindafoll}
-\subsection{LENGTH}
-\subsection{ROUND}
+Fall\footnote{e. \emph{function}} er mikilvægt stærðfræðihugtak sem kemur víða við í forritun, þar á meðal í SQL.
+
+Líta má á fall sem nokkurns konar ``vél'' sem breytir einu í annað. Fall \emph{tekur eitthvað inn} og \emph{skilar} einhverju öðru.
+
+\begin{marginfigure}
+\caption[Fall]{Líta má á fall $f$ sem vél sem breytir gildinu $x$ í gildið $f(x)$.}
+\label{mynd:fall}
+\centering
+\includegraphics[width=\linewidth]{myndir/fall}
+\end{marginfigure}
+
+Við getum t.d. litið á brauðrist sem fall. Brauðrist \emph{tekur inn} brauð og \emph{skilar} ristuðu brauði. Á stærðfræðimáli myndum við skrifa það svona:
+\[
+\text{brauðrist(brauð)} = \text{ristað brauð}
+\]
+
+Í þessum undirkafla ætlum við að skoða MySQL-föll sem taka inn eitt (eða ekkert) gildi og skila einu gildi. Þau eru kölluð ``scalar föll''. Ekki er til íslenskt orð yfir hugtakið sem er í almennri notkun.
+\subsection{Lengd strengs - CHAR\_LENGTH}
+Fyrsta fallið sem við skoðum er MySQL-fallið \verb|CHAR_LENGTH|. \verb|CHAR_LENGTH| tekur inn streng og skilar fjölda stafa sem er í strengnum. Bil og önnur tákn eru tekin með. Almenn lýsing á fallinu gæti þá verið svona:
+\[
+\text{CHAR\_LENGTH(texti)} = \text{fjöldi stafa í texta}
+\]
+Og dæmi um notkun (á stærðfræðiformi)
+\[
+\text{CHAR\_LENGTH('Jónas')} = 5
+\]
+
+Notkun fallsins í MySQL má sjá í sýnidæmi \ref{sql:k4d17-char-length}.
+
+\begin{example}[h]
+\caption[CHAR\_LENGTH]{\emph{SELECT} skipun sem finnur fjölda stafa í orðinu ``Jónas'' með \emph{CHAR\_LENGTH} fallinu. Þessi skipun skilar sem sagt tölunni 5.}
+\label{sql:k4d17-char-length}
+\centering
+\sql{sql/k4d17-char-length.sql}
+\end{example}
+
+Annað fall, sem heitir einfaldlega \verb|LENGTH|, er líka til. Það fall skilar fjölda bæta sem eru í strengnum. Oft er einn bókstafur geymdur í einu bæti, svo \verb|LENGTH| og \verb|CHAR_LENGTH| skila oft sömu tölu, en munur getur komið fram þegar bókstafir eru geymdir í meira en einu bæti. Séríslenskir stafir eru t.d. venjulega geymdir í tveimur bætum. \verb|LENGTH('Jónas')| myndi þess vegna skila tölunni $6$. 
+
+% \subsection{ROUND} 
 \subsection{UCASE og LCASE}
+\verb|UCASE| er fall sem tekur inn streng og skilar honum í hástöfum. Notkun fallsins í MySQL má sjá í sýnidæmi \ref{sql:k4d18-ucase}.
+
+\begin{example}[h]
+\caption[UCASE]{\emph{SELECT} skipun sem skilar strengnum ``JÓNAS''.}
+\label{sql:k4d18-ucase}
+\centering
+\sql{sql/k4d18-ucase.sql}
+\end{example}
+
+Fallinu má lýsa á eftirfarandi hátt:
+\[
+\text{UCASE(textinn)} = \text{textinn í hástöfum}
+\]
+Dæmi um notkun er:
+\[
+\text{UCASE('Jónas')} = \text{'JÓNAS'}
+\]
+
+\verb|LCASE| er svipað fall. Það fall tekur inn streng og skilar honum í lágstöfum. 
+\subsection{NOW}
+\verb|NOW| er fall sem skilar núverandi tímasetningu (skv. klukku MySQL-serversins). \verb|NOW| er ólíkt föllunum hér á undan að því leytinu til að það þarf ekki að taka neitt inn, það skilar bara gildi. (Þessi vél þarf ekkert hráefni!)
+
+Til að prenta núverandi tímasetningu út mætti sem sagt einfaldlega keyra skipunina \verb|SELECT NOW();|.
+\subsection{Notkun falla}
+Föllin sem við höfum farið yfir eru sjalnast notuð ein og sér. Oftast þau notuð á eftirfarandi vegu:
+\begin{enumerate}
+ \item Sem hluti af lýsingu á því hvaða dálka \verb|SELECT| skipun á að ná í.
+ \item Sem hluti af \verb|WHERE| klausu, til samanburðar við gildi.
+\end{enumerate}
+
+Fyrri notkunina má sjá í sýnidæmi \ref{sql:k4d19-char-length-haus}. Þar er allur dálkurinn \emph{nafn} settur inn í \verb|CHAR_LENGTH| fallið.
+
+Áðan sögðum við að \verb|CHAR_LENGTH| taki aðeins við einum streng. Þegar heill dálkur er settur inn í fall sem einungis tekur við einum streng (scalar fall) er fallið notað á hverja línu í dálkinum, eina í einu. Niðurstöðurnar birtast þá sem heill dálkur líka, líkt og sjá má á töflu \ref{tafla:lengd-nafna}.
+
+\begin{example}
+\caption[CHAR\_LENGTH í dálklýsingu]{\emph{SELECT} skipun sem finnur lengd nafna allra nemenda í nemendatöflunni sem enda á \emph{``dóttir''}. Niðurstöðu má sjá á töflu \ref{tafla:lengd-nafna}.}
+\label{sql:k4d19-char-length-haus}
+\centering
+\sql{sql/k4d19-char-length-haus.sql}
+\end{example}
+
+\begin{table}
+\centering
+\caption[Lengd nafna]{Niðurstaða sýnidæmis \ref{sql:k4d19-char-length-haus}.}
+\label{tafla:lengd-nafna}
+\begin{tabular}{ll}
+\toprule
+\verb|nafn|&\verb|CHAR_LENGTH(nafn)|\\
+\midrule
+Ingunn Rún Andradóttir&22\\
+Pálína Björk Þórólfsdóttir&26\\
+Regína Sigrún Jensdóttir&24\\
+Líney Geirsdóttir&17\\
+Steinunn Berglind Eiðsdóttir&28\\
+Kristjana Ólafsdóttir&21\\
+Þóra Gestsdóttir&16\\
+Kolfinna Svava Óttarsdóttir&27\\
+Elísabet Hrannarsdóttir&23\\
+Hafrún Þorláksdóttir&20\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Seinni notkunina má sjá í sýnidæmi \ref{sql:k4d20-char-length-where}. Þar er fallið \verb|CHAR_LENGTH| notað í \verb|WHERE| klausu. Reiknað er upp úr fallinu fyrir hverja línu og útkoman borin saman við tölu.
+
+\begin{example}
+\caption[CHAR\_LENGTH í WHERE klausu]{\emph{SELECT} skipun sem finnur nöfn allra nemenda sem heita sextán stafa nafni (að bilum meðtöldum).}
+\label{sql:k4d20-char-length-where}
+\centering
+\sql{sql/k4d20-char-length-where.sql}
+\end{example}
+
 \section{GROUP BY}
 \section{Helstu samsteypuföll}
 \subsection{SUM og AVG}

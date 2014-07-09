@@ -1,0 +1,1 @@
+SELECT CHAR_LENGTH('Jónas');
