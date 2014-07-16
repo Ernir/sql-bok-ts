@@ -353,7 +353,7 @@ Hægt er að gera suma samanburði (sérstaklega þá sem annars þyrftu mörg \
 Dæmi um notkun \verb|IN| má sjá á sýnidæmi \ref{sql:k4d15-where-in}.
 
 \begin{example}
-\caption[WHERE með IN]{Tvær \emph{SELECT} skipanir sem gera sama hlutinn. Þær finna báðar nemendurna með númerin 1, 3, 5 og 7. Seinni skipunin er þó töluvert betri!}
+\caption[WHERE með IN]{Tvær \emph{SELECT} skipanir sem gera sama hlutinn. Þær finna báðar nemendurna með númerin 1, 3, 5 og 7. Seinni skipunin er þó töluvert skárri!}
 \label{sql:k4d15-where-in}.
 \centering
 \sql{sql/k4d15-where-in.sql}
@@ -432,7 +432,7 @@ Dæmi um notkun er:
 \verb|NOW| er fall sem skilar núverandi tímasetningu (skv. klukku MySQL-serversins). \verb|NOW| er ólíkt föllunum hér á undan að því leytinu til að það þarf ekki að taka neitt inn, það skilar bara gildi. (Þessi vél þarf ekkert hráefni!)
 
 Til að prenta núverandi tímasetningu út mætti sem sagt einfaldlega keyra skipunina \verb|SELECT NOW();|.
-\subsection{Notkun falla}
+\subsection{Notkun scalar falla}
 Föllin sem við höfum farið yfir eru sjalnast notuð ein og sér. Oftast þau notuð á eftirfarandi vegu:
 \begin{enumerate}
  \item Sem hluti af lýsingu á því hvaða dálka \verb|SELECT| skipun á að ná í.
@@ -482,11 +482,99 @@ Seinni notkunina má sjá í sýnidæmi \ref{sql:k4d20-char-length-where}. Þar 
 \end{example}
 
 \section{GROUP BY}
-\section{Helstu samsteypuföll}
-\subsection{SUM og AVG}
-\subsection{MIN og MAX}
+Hingað til höfum við unnið með hrá gögn eins og þau koma fram í upphaflegu töflunni. Hver lína í niðurstöðunum samsvarar nákvæmlega einni línu í töflunni sem valið er úr.
+
+En þetta dugar okkur ekki alltaf. Stundum þurfum við að geta litið á margar línur í einu.
+
+Til þess að skoða margar línur í einu er \verb|GROUP BY| klausan gagnleg. Hún tekur töfluna sem valið er úr og skiptir henni í ``hópa''.
+
+Hópar af línum eru búnir til út frá sameiginlegum atriðum. Þessi ``sameiginlegu atriði'' eru gildi í einum eða fleiri dálkum. 
+
+Einföld \verb|GROUP BY| klausa tekur sem sagt við nafni á dálki og setur allar línur sem hafa sama gildið í þeim dálki saman í hóp. Dæmi um hvernig svona skipting gæti gengið fyrir sig má sjá á mynd \ref{mynd:group-by}.
+
+\begin{figure}
+\caption[GROUP BY]{Sýnir hvernig GROUP BY klausa gæti skipt töflu upp í hópa eftir því hvaða gildi er í dálkinum $y$.}
+\label{mynd:group-by}
+\centering
+\includegraphics[width=\linewidth]{myndir/group-by}
+\end{figure}
+
+Mikilvægt er að átta sig á að þegar \verb|GROUP BY| klausa er til staðar í \verb|SELECT| skipun samanstanda niðurstöðurnar ekki af línum, heldur \emph{hópum} af línum. Klausan breytir eðli skipunarinnar. 
+
+\section{Samsteypuföll}
+Föllin sem við höfum skoðað hingað til hafa ekki tekið inn meira en eitt gildi í einu. Nú lítum við á föll sem geta tekið inn fjöldann allan af gildum og unnið með þau sem eina heild. Slík föll eru kölluð samsteypuföll\footnote{e. \emph{aggregate function}}.
+
+Samsteypuföll í MySQL geta sem sagt tekið inn mengi af gildum og skilað svo upplýsingum um mengið. Mengið getur verið heill dálkur eða ``hópur'' af gildum sem \verb|GROUP BY| klausa býr til.
+
 \subsection{COUNT}
+Mest notaða samsteypufallið er líklega fallið \verb|COUNT|. \verb|COUNT| tekur inn mengi af gildum og skilar fjölda þeirra - fallið telur stökin.
+
+Til að kynnast \verb|COUNT| aðeins betur skulum við byrja á að skoða nýja töflu, töflu \ref{tafla:afangar}.
+
+\begin{table}
+\centering
+\caption[Áfangar]{Áfangar grunndeildar tölvubrautar Tækniskólans. Í töflunni eru upplýsingar um auðkenni áfangans (nafn hans), fagið sem áfangarnir tilheyra, og önnina sem þeir eru kenndir á. Dálkurinn \emph{numer} er aðallykill.}
+\label{tafla:afangar}
+\begin{tabular}{llll}
+\toprule
+numer&audkenni&fag&onn\\
+\midrule
+1&	FOR1A3U&	Forritun&		1\\
+2&	VSH1A3U&	Vefhönnun&		1\\
+3&	GSÖ1G2U&	Notkun gagnasafna&	1\\
+4&	TÆK1A1U&	Tölvutækni&		1\\
+5&	FOR1B3U&	Forritun&		2\\
+6&	VSH2A3U&	Vefhönnun&		2\\
+7&	GSÖ1F2U&	Notkun gagnasafna&	2\\
+8&	TÆK2A3U&	Tölvutækni&		2\\
+9&	FOR2B2U&	Forritun&		3\\
+10&	VSH2B2U&	Vefhönnun&		3\\
+11&	GSÖ2B2U&	Notkun gagnasafna&	3\\
+12&	TÆK2B2U&	Tölvutækni&		3\\
+13&	GRU2L4U&	Lokaverkefni grunndeildar&3\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Við getum t.d. notað \verb|SELECT| skipun sem inniheldur \verb|COUNT| fallið til að komast að því hversu margir áfangar eru í grunndeildinni. Slíka skipun má sjá á sýnidæmi \ref{sql:k4d21-count}.
+
+\begin{example}
+\caption[COUNT á dálk]{\emph{SELECT} skipun sem finnur fjölda lína í \emph{Afangar} töflunni (töluna 13). Í raun er fjöldi gilda í dálkinum \emph{numer} talinn, en þar sem við vitum að \emph{numer} er aðallykill getum við verið viss um að allar línurnar séu taldar.}
+\label{sql:k4d21-count}
+\centering
+\sql{sql/k4d21-count.sql}
+\end{example}
+
+Sé \verb|COUNT| notað með \verb|GROUP BY| klausu er ekki allur dálkurinn talinn, heldur er fjöldi staka (eða lína) í hverjum hópi talinn fyrir sig. Dæmi um slíka skipun og hvernig niðurstöður hennar geta litið út má sjá á myndum \ref{mynd:workbench-group-by} og \ref{mynd:workbench-group-by-onn}.
+
+\begin{figure}
+\caption[GROUP BY og COUNT eftir fögum]{Dæmi um \emph{SELECT} skipun með \emph{GROUP BY} klausu sem raðar áföngum saman í hópa eftir því hvaða fagi þeir tilheyra. Síðan telur \emph{COUNT} hversu margir áfangar tilheyra hverju fagi.}
+\label{mynd:workbench-group-by}
+\centering
+\includegraphics[width=\linewidth]{myndir/workbench-group-by}
+\end{figure}
+
+\begin{figure}
+\caption[GROUP BY og COUNT eftir önnum]{Dæmi um \emph{SELECT} skipun með \emph{GROUP BY} klausu sem raðar áföngum saman í hópa eftir því hvaða önn þeir eru kenndir á. Síðan telur \emph{COUNT} hversu margir áfangar eru á hverri önn.}
+\label{mynd:workbench-group-by-onn}
+\centering
+\includegraphics[width=\linewidth]{myndir/workbench-group-by-onn}
+\end{figure}
+
+\subsection{Önnur samsteypuföll - MIN, MAX, SUM, og AVG}
+Fleiri samsteypuföll eru til en \verb|COUNT|. Lítum á nokkur til viðbótar. Öll eiga þau sameiginlegt að taka inn mengi af gildum og skila okkur upplýsingum um mengið sjálft.
+
+\begin{itemize}
+ \item \verb|MIN| tekur inn mengi og skilar minnsta stakinu í menginu.
+ \item \verb|MAX| tekur inn mengi og skilar stærsta stakinu í menginu.
+ \item \verb|SUM| tekur inn mengi og skilar summu staka í menginu.
+ \item \verb|AVG| tekur inn mengi og skilar meðaltali staka í menginu.
+\end{itemize}
+
+Þau eru notuð á svipaðan hátt og \verb|COUNT|.
 \section{HAVING}
+
+
 \section{ORDER BY}
 \subsection{LIMIT}
 \section{Yfirlit}
