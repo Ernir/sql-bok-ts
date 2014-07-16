@@ -573,9 +573,30 @@ Fleiri samsteypuföll eru til en \verb|COUNT|. Lítum á nokkur til viðbótar. 
 
 Þau eru notuð á svipaðan hátt og \verb|COUNT|.
 \section{HAVING}
+Við vorum búin að komast að því að \verb|GROUP BY| klausa breytir eðli \verb|SELECT| skipunar sem hún tilheyrir. Niðurstöður skipunar sem inniheldur \verb|GROUP BY| klausuna eru nefnilega hópar af línum (hóplínur), ekki línur.
 
+Þetta hefur nokkrar afleiðingar í för með sér. Sérstaklega er sú afleiðing áberandi að \verb|WHERE| klausan virkar ekki sem fyrr. \verb|WHERE| klausan vinnur með línur, hún getur ekki unnið með hóplínur.
+
+Til þess að sía burt hóplínur þarf að nota enn aðra klausu - \verb|HAVING|. \verb|HAVING| virkar eins og \verb|WHERE| klausan, nema hún vinnur með hóplínur. 
+
+\verb|HAVING| klausuna má sjá á sýnidæmi \ref{sql:k4d22-having}.
+
+\begin{example}
+\caption[HAVING]{\emph{SELECT} skipun með \emph{HAVING} klausu sem finnur öll fög með þrjá áfanga. Væri reynt að nota \emph{WHERE} klausu hér í stað \emph{HAVING} myndi það leiða til villu!}
+\label{sql:k4d22-having}
+\centering
+\sql{sql/k4d22-having.sql}
+\end{example}
+
+Yfirlit yfir það hvernig \verb|WHERE| og \verb|HAVING| virka saman má sjá á mynd \ref{mynd:group-by-having}. Myndin sýnir líka í hvaða röð \verb|FROM|, \verb|WHERE|, \verb|GROUP BY| og \verb|HAVING| klausurnar koma fyrir í \verb|SELECT| skipunum.
+\begin{figure}
+\caption[FROM, WHERE, GROUP BY og HAVING]{Lýsing á því hvernig FROM, WHERE, GROUP BY og HAVING klausurnar vinna saman.}
+\label{mynd:group-by-having}
+\centering
+\includegraphics[width=\linewidth]{myndir/group-by-having}
+\end{figure}
 
 \section{ORDER BY}
 \subsection{LIMIT}
+\section{Uppbygging SELECT skipunarinnar}
 \section{Yfirlit}
-\subsection{Uppbygging SELECT skipunarinnar}
