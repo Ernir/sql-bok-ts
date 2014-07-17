@@ -157,6 +157,7 @@ Slík sía þarf að innihalda lýsingu á þeim gögnum sem hleypa á í gegn. 
 \includegraphics[width=\linewidth]{myndir/workbench-nidurstada-jon}
 \end{figure*}
 \subsection{Röksegðir}
+\label{undirkafli:roksegdir}
 Í öllum \verb|WHERE| klausunum hér á undan er um að ræða síur sem henda öllu sem ekki uppfylla eitt, nákvæmt skilyrði. Skilyrðið í sýnidæmi \ref{sql:k4d4-where-numer}, \verb|numer = 11|, hleypir til dæmis einungis þeim nemanda sem er með nákvæmlega númerið 11 í gegn.
 
 Skilyrðin geta þó verið margs konar. \verb|WHERE| klausan tekur nefnilega við næstum hvaða röksegð\footnote{e. \emph{boolean expression}} sem er, þ.e.a.s. alls kyns samanburðum og staðhæfingum sem að lokum gefa gildin ``satt'' eða ``ósatt''.\footnote{Í MySQL er ``satt'' táknað með tölunni $1$ eða orðinu \emph{TRUE}. ``Ósatt'' er táknað með $0$ eða \emph{FALSE}.}
@@ -597,6 +598,59 @@ Yfirlit yfir það hvernig \verb|WHERE| og \verb|HAVING| virka saman má sjá á
 \end{figure}
 
 \section{ORDER BY}
-\subsection{LIMIT}
+Niðurstöður \verb|SELECT| skipananna sem við höfum séð hafa ekki birst í neinni sérstakri röð. Þær hafa birst í þeirri röð sem þær eru geymdar í í gagnagrunninum.\footnote{Þetta er oftast innsetningarröð gagnanna. Ekki er samt alltaf hægt að treysta á það.}
+
+Til að láta gögnin birtast í ákveðinni röð má nota klausu sem heitir \verb|ORDER BY|. \verb|ORDER BY| klausan tekur við nafni á a.m.k. einum dálki og raðar línunum í röð eftir gildunum í þeim dálki.
+
+Hægt er að raða línum eftir tölum, bókstöfum, dagsetningum, hverju sem er sem hægt er að bera saman.\footnote{Hér getur verið gott að rifja upp samanburði með röksegðum úr undirkafla \ref{undirkafli:roksegdir}.}
+
+Sé annað ekki tekið fram er línunum raðað í hækkandi röð. ``Lægstu'' gildin koma fremst í röðinni, ``hæstu'' gildin koma aftast. Röðinni má snúa við með því að bæta lykilorðinu \verb|DESC| fyrir aftan dálkupptalninguna í \verb|ORDER BY| klausunni.
+
+Notkun \verb|ORDER BY| klausunnar má sjá á sýnidæmum \ref{sql:k4d23-order-by} til \ref{sql:k4d25-order-by-tveir}.
+
+\begin{example}
+\caption[ORDER BY]{\emph{SELECT} skipun sem velur nemendur úr töflunni í stafrófsröð eftir nafni með því að nota \emph{ORDER BY} klausu.}
+\label{sql:k4d23-order-by}
+\centering
+\sql{sql/k4d23-order-by.sql}
+\end{example}
+
+\begin{example}
+\caption[ORDER BY með DESC]{\emph{SELECT} skipun sem velur nemendur úr töflunni í öfugri stafrófsröð.}
+\label{sql:k4d24-order-by-desc}
+\centering
+\sql{sql/k4d24-order-by-desc.sql}
+\end{example}
+
+\begin{example}
+\caption[ORDER BY með tveimur dálkum]{\emph{SELECT} skipun sem sýnir áfanga, fyrst raðaða eftir önninni sem þeir eru kenndir á, svo er stafrófsröð notuð til að raða áföngunum innbyrðis innan annanna.}
+\label{sql:k4d25-order-by-tveir}
+\centering
+\sql{sql/k4d25-order-by-tveir.sql}
+\end{example}
+\section{LIMIT}
+Stundum þurfum við ekki allar upplýsingarnar úr töflu. Til að takmarka hversu margar línur birtast í niðurstöðu \verb|SELECT| skipunar má nota síðustu klausuna sem við förum yfir í þessari bók - \verb|LIMIT|.
+
+\verb|LIMIT| klausan tekur við einni eða tveimur tölum. 
+
+Fái \verb|LIMIT| klausan eina tölu mun \verb|SELECT| skipunin einungis sýna þann fjölda af línum í niðurstöðunni. Fyrstu línurnar úr niðurstöðunni eru valdar. Þannig myndi t.d. \verb|LIMIT 5| sía allar línur úr niðurstöðunni nema þær fimm fyrstu.
+
+Fái \verb|LIMIT| klausan tvær tölur skilar \verb|SELECT| skipunin ekki (endilega) fyrstu línunum úr niðurstöðunni. Klausan byrjar þá að telja á því línunúmeri sem fyrri talan segir til um, sú seinni segir til um hversu margar tölur eru valdar. Línunúmerin byrja að telja frá núlli. Þannig myndi t.d. \verb|LIMIT 5,10| hleypa í gegn línum $6-15$ og \verb|LIMIT 0,5| myndi gera það sama og \verb|LIMIT 5|.
+
+Sýnidæmi \ref{sql:k4d26-limit} og \ref{sql:k4d27-limit-tveir} sýna notkun \verb|LIMIT| klausunnar.
+
+\begin{example}
+\caption[LIMIT]{\emph{SELECT} skipun sem velur þá þrjá nemendur sem fremstir eru í stafrófsröðinni. Niðurstöðunum raðað með \emph{ORDER BY}, síðan er öllum línum eftir þá þriðju hent með \emph{LIMIT} klausunni.}
+\label{sql:k4d26-limit}
+\centering
+\sql{sql/k4d26-limit.sql}
+\end{example}
+
+\begin{example}
+\caption[LIMIT með tveimur tölum]{\emph{SELECT} skipun sem velur nemanda númer 11 í stafrófsröðinni.}
+\label{sql:k4d27-limit-tveir}
+\centering
+\sql{sql/k4d27-limit-tveir.sql}
+\end{example}
 \section{Uppbygging SELECT skipunarinnar}
 \section{Yfirlit}
