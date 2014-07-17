@@ -653,4 +653,35 @@ Sýnidæmi \ref{sql:k4d26-limit} og \ref{sql:k4d27-limit-tveir} sýna notkun \ve
 \sql{sql/k4d27-limit-tveir.sql}
 \end{example}
 \section{Uppbygging SELECT skipunarinnar}
+Við höfum farið yfir fjölmargar klausur sem tilheyra \verb|SELECT| skipuninni.
+
+Það skiptir máli í hvaða röð þessar klausur koma fram í \verb|SELECT| skipun. Þær þurfa að koma fram í nákvæmlega þeirri röð sem við kynntum þær. Sú röð er:
+
+\begin{enumerate}
+ \setcounter{enumi}{0}
+ \item Haus \verb|SELECT| skipunarinnar
+ \item \verb|FROM|
+ \item \verb|WHERE|
+ \item \verb|GROUP BY|
+ \item \verb|HAVING|
+ \item \verb|ORDER BY|
+ \item \verb|LIMIT|
+\end{enumerate}
+
+Sleppa má hverri af klausunum sem er\footnote{\emph{HAVING} er þó mjög sjaldan notuð án \emph{GROUP BY}.}. Þetta breytir ekki röðinni - \verb|WHERE| þarf alltaf að koma á eftir \verb|FROM|, \verb|ORDER BY| þarf alltaf að koma á eftir \verb|GROUP BY|, og svo framvegis.
 \section{Yfirlit}
+Í þessum kafla fórum við yfir \verb|SELECT| skipunina í MySQL.
+\begin{itemize}
+ \item \verb|SELECT| skipun er notuð til að ná í upplýsingar.
+ \item Þegar \verb|FROM| klausa fylgir \verb|SELECT| skipun er klausan notuð til að skilgreina hvaðan upplýsingarnar koma. \verb|FROM| klausan myndar mengi sem upplýsingarnar koma úr.
+ \item \verb|WHERE| klausan síar burt upplýsingar frá \verb|FROM| klausunni. Til þess eru notaðir samanburðir.
+ \begin{itemize}
+  \item Hægt er að nota alls kyns samanburði í \verb|WHERE| klausu svo lengi sem samanburðurinn einfaldast niður í ``satt'' eða ``ósatt''.
+ \end{itemize}
+ \item Scalar föll í MySQL taka inn eitt eða ekkert gildi og skila einu gildi. Sé dálkur af gildum settur inn í scalar fall sem tekur við einu gildi er fallið notað á hvert gildi í dálkinum fyrir sig.
+ \item \verb|GROUP BY| klausan sameinar gögn eftir sameiginlegum einkennum svo úr verða ``hóplínur''. Þetta er oftast gert til þess að nota samsteypuföll á hóplínurnar.
+ \item Samsteypuföll taka inn hóp af gildum (dálk, hóplínu) og skila upplýsingum um hópinn.
+ \item \verb|HAVING| klausan virkar eins og \verb|WHERE|, nema fyrir hóplínur.
+ \item \verb|ORDER BY| klausan raðar línum í niðurstöðum \verb|SELECT| skipunar í röð eftir einum eða fleiri dálkum.
+ \item \verb|LIMIT| klausan setur takmörk á hversu margar línur geta birst í niðurstöðunum.
+\end{itemize}
