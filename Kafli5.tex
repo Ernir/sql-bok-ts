@@ -38,8 +38,23 @@ Kennitölur eru þess vegna ekki sérstaklega góðir aðallyklar. Þær geyma u
  \item Og eru óháðir gögnunum.
 \end{itemize}
 Þó að tafla geti verið með marga lykla, þá er hver tafla aðeins með einn aðallykil.
-\subsection{Meira um lykla}
 
+\begin{example}
+\caption[PRIMARY KEY]{Til upprifjunar: aðallykill skilgreindur sem hluti af \emph{CREATE TABLE} skipun. Þessi skipun býr til töflu \ref{tafla:nemendur}, sem við notuðum mikið í síðasta kafla.}
+\label{sql:k5d1-primary-key}
+\centering
+\sql{sql/k5d1-primary-key.sql}
+\end{example}
+\subsection{(Ekki) meira um lykla}
+Lyklar eru stórt viðfangsefni sem ekki er hægt að snerta á nema að mjög litlu leyti í þessari bók. Við munum ekki kafa dýpra í þá hér, heldur munum við láta þá bíða bóka og námskeiða fyrir lengra komna.
+
+Í bili, þá skulum við láta okkur duga að muna að
+\begin{itemize}
+ \item Lyklar eru mikilvægir til að gagnagrunnskerfi geti unnið á skilvirkan hátt
+ \item Við kunnum að búa til aðallykla 
+ \item Aðallyklar geta auðkennt hverja línu í gagnagrunninum fyrir sig.
+\end{itemize}
+Síðasta atriðið verður sérstaklega mikilvægt þegar við förum að nota margar töflur í sama gagnagrunninum.
 \section{Margar töflur í sama gagnagrunninum}
 \section{Aðkomulyklar} % FOREIGN KEY
 \section{Tengingar} % 1-1, 1-N, N-N
