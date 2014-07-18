@@ -1,7 +1,29 @@
+Við höfum kynnst því hvernig búa má til töflur (kafli \ref{kafli:uppsetningtaflna}) og hvernig ná má í gögn úr töflunum (kafli \ref{kafli:select}). 
+
+Þessi vitneskja getur komið okkur furðu langt - en ekki alveg nógu. Nú skulum við skoða hvernig vinna má með stærri töflur og margar töflur í sama grunninum.
 \section{Lyklar}
 \label{undirkafli:lyklar}
+Lyklar\footnote{e. \emph{key} eða \emph{index}} eru mikilvægir í öllum skilvirkum gagnagrunnum. Lyklar eru m.a. notaðir til að gera fyrirspurnir hraðvirkari og til að tengja töflur saman.
+
+Lyklar eru stundum kallaðir \emph{vísar}. ``Lykill'' og ``vísir'' þýða það sama þegar kemur að MySQL.
 \subsection{Almennt um lykla - KEY/INDEX}
+Ímyndum okkur að við séum að leita að bók sem geymd er á mjög frumstæðu bókasafni. Á þessu bókasafni eru nefnilega engir titlar á kili bókanna og allar bækurnar líta eins út.
+Erfitt verk, ekki satt? Að meðaltali þyrftum við að fara í gegnum hálft bókasafnið áður en við rekumst á bókina sem við viljum.
+
+Þetta er verkið sem stendur frammi fyrir gagnagrunnskerfum í hvert skipti sem við notum þau til að leita að gögnum. Gagnagrunnskerfi geta ekki borið saman gögn við 
+Sem betur fer eru tölvur mjög fljótar að bryðja sér leið í gegn um mikið magn af gögnum - en við getum gert betur en að geyma allar upplýsingarnar okkar ómerktar og óraðar.
+
+Það að setja vísi á dálk í gagnagrunnstöflu samsvarar því að búa til bókasafnskerfi sem getur sagt okkur í hvaða hillum og hvar í hillunum við getum fundið hverja bók. Það gefur auga leið að þetta gerir leitina auðveldari.
+
+Sjá má hvernig búa má til lykil fyrir einn dálk á sýnidæmi \ref{sql:k5d1}.
+\begin{example}
+\caption[CREATE INDEX]{SQL-skipun sem býr til lykil.}
+\label{sql:k5d1}
+\centering
+\sql{sql/k5d1-lykill.sql}
+\end{example}
 \subsection{Einkvæmir lyklar - UNIQUE KEY}
+
 \subsection{Aðallyklar - PRIMARY KEY}
 \section{Margar töflur í sama gagnagrunninum}
 \section{Aðkomulyklar} % FOREIGN KEY
