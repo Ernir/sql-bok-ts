@@ -10,21 +10,36 @@ Lyklar eru stundum kallaðir \emph{vísar}. ``Lykill'' og ``vísir'' þýða þa
 Ímyndum okkur að við séum að leita að bók sem geymd er á mjög frumstæðu bókasafni. Á þessu bókasafni eru nefnilega engir titlar á kili bókanna og allar bækurnar líta eins út.
 Erfitt verk, ekki satt? Að meðaltali þyrftum við að fara í gegnum hálft bókasafnið áður en við rekumst á bókina sem við viljum.
 
-Þetta er verkið sem stendur frammi fyrir gagnagrunnskerfum í hvert skipti sem við notum þau til að leita að gögnum. Gagnagrunnskerfi geta ekki borið saman gögn við 
+Þetta er verkið sem stendur frammi fyrir gagnagrunnskerfum í hvert skipti sem við notum þau til að leita að gögnum í dálki sem ekki er með lykil.
+Gagnagrunnskerfi geta ekki borið saman gögn án þess að lesa þau.
 Sem betur fer eru tölvur mjög fljótar að bryðja sér leið í gegn um mikið magn af gögnum - en við getum gert betur en að geyma allar upplýsingarnar okkar ómerktar og óraðar.
 
 Það að setja vísi á dálk í gagnagrunnstöflu samsvarar því að búa til bókasafnskerfi sem getur sagt okkur í hvaða hillum og hvar í hillunum við getum fundið hverja bók. Það gefur auga leið að þetta gerir leitina auðveldari.
 
-Sjá má hvernig búa má til lykil fyrir einn dálk á sýnidæmi \ref{sql:k5d1}.
-\begin{example}
-\caption[CREATE INDEX]{SQL-skipun sem býr til lykil.}
-\label{sql:k5d1}
-\centering
-\sql{sql/k5d1-lykill.sql}
-\end{example}
+Hver tafla getur haft marga lykla.
 \subsection{Einkvæmir lyklar - UNIQUE KEY}
+Hægt er að setja þá takmörkun á lykil að öll stök sem honum tilheyra þurfi að vera einstök.
 
+Slíkur lykill, sem kalla má einkvæman lykil\footnote{e. \emph{unique key} eða \emph{unique index}}, hefur þá ekki einungis það hlutverk að gera leit í gagnagrunninum auðveldari, heldur einnig það hlutverk að passa upp á að gögnin séu einstök.
+
+Íslenskar kennitölur eru dæmi um gögn sem oft væri gott að vera með einkvæman lykil á. Það að fletta upp kennitölum er algeng aðgerð og við vitum að allar kennitölur eiga að vera einstakar.
 \subsection{Aðallyklar - PRIMARY KEY}
+Við höfum kynnst aðallyklum áður. Við sáum útskýringu á hvernig búa má til slíkan lykil í undirkafla \ref{undirkafli:adallyklar-kynning}.
+
+Nú getum við séð að aðallykill er ekkert annað en sérstök gerð af einkvæmum lykli. Aðallykill er lykill sem hefur það sérstaka hlutverk að einkenna hverja línu fyrir sig, svo að hægt sé að vísa í hana á ótvíræðan hátt.
+
+Þar sem að aðallykill töflu á að geta einkennt hverja línu er oftast best að lykillinn sé ekki byggður á gögnunum í línunni \footnote{af því að við viljum alls ekki þurfa að breyta aðallykli línu ef að gögnin breytast}. Einnig er gott að aðallykillinn sé lítill og einfaldur\footnote{Vegna þess að hann er oftast mikið notaður af gagnagrunnskerfinu.}. 
+
+Kennitölur eru þess vegna ekki sérstaklega góðir aðallyklar. Þær geyma upplýsingar um einstaklinginn (fæðingardagsetningu hans), þær geta breyst (þó það sé sjaldgæft) og þær eru langar (sem er tímafrekt að lesa). Þess vegna eru romsur á borð við þá sem við höfum séð í \verb|CREATE TABLE| skipunum, \verb|id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT| mikið notaðar til að skilgreina aðallykla. Þær búa til lykla sem 
+\begin{itemize}
+ \item Auðkenna línuna fullkomlega
+ \item Eru heiltölur (og þar með litlar og auðveldar í vinnslu)
+ \item Eru aldrei \verb|NULL|
+ \item Og eru óháðir gögnunum.
+\end{itemize}
+Þó að tafla geti verið með marga lykla, þá er hver tafla aðeins með einn aðallykil.
+\subsection{Meira um lykla}
+
 \section{Margar töflur í sama gagnagrunninum}
 \section{Aðkomulyklar} % FOREIGN KEY
 \section{Tengingar} % 1-1, 1-N, N-N
