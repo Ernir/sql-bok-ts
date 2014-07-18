@@ -24,6 +24,7 @@ Slíkur lykill, sem kalla má einkvæman lykil\footnote{e. \emph{unique key} eð
 
 Íslenskar kennitölur eru dæmi um gögn sem oft væri gott að vera með einkvæman lykil á. Það að fletta upp kennitölum er algeng aðgerð og við vitum að allar kennitölur eiga að vera einstakar.
 \subsection{Aðallyklar - PRIMARY KEY}
+\label{undirkafli:adallyklar}
 Við höfum kynnst aðallyklum áður. Við sáum útskýringu á hvernig búa má til slíkan lykil í undirkafla \ref{undirkafli:adallyklar-kynning}.
 
 Nú getum við séð að aðallykill er ekkert annað en sérstök gerð af einkvæmum lykli. Aðallykill er lykill sem hefur það sérstaka hlutverk að einkenna hverja línu fyrir sig, svo að hægt sé að vísa í hana á ótvíræðan hátt.
@@ -56,5 +57,84 @@ Lyklar eru stórt viðfangsefni sem ekki er hægt að snerta á nema að mjög l
 \end{itemize}
 Síðasta atriðið verður sérstaklega mikilvægt þegar við förum að nota margar töflur í sama gagnagrunninum.
 \section{Margar töflur í sama gagnagrunninum}
+Við komumst að því strax í kafla \ref{kafli:fyrstuskrefin} að gagnagrunnur getur innihaldið margar töflur. Hingað til höfum við samt verið að vinna með töflur eina í einu, óháð hvor annarri.
+
+Lítum á dæmi um hvernig tvær töflur sem eru staddar í sama gagnagrunni geta tengst. Skoðum aftur áfangatöfluna okkar frá því í síðasta kafla (\ref{tafla:afangar-aftur}).
+
+\begin{table}
+\centering
+\caption[Áfangar]{Tafla \ref{tafla:afangar} endurtekin.}
+\label{tafla:afangar-aftur}
+\begin{tabular}{llll}
+\toprule
+numer&audkenni&fag&onn\\
+\midrule
+1&	FOR1A3U&	Forritun&		1\\
+2&	VSH1A3U&	Vefhönnun&		1\\
+3&	GSÖ1G2U&	Notkun gagnasafna&	1\\
+4&	TÆK1A1U&	Tölvutækni&		1\\
+5&	FOR1B3U&	Forritun&		2\\
+6&	VSH2A3U&	Vefhönnun&		2\\
+7&	GSÖ1F2U&	Notkun gagnasafna&	2\\
+8&	TÆK2A3U&	Tölvutækni&		2\\
+9&	FOR2B2U&	Forritun&		3\\
+10&	VSH2B2U&	Vefhönnun&		3\\
+11&	GSÖ2B2U&	Notkun gagnasafna&	3\\
+12&	TÆK2B2U&	Tölvutækni&		3\\
+13&	GRU2L4U&	Lokaverkefni grunndeildar&3\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Sú tafla er ágæt, en við getum gert hana betri með því að skipta henni upp í tvær töflur sem eru tengdar saman.\footnote{Af hverju er betra að vera ekki með svona endurtekningar? Hér má til dæmis nefna minni plásseyðslu og hversu mikið auðveldara verður að uppfæra gildin í töflunum séu engar endurtekningar til staðar.} Tökum eftir því að nafnið á hverju fagi er endurtekið í dálkinum \emph{fag}. 
+
+Við gætum komist hjá þessari endurtekningu með því að geyma nöfnin á fögunum í sérstakri töflu.\footnote{Það sem við erum að gera hér er kallað að ``normalísera'' (e. \emph{normalize}) gagnagrunninn. Normalísering er viðfangsefni fyrir lengra komna.} Sú tafla gæti verið eins og tafla \ref{tafla:fog}.
+Þar má sjá að við höfum gefið hverju fagi númer. Gefum okkur það að dálkurinn sem inniheldur þau númer sé aðallykill (sjá undirkafla \ref{undirkafli:adallyklar}). Þá getum við notað númerin til þess að vísa í línurnar. Þetta hefur verið gert á töflu \ref{tafla:afangar-fagnumer}, nöfnunum á fögunum hefur verið skipt út fyrir númer þeirra í töflu \ref{tafla:fog}.
+
+\begin{table}
+\centering
+\caption[Fög]{Fög, sem áður voru í gömlu áfangatöflunni (\ref{tafla:afangar}/\ref{tafla:afangar-aftur}). Þessa töflu má tengja við endurbættu áfangatöfluna - töflu \ref{tafla:afangar-fagnumer}.}
+\label{tafla:fog}
+\begin{tabular}{ll}
+\toprule
+numer&fag\\
+\midrule
+1&Forritun\\
+2&Vefhönnun\\
+3&Notkun gagnasafna\\
+4&Tölvutækni\\
+5&Lokaverkefni grunndeildar\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\caption[Áfangar - endurbætt]{Áfangataflan, þar sem nöfnunum á fögunum hefur verið skipt út fyrir númer þeirra, sem birtast í töflu \ref{tafla:fog}.}
+\label{tafla:afangar-fagnumer}
+\begin{tabular}{llll}
+\toprule
+numer&audkenni&fagNumer&onn\\
+\midrule
+1&	FOR1A3U&	1&	1\\
+2&	VSH1A3U&	2&	1\\
+3&	GSÖ1G2U&	3&	1\\
+4&	TÆK1A1U&	4&	1\\
+5&	FOR1B3U&	1&	2\\
+6&	VSH2A3U&	2&	2\\
+7&	GSÖ1F2U&	3&	2\\
+8&	TÆK2A3U&	4&	2\\
+9&	FOR2B2U&	1&	3\\
+10&	VSH2B2U&	2&	3\\
+11&	GSÖ2B2U&	3&	3\\
+12&	TÆK2B2U&	4&	3\\
+13&	GRU2L4U&	5&	3\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Hægt er að búa til mjög stórar fjölskyldur af töflum með því að tengja þær saman á þennan hátt með sameiginlegum gildum.
+
+Til þess að tryggja það að svona tengingar séu rétt upp settar notum við svokallaða aðkomulykla.
 \section{Aðkomulyklar} % FOREIGN KEY
 \section{Tengingar} % 1-1, 1-N, N-N
