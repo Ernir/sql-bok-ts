@@ -135,6 +135,30 @@ numer&audkenni&fagNumer&onn\\
 
 Hægt er að búa til mjög stórar fjölskyldur af töflum með því að tengja þær saman á þennan hátt með sameiginlegum gildum.
 
-Til þess að tryggja það að svona tengingar séu rétt upp settar notum við svokallaða aðkomulykla.
+\begin{figure}
+\caption[Tengsl taflna]{Sýnir hvernig töflur \ref{tafla:fog} og \ref{tafla:afangar-fagnumer} tengjast saman á dálkunum \emph{fagNumer} og \emph{fag}. (Töflurnar eru ekki sýndar í heilu lagi.)}
+\label{mynd:tengsl}
+\centering
+\includegraphics[width=\linewidth]{myndir/foreign-key}
+\end{figure}
+
 \section{Aðkomulyklar} % FOREIGN KEY
+Þegar gildi í dálki eiga að vísa í línur annarrar töflu er hægt að tryggja sambandið með því að búa til svokallaðan aðkomulykil\footnote{e. \emph{Foreign key}.}.
+
+Aðkomulykill myndar formlegt samband á milli tveggja taflna. Taflan sem inniheldur gögnin sjálf er kölluð foreldrið í sambandinu. Taflan sem inniheldur vísunina í gögnin er kölluð barnið\footnote{e. \emph{parent table} annars vegar og \emph{child table} hins vegar}. Í dæminu okkar á undan er \ref{tafla:fog} því foreldrið og \ref{tafla:afangar-fagnumer} barnið.
+
+Aðkomulykillinn passar upp á að barnið geti ekki vísað í gögn sem ekki eru til í foreldrinu. Sé reynt að nota \verb|INSERT| skipun á barnið til að setja inn vísun í línu sem ekki er til í foreldrinu veldur það villu sé lykillinn rétt upp settur.
+
+Aðkomulykillinn er skilgreindur í \verb|CREATE TABLE| skipun barnsins.
+
+Mikilvægt er að dálkarnir í barninu og foreldrinu passi saman m.t.t. gagnagerðar (\ref{undirkafli:gagnagerdir}). Oftast er tengt saman á heiltöludálkum (sem þurfa að vera af sömu stærð).
+
+Dálkurinn í foreldrinu sem aðkomulykillinn vísar í þarf að hafa aðallykill eða einkvæman lykill. Væri svo ekki gæti gagnagrunnskerfið ekki verið visst um hvaða línu í foreldrinu vísunin í barninu ætti við.
 \section{Tengingar} % 1-1, 1-N, N-N
+
+
+
+
+
+
+
