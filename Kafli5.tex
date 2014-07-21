@@ -97,7 +97,7 @@ Við gætum komist hjá þessari endurtekningu með því að geyma nöfnin á f
 \label{tafla:fog}
 \begin{tabular}{ll}
 \toprule
-numer&fag\\
+numer&nafn\\
 \midrule
 1&Forritun\\
 2&Vefhönnun\\
@@ -136,7 +136,7 @@ numer&audkenni&fagNumer&onn\\
 Hægt er að búa til mjög stórar fjölskyldur af töflum með því að tengja þær saman á þennan hátt með sameiginlegum gildum.
 
 \begin{figure}
-\caption[Tengsl taflna]{Sýnir hvernig töflur \ref{tafla:fog} og \ref{tafla:afangar-fagnumer} tengjast saman á dálkunum \emph{fagNumer} og \emph{fag}. (Töflurnar eru ekki sýndar í heilu lagi.)}
+\caption[Tengsl taflna]{Sýnir hvernig töflur \ref{tafla:fog} og \ref{tafla:afangar-fagnumer} tengjast saman á dálkunum \emph{fagNumer} í áfangatöflunni og \emph{numer} í fagtöflunni. (Ath: Töflurnar eru ekki sýndar í heilu lagi.)}
 \label{mynd:tengsl}
 \centering
 \includegraphics[width=\linewidth]{myndir/foreign-key}
@@ -153,8 +153,25 @@ Aðkomulykillinn er skilgreindur í \verb|CREATE TABLE| skipun barnsins.
 
 Mikilvægt er að dálkarnir í barninu og foreldrinu passi saman m.t.t. gagnagerðar (\ref{undirkafli:gagnagerdir}). Oftast er tengt saman á heiltöludálkum (sem þurfa að vera af sömu stærð).
 
-Dálkurinn í foreldrinu sem aðkomulykillinn vísar í þarf að hafa aðallykill eða einkvæman lykill. Væri svo ekki gæti gagnagrunnskerfið ekki verið visst um hvaða línu í foreldrinu vísunin í barninu ætti við.
-\section{Tengingar} % 1-1, 1-N, N-N
+Dálkurinn í foreldrinu sem aðkomulykillinn vísar í þarf að hafa aðallykil eða einkvæman lykil. Væri svo ekki gæti gagnagrunnskerfið ekki verið visst um hvaða línu í foreldrinu vísunin í barninu ætti við.
+
+Sjá má hvernig skilgreina mætti samband á milli taflna \ref{tafla:fog} og \ref{tafla:afangar-fagnumer} sem hluta af \verb|CREATE TABLE| skipunum á sýnidæmi \ref{sql:k5d2-tengdar-toflur}.
+
+\begin{example}
+\caption[FOREIGN KEY - tengdar töflur]{Tengdar töflur. Aðkomulykillinn er skilgreindur í síðustu línu seinni \emph{CREATE TABLE} skipunarinnar. Línan býr til aðkomulykil fyrir dálkinn \emph{fagNumer} sem vísar í dálkinn \emph{numer} í töflunni Fog.}
+\label{sql:k5d2-tengdar-toflur}
+\centering
+\sql{sql/k5d2-tengdar-toflur.sql}
+\end{example}
+
+\begin{example}
+\caption[FOREIGN KEY - abstract dæmi]{Meira ``abstract'' dæmi um tengdar töflur. Hér koma hlutverk taflanna og dálkanna fram sem heiti, til að sýna sambandið betur.}
+\label{sql:k5d3-abstract-toflur}
+\centering
+\sql{sql/k5d3-abstract-toflur.sql}
+\end{example}
+
+% \section{Tengingar} % 1-1, 1-N, N-N
 
 
 
