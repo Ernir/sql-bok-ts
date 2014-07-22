@@ -1,3 +1,36 @@
+Við höfum komist að því hvernig búa má til töflur sem vísa hver í aðra. Við höfum líka komist að því hvernig ná má í upplýsingar úr einni töflu.
+
+Nú skulum við líta á hvernig búa má til skipanir sem velja upplýsingar úr fleiri en einni töflu. Til þess þurfum við að læra hvernig stækka má \verb|FROM| klausuna svo að hún geti meðhöndlað margar töflur.
+\section{Nöfn dálka}
+Áður en lengra er haldið skulum við skoða betur dálitla ónákvæmni sem við höfum sætt okkur við hingað til.
+
+Þegar við höfum vísað í dálk hefur okkur dugað að skrifa einfaldlega nafn hans. Við höfum ekki séð mikið að því að skrifa \verb|WHERE| klausur á borð við \verb|WHERE numer = 11|.
+
+Þetta verður hins vegar erfiðara þegar við vinnum með margar töflur í einu. Hvað ef við erum að vinna með tvær töflur þar sem báðar töflurnar eru með dálk sem heitir \verb|numer|?
+
+Til að passa upp á að gagnagrunnskerfið viti hvaða dálk við eigum við þurfum við oft að taka fram í hvaða töflu dálkurinn sem við erum að nefna er. Þetta er gert með því að skipta út nafninu á dálkinum fyrir ``fullt nafn'' hans. Til að fá fullt nafn dálks skrifum við fyrst nafn töflunnar sem hann er í, svo punkt, svo nafn dálksins. Þannig má vísa í dálkinn \verb|a| í töflunni \verb|A| með því að skrifa \verb|A.a|.
+
+Notkun á fullu nafni dálks má sjá á sýnidæmi \ref{sql:k6d1-fullt-nafn}.
+
+\begin{example}
+\caption[Fullt nafn dálks]{Tvær \emph{SELECT} skipanir sem gera það sama - velja auðkenni áfanga úr áfangatöflunni þar sem raðnúmer línunnar er $1$. Munurinn er sá að í seinni skipuninni er tekið fram í hvaða töflu dálkurinn \emph{numer} er.}
+\label{sql:k6d1-fullt-nafn}
+\centering
+\sql{sql/k6d1-fullt-nafn.sql}
+\end{example}
+
+\subsection{Að endurnefna - AS}
+Það að vinna með heiti getur verið þreytandi. Til að vinna með dálka og töflur undir öðru nafni má nota lykilorðið \verb|AS|. Þetta býr til ``aukanafn''\footnote{e. \emph{alias}} fyrir fyrirbrigðið sem unnið er með. Gamla nafninu er ekki breytt í gagnagrunnskerfinu, \verb|AS| býr bara til nýtt nafn til að nota tímabundið.
+
+Sjá má endurnefndan dálk á sýnidæmi 
+
+\begin{example}
+\caption[Endurnefning]{Endurnefning dálks. Dálkurinn \emph{audkenni} mun birtast sem \emph{afangi} í niðurstöðum þessarar skipunar.}
+\label{sql:k6d2-nytt-nafn}
+\centering
+\sql{sql/k6d2-nytt-nafn.sql}
+\end{example}
+
 \section{INNER JOIN}
 \section{OUTER JOIN}
 \section{Undirfyrirspurnir}
