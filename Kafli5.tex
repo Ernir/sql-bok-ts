@@ -22,6 +22,8 @@ Hægt er að setja þá takmörkun á lykil að öll stök sem honum tilheyra þ
 
 Slíkur lykill, sem kalla má einkvæman lykil\footnote{e. \emph{unique key} eða \emph{unique index}}, hefur þá ekki einungis það hlutverk að gera leit í gagnagrunninum auðveldari, heldur einnig það hlutverk að passa upp á að gögnin séu einstök.
 
+Þetta þýðir að það að reyna að setja inn gögn í dálk (dálka) sem er með einkvæman lykil veldur villu. Einkvæmur lykill myndar sem sagt takmörkun á því hvaða gildi mega fara inn í dálka sem hann nær yfir. Talað er um að einkvæmir lyklar myndi skorðu\footnote{e. \emph{constraint}} á dálkinn eða dálkana.
+
 Íslenskar kennitölur eru dæmi um gögn sem oft væri gott að vera með einkvæman lykil á. Það að fletta upp kennitölum er algeng aðgerð og við vitum að allar kennitölur eiga að vera einstakar.
 \subsection{Aðallyklar - PRIMARY KEY}
 \label{undirkafli:adallyklar}
@@ -147,7 +149,7 @@ Hægt er að búa til mjög stórar fjölskyldur af töflum með því að tengj
 
 Aðkomulykill myndar formlegt samband á milli tveggja taflna. Taflan sem inniheldur gögnin sjálf er kölluð foreldrið í sambandinu. Taflan sem inniheldur vísunina í gögnin er kölluð barnið\footnote{e. \emph{parent table} annars vegar og \emph{child table} hins vegar}. Í dæminu okkar á undan er \ref{tafla:fog} því foreldrið og \ref{tafla:afangar-fagnumer} barnið.
 
-Aðkomulykillinn passar upp á að barnið geti ekki vísað í gögn sem ekki eru til í foreldrinu. Sé reynt að nota \verb|INSERT| skipun á barnið til að setja inn vísun í línu sem ekki er til í foreldrinu veldur það villu sé lykillinn rétt upp settur.
+Aðkomulykillinn passar upp á að barnið geti ekki vísað í gögn sem ekki eru til í foreldrinu. Sé reynt að nota \verb|INSERT| skipun á barnið til að setja inn vísun í línu sem ekki er til í foreldrinu veldur það villu sé lykillinn rétt upp settur.\footnote{Aðkomulyklar eru því önnur gerð af skorðu (constraint).}
 
 Aðkomulykillinn er skilgreindur í \verb|CREATE TABLE| skipun barnsins.
 
@@ -173,7 +175,21 @@ Sjá má hvernig skilgreina mætti samband á milli taflna \ref{tafla:fog} og \r
 
 % \section{Tengingar} % 1-1, 1-N, N-N
 
+\newpage
+\section{Yfirlit}
+Í þessum kafla skoðuðum við lykla og tengingar á milli taflna.
 
+\begin{itemize}
+ \item Það að setja lykil á dálk hjálpar gagnagrunnskerfi að vinna með hann á hagkvæman máta.
+ \begin{itemize}
+  \item Einn lykill getur náð yfir marga dálka.
+  \item Hver tafla getur haft marga lykla.
+ \end{itemize}
+ \item Lykill getur verið ``einkvæmur'' (unique). Engin tvö stök í einkvæmum lykli eru eins.
+ \item Hver tafla getur verið með einn aðallykil, sem er einkvæmur lykill. Hann er notaður til að auðkenna hverja línu í töflunni fyrir sig.
+ \item Aðkomulykill er sérstök gerð af lykli sem skilgreinir samband á milli tveggja taflna.
+ \item Aðkomulyklar og einkvæmir lyklar eru skorður (constraints). Villa kemur upp sé reynt að setja inn gögn í dálk sem tilheyrir slíkum lykli ef gögnin uppfylla ekki skilyrðin sem lykillinn setur.
+\end{itemize}
 
 
 
