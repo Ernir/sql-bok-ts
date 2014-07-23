@@ -174,9 +174,27 @@ Sjá má hvernig skilgreina mætti samband á milli taflna \ref{tafla:fog} og \r
 \sql{sql/k5d3-abstract-toflur.sql}
 \end{example}
 
+\section{Margar samtengdar töflur}
+Nú þegar við kunnum að tengja saman tvær töflur er ekkert sem hindrar okkur í að tengja saman eins margar töflur og við viljum.
+
+Sýnidæmi \ref{sql:k5d4-starfsmenn-nemendur} til \ref{sql:k5d5-hopar} bæta töflum við gagnagrunninn ``taekniskolinn'' sem við bjuggum til fyrir löngu (sýnidæmi \ref{sql:k2d4-create-database}). Þær töflur passa við töflurnar sem búnar voru til í dæmi \ref{sql:k5d2-tengdar-toflur}.
+
+\begin{example}
+\caption[Starfsmenn og nemendur]{Okkar gömlu góðu starfsmanna- og nemendatöflur (töflur \ref{tafla:starfsmenn-ts} og \ref{tafla:nemendur}) uppfærðar til að vera tengdar saman. Hér höfum við bætt dálkinum \emph{umsjonarkennari} við nemendatöfluna, sem inniheldur vísun í starfsmannatöfluna. Hver nemandi hefur sem sagt einn starfsmann sem er umsjónarkennari viðkomandi nemanda.}
+\label{sql:k5d4-starfsmenn-nemendur}
+\centering
+\sql{sql/k5d4-starfsmenn-nemendur.sql}
+\end{example}
+
+\begin{example}
+\caption[Hópar]{Hver áfangi getur verið kenndur oftar en einu sinni á önn, nemendum er þá skipt upp í hópa. Hér er tafla sem geymt gæti upplýsingar um hópa. Hópur getur hér verið með nafn (í Tækniskólanum er þetta oftast bara tala) og hámarksfjölda nemenda sem eigin einkenni. Síðan vísum við í áfangatöfluna til að skrá upplýsingar um hvaða áfanga er hér verið að kenna, og starfsmannatöfluna til að skrá upplýsingar um hver kennir hópinn.}
+\label{sql:k5d5-hopar}
+\centering
+\sql{sql/k5d5-hopar.sql}
+\end{example}
+
 % \section{Tengingar} % 1-1, 1-N, N-N
 
-\newpage
 \section{Yfirlit}
 Í þessum kafla skoðuðum við lykla og tengingar á milli taflna.
 
