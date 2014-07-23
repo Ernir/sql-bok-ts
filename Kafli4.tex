@@ -16,9 +16,10 @@ Dæmi um ofurlitla \verb|SELECT| skipun má sjá í sýnidæmi \ref{sql:k4d1-sum
 \end{example}
 
 \subsection{SELECT - FROM}
+\label{undirkafli:from}
 Þegar \verb|SELECT| skipun er skrifuð er það oftast í þeim tilgangi að ná upplýsingum úr SQL-töflu.
 
-Til þess að ná upplýsingum úr töflu með þarf að minnsta kosti að koma fram úr hvaða töflu og úr hvaða dálki upplýsingarnar eiga að koma. Þetta er gert með því að 
+Þegar ná á upplýsingum úr töflu þarf að minnsta kosti tvennt að koma fram - hvar upplýsingarnar er að finna og hvaða upplýsingar skal velja. Þetta má gera í eftirfarandi skrefum:
 
 \begin{enumerate}
  \item Skrifa orðið \verb|SELECT| (sem gerir skipunina að \verb|SELECT| skipun)
@@ -26,8 +27,9 @@ Til þess að ná upplýsingum úr töflu með þarf að minnsta kosti að koma 
  \item Skrifa orðið \verb|FROM|
  \item Skrifa nafn töflunnar sem velja skal úr.
 \end{enumerate}
+Fyrri tvö skrefin lýsa þá því hvaða upplýsingar skal velja, þau seinni tvö lýsa því hvaðan þær koma.\footnote{Seinni tvö skrefin lýsa svokallaðri \emph{FROM} klausu. \emph{FROM} klausa lýsir því hvaðan upplýsingar koma. Oft er þetta bara nafn á einni töflu.}
 
-Dæmi um þetta má sjá á sýnidæmi \ref{sql:k4d2-from}.
+\verb|SELECT| skipun með \verb|FROM| klausu má sjá á sýnidæmi \ref{sql:k4d2-from}.
 
 \begin{table}
 \centering
@@ -122,6 +124,8 @@ Hafrún Þorláksdóttir&250498-2849\\
 \centering
 \includegraphics[width=\linewidth]{myndir/workbench-nidurstada-margir-dalkar}
 \end{figure*}
+
+\newpage
 \section{WHERE klausan}
 Hingað til höfum við valið heila dálka með \verb|SELECT| skipunum. Það sem við viljum hins vegar oftast gera er að finna ákveðnar upplýsingar í töflunni, frekar en að fá þær allar.
 
@@ -673,7 +677,7 @@ Sleppa má hverri af klausunum sem er\footnote{\emph{HAVING} er þó mjög sjald
 Í þessum kafla fórum við yfir \verb|SELECT| skipunina í MySQL.
 \begin{itemize}
  \item \verb|SELECT| skipun er notuð til að ná í upplýsingar.
- \item Þegar \verb|FROM| klausa fylgir \verb|SELECT| skipun er klausan notuð til að skilgreina hvaðan upplýsingarnar koma. \verb|FROM| klausan myndar mengi sem upplýsingarnar koma úr.
+ \item Þegar \verb|FROM| klausa fylgir \verb|SELECT| skipun er klausan notuð til að skilgreina hvaðan upplýsingarnar koma. 
  \item \verb|WHERE| klausan síar burt upplýsingar frá \verb|FROM| klausunni. Til þess eru notaðir samanburðir.
  \begin{itemize}
   \item Hægt er að nota alls kyns samanburði í \verb|WHERE| klausu svo lengi sem samanburðurinn einfaldast niður í ``satt'' eða ``ósatt''.
