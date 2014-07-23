@@ -40,9 +40,42 @@ Hingað til hefur \verb|FROM| klausan ekki innihaldið annað en orðið \verb|F
 \end{quote}
 Þessi lýsing getur innihaldið meira en eina töflu. Almennt séð myndar \verb|FROM| klausan sem sagt \emph{mengi} upplýsinga sem hægt er að vinna með.
 
-Til að skilgreina mengi sem tekur upplýsingar sínar úr tveimur eða fleiri töflum notum við \verb|JOIN|.
+Til að skilgreina mengi sem tekur upplýsingar sínar úr tveimur eða fleiri töflum bætum við lykilorðinu \verb|JOIN| (ásamt fleiri lykilorðum) við \verb|FROM| klausuna.
 
 \subsection{INNER JOIN}
+\verb|INNER JOIN| er sú leið sem langmest er notuð til að ná upplýsingum úr mörgum töflum. 
+
+Til að skilja \verb|INNER JOIN| betur skulum við skoða aftur hvernig töflur voru tengdar saman með aðkomulyklum (undirkafli \ref{undirkafli:adkomulyklar}).
+Aðkomulyklar tengja töflur saman með því að halda utan um gögn sem eru sameiginleg í tveimur töflum. \verb|INNER JOIN| nýtir sér þessi sameiginlegu gögn til að smíða eitt stórt mengi sem vinna má með.
+
+Lítum á mynd \ref{mynd:inner-join}.
+
+\begin{figure}
+\caption[INNER JOIN]{Sýnir hvernig \emph{SELECT} skipun með \emph{INNER JOIN} velur einungis þær línur úr töflunum $A$ og $B$ sem dálkarnir $numerA$ og $numerB$ eiga sameiginlegar.}
+\label{mynd:inner-join}
+\centering
+\includegraphics[width=\linewidth]{myndir/inner-join}
+\end{figure}
+
+Þar má sjá gildi í tveimur töflum borin saman. Þessi samanburður á sér stað í \verb|ON| hluta skipunarinnar. Hann er líkur samanburði í \verb|WHERE| klausu, en hefur það sérstaka hlutverk að bera saman línur í tveimur mismunandi töflum.
+
+Fyrir utan það að \verb|FROM| klausan er stærri, þá virkar \verb|SELECT| skipun sem velur úr fleiri en einni töflu alveg eins og \verb|SELECT| skipun sem vinnur bara með eina töflu. Hægt er að velja hvaða dálk úr töflunum tveimur sem er.
+
+Sjá má raunverulegri notkun á \verb|INNER JOIN| á sýnidæmi \ref{sql:k6d3-inner-join}.
+
+\begin{example}
+\caption[INNER JOIN]{\emph{SELECT} skipun sem velur úr töflunum \emph{Fog} og \emph{Afangar}. Niðurstöðurnar má sjá á mynd \ref{mynd:nidurstada-join}.}
+\label{sql:k6d3-inner-join}
+\centering
+\sql{sql/k6d3-inner-join.sql}
+\end{example}
+
+\begin{figure}
+\caption[INNER JOIN niðurstaða]{Niðurstaða \emph{SELECT} skipunarinnar í dæmi \ref{sql:k6d3-inner-join}. }
+\label{mynd:nidurstada-join}
+\centering
+\includegraphics{myndir/workbench-nidurstada-join}
+\end{figure}
 
 \subsection{OUTER JOIN}
 \section{Undirfyrirspurnir}
