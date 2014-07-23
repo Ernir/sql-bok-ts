@@ -193,8 +193,21 @@ Sýnidæmi \ref{sql:k5d4-starfsmenn-nemendur} til \ref{sql:k5d5-hopar} bæta tö
 \sql{sql/k5d5-hopar.sql}
 \end{example}
 
-% \section{Tengingar} % 1-1, 1-N, N-N
+\section{Tengingar} % 1-1, 1-N, N-N
+Samtenging á töflum getur táknað þrjár gerðir af samböndum. Gerðirnar eru \emph{1-1 sambönd}, \emph{1-N sambönd} og \emph{N-N sambönd}. Lítum stuttlega á þær.
 
+\subsection{1-N: Einn tengdur í marga}
+Allar tengingar sem við höfum séð hingað til (í sýnidæmum \ref{sql:k5d2-tengdar-toflur} til \ref{sql:k5d5-hopar}) eru af gerðinni $1-N$.
+
+Kalla mætti $1-N$ sambandsgerðina ``einn-í-marga''\footnote{e. \emph{one-to-many}} samband (táknið $N$ þýðir hér ``margir''). Þetta er sú gerð af samböndum sem við sjáum oftast.
+
+Skoðum dæmi \ref{sql:k5d2-tengdar-toflur} aftur, með það fyrir augum að hér sé verið að tengja ``einn-í-marga''.
+
+Ef við greinum sambandið á milli taflanna tveggja aðeins, þá sjáum við að hver áfangi tilheyrir nákvæmlega einu fagi. Enginn áfangi tilheyrir tveimur fögum. Hins vegar getur hvert fag samanstaðið af mörgum áföngum. Öll sambönd á milli taflna þar sem hver lína í annarri töflunni getur tengst mörgum línum í hinni töflunni, en ekki öfugt, eru $1-N$ sambönd.
+
+Í $1-N$ sambandi er aðkomulykillinn settur í ``margir'' töfluna - barnið í sambandinu.
+\subsection{1-1: Einn tengdur í einn}
+\subsection{N-N: Margir tengdir í marga}
 \section{Yfirlit}
 Í þessum kafla skoðuðum við lykla og tengingar á milli taflna.
 
