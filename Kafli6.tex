@@ -31,7 +31,7 @@ Sjá má endurnefndan dálk á sýnidæmi \ref{sql:k6d2-nytt-nafn}.
 \sql{sql/k6d2-nytt-nafn.sql}
 \end{example}
 
-\section{Að velja úr meira en einni töflu}
+\section{Að velja úr meira en einni töflu - JOIN}
 Til að segja hvaðan upplýsingarnar sem við ætlum að vinna með í \verb|SELECT| skipun eiga að koma notum við \verb|FROM| klausu.
 
 Hingað til hefur \verb|FROM| klausan ekki innihaldið annað en orðið \verb|FROM| og nafnið á töflunni. Þetta er villandi einfalt. Rifjum upp hvað við sögðum þegar við kynntumst \verb|FROM| klausunni fyrst (undirkafli \ref{undirkafli:from}):
@@ -76,6 +76,15 @@ Sjá má raunverulegri notkun á \verb|INNER JOIN| á sýnidæmi \ref{sql:k6d3-i
 \centering
 \includegraphics{myndir/workbench-nidurstada-join}
 \end{figure}
+
+Hægt er að tengja saman meira en tvær töflur með því að skrifa mörg \verb|JOIN|. Sjá sýnidæmi \ref{sql:k6d4-tvofalt-join}.
+
+\begin{example}
+\caption[INNER JOIN]{\emph{SELECT} skipun sem velur nöfn hópa, hvaða áföngum hóparnir tilheyra og hver kennir þá, úr töflunum \emph{Hopar}, \emph{Afangar} og \emph{Starfsmenn}.}
+\label{sql:k6d4-tvofalt-join}
+\centering
+\sql{sql/k6d4-tvofalt-join.sql}
+\end{example}
 
 \subsection{OUTER JOIN}
 \section{Undirfyrirspurnir}
