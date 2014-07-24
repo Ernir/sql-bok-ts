@@ -207,7 +207,55 @@ Ef við greinum sambandið á milli taflanna tveggja aðeins, þá sjáum við a
 
 Í $1-N$ sambandi er aðkomulykillinn settur í ``margir'' töfluna - barnið í sambandinu.
 \subsection{1-1: Einn tengdur í einn}
+\begin{marginfigure}[8cm]
+\caption[Sambandsgerðir]{Tengingar í sambandsgerðunum þremur.}
+\label{mynd:tengingar}
+\centering
+\includegraphics[width=\linewidth]{myndir/tengingar}
+\end{marginfigure}
+$1-1$ tengingar eru einfaldar tengingar. Við gætum kallað þær ``einn-í-einn'' tengingar. Ef $1-1$ tenging er á milli taflna samsvarar hver lína í annarri töflunni nákvæmlega einni línu í hinni töflunni, og öfugt.
+
+Það að vera með $1-1$ tengingu á milli taflna er mjög svipað og að vera bara með eina töflu (hver lína í annarri töflunni er í raun bara framhald af línu í fyrri töflunni). Við sjáum þessa gerð tenginga oftast þegar gagnagrunnshönnuður sér að gott væri að skipta töflu með mörgum dálkum í nokkrar minni.
+
+Í $1-1$ sambandi er aðkomulykill settur frá einum einkvæmum lykli til annars.
 \subsection{N-N: Margir tengdir í marga}
+Síðasta gerð tenginga er $N-N$ gerðin (``margir-í-marga'').
+
+Til að sjá dæmi um hvernig $N-N$ tenging gæti komið upp getum við skoðað sambandið á milli hugtakanna ``nemendur'' og ``hópar'' (við bjuggum til töflur fyrir þessi hugtök í sýnidæmum \ref{sql:k5d4-starfsmenn-nemendur} og \ref{sql:k5d5-hopar}). Hver nemandi getur tilheyrt mörgum hópum. Hver hópur inniheldur meira en einn nemanda.
+
+Ekki er hægt að tákna þetta samband með aðkomulyklum eingöngu svo vel sé. Til að tákna slík sambönd bætum við við sérstakri töflu. Þessi tafla, sem við getum kallað tengitöflu eða millitöflu, hefur það hlutverk að halda utan um sambandið. Hver lína í slíkri töflu táknar eitt samband.
+
+Sýnidæmi \ref{sql:k5d6-hopskraning} sýnir hvernig búa mætti til tengitöflu sem skilgreinir $N-N$ samband á milli nemenda og hópa.
+
+\begin{example}
+\caption[Hópskráning: N-N]{Sambandið á milli hópa og nemenda táknað með tengitöflu. Taflan hefur tvo aðkomulykla. Hver lína í töflunni táknar eina skráningu nemanda í hóp.}
+\label{sql:k5d6-hopskraning}
+\centering
+\sql{sql/k5d6-hopskraning.sql}
+\end{example}
+
+\section{Að sjá yfirlit gagnagrunns í MySQL Workbench}
+Eftir því sem gagnagrunnar stækka verður erfiðara að átta sig á tengingunum á milli taflnanna sem honum tilheyra.
+
+\begin{marginfigure}
+\caption[Workbench - Reverse Engineer takki]{Reverse Engineer takkinn í MySQL Workbench.}
+\label{mynd:reverse-engineer}
+\centering
+\includegraphics[width=\linewidth]{myndir/workbench-reverse-engineer}
+\end{marginfigure}
+
+MySQL Workbench getur sem betur fer aðstoðað okkur við að halda utan um gagnagrunna. Meðal annars getur hann búið til mynd af gagnagrunninum sem sýnir töflur gagnagrunnsins, dálka þeirra, lykla og sambönd.
+
+Til að búa til slíka mynd út frá gagnagrunni sem þegar er til má velja valkostinn ``Reverse Engineer'' undir ``Database'' í aðalvalmynd MySQL Workbench (sjá mynd \ref{mynd:reverse-engineer}) og fylgja leiðbeiningunum sem þar birtast.
+
+Útkoman verður lík mynd \ref{mynd:eer}.
+\begin{figure}
+\caption[Tækniskólagagnagrunnurinn]{Yfirlitsmynd fyrir Tækniskólagagnagrunninn, búin til af MySQL Workbench.}
+\label{mynd:eer}
+\centering
+\includegraphics[width=\linewidth]{myndir/workbench-eer}
+\end{figure}
+
 \section{Yfirlit}
 Í þessum kafla skoðuðum við lykla og tengingar á milli taflna.
 

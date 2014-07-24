@@ -12,7 +12,7 @@ CREATE TABLE Nemendur
   nafn VARCHAR(100),
   kennitala CHAR(11),
   innritun DATE, 
-  umsjonarkennari INTEGER NOT NULL,
-  FOREIGN KEY (umsjonarkennari) 
+  umsjonarkennaraNumer INTEGER NOT NULL,
+  FOREIGN KEY (umsjonarkennaraNumer) 
     REFERENCES Starfsmenn(numer)
 );
