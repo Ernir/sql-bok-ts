@@ -246,7 +246,7 @@ Eftir því sem gagnagrunnar stækka verður erfiðara að átta sig á tengingu
 
 MySQL Workbench getur sem betur fer aðstoðað okkur við að halda utan um gagnagrunna. Meðal annars getur hann búið til mynd af gagnagrunninum sem sýnir töflur gagnagrunnsins, dálka þeirra, lykla og sambönd.
 
-Til að búa til slíka mynd út frá gagnagrunni sem þegar er til má velja valkostinn ``Reverse Engineer'' undir ``Database'' í aðalvalmynd MySQL Workbench (sjá mynd \ref{mynd:reverse-engineer}) og fylgja leiðbeiningunum sem þar birtast.
+Til að búa til slíka mynd út frá gagnagrunni sem þegar er til má velja valkostinn ``Reverse Engineer'' undir ``Database'' í aðalvalmynd MySQL Workbench (sjá mynd \ref{mynd:reverse-engineer}) eða ýta á \emph{CTRL+R} og fylgja leiðbeiningunum sem þar birtast. 
 
 Útkoman verður lík mynd \ref{mynd:eer}.
 \begin{figure}
@@ -269,6 +269,13 @@ Til að búa til slíka mynd út frá gagnagrunni sem þegar er til má velja va
  \item Hver tafla getur verið með einn aðallykil, sem er einkvæmur lykill. Hann er notaður til að auðkenna hverja línu í töflunni fyrir sig.
  \item Aðkomulykill er sérstök gerð af lykli sem skilgreinir samband á milli tveggja taflna.
  \item Aðkomulyklar og einkvæmir lyklar eru skorður (constraints). Villa kemur upp sé reynt að setja inn gögn í dálk sem tilheyrir slíkum lykli ef gögnin uppfylla ekki skilyrðin sem lykillinn setur.
+ \item Sambönd á milli taflna geta verið á þrjá vegu: $1-N$, $1-1$ og $N-N$.
+ \begin{itemize}
+  \item Í $1-N$ sambandi er aðkomulykillinn í ``margir'' hluta sambandsins (barnið).
+  \item Í $1-1$ sambandi tengir aðkomulykillinn saman tvo einkvæma lykla. 
+  \item í $N-N$ sambandi eru tveir aðkomulyklar í sérstakri tengitöflu.
+ \end{itemize}
+ \item Hægt er að fá yfirlitsmynd af gagnagrunni með því að nota Reverse Engineer tólið í MySQL Workbench.
 \end{itemize}
 
 
