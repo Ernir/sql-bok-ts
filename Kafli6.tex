@@ -77,7 +77,9 @@ Sjá má raunverulegri notkun á \verb|INNER JOIN| á sýnidæmi \ref{sql:k6d3-i
 \includegraphics{myndir/workbench-nidurstada-join}
 \end{figure}
 
-Hægt er að tengja saman meira en tvær töflur með því að skrifa mörg \verb|JOIN|. Sjá sýnidæmi \ref{sql:k6d4-tvofalt-join}.
+Hægt er að tengja saman meira en tvær töflur með því að skrifa mörg \verb|JOIN| í sömu \verb|FROM| klausunni. Sjá sýnidæmi \ref{sql:k6d4-tvofalt-join}.
+
+Þegar valið er úr mörgum töflum má líta á það sem svo að sífellt sé verið að stækka það mengi sem valið er úr, eina töflu í einu. Passa þarf upp á að tenging sé á milli allra taflanna sem taldar eru upp. Lína þarf að uppfylla öll skilyrðin í \verb|ON| hlutum skipunarinnar til að geta birst í niðurstöðunum.
 
 \begin{example}
 \caption[INNER JOIN]{\emph{SELECT} skipun sem velur nöfn hópa, hvaða áföngum hóparnir tilheyra og hver kennir þá, úr töflunum \emph{Hopar}, \emph{Afangar} og \emph{Starfsmenn}.}
