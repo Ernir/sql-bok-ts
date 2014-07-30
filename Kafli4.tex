@@ -576,8 +576,51 @@ Fleiri samsteypuföll eru til en \verb|COUNT|. Lítum á nokkur til viðbótar. 
  \item \verb|AVG| tekur inn mengi og skilar meðaltali staka í menginu.
 \end{itemize}
 
-Þau eru notuð á svipaðan hátt og \verb|COUNT|.
+Þau eru notuð á svipaðan hátt og \verb|COUNT|. Skoðum enn aðra töflu, töflu \ref{tafla:einkunnir}, til að kynnast þeim betur.
+
+\begin{table}
+\centering
+\caption[Einkunnir]{Nokkrir nemendur og einkunnir þeirra.}
+\label{tafla:einkunnir}
+\begin{tabular}{llr}
+\toprule
+numer&nafn&einkunn\\
+\midrule
+1&Birgir Torfason&5.5\\
+2&Höskuldur Frímann Ásmundsson&3.0\\
+3&Jón Guðmundsson&9.0\\
+4&Hilmar Hjartarson&5.0\\
+5&Reynir Rafn Sigurgeirsson&8.0\\
+6&Ingunn Rún Andradóttir&10.0\\
+7&Pálína Björk Þórólfsdóttir&3.5\\
+8&Regína Sigrún Jensdóttir&1.5\\
+9&Líney Geirsdóttir&2.5\\
+10&Steinunn Berglind Eiðsdóttir&4.0\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Við getum notað samsteypuföll til að fá frekari upplýsingar um töfluna. Sjá sýnidæmi \ref{sql:k4d28-min} og \ref{sql:k4d29-avg}.
+
+\begin{example}
+\caption[MIN fallið]{\emph{SELECT} skipun sem finnur lægstu einkunnina í einkunnatöflunni. Hún finnur gildið $1.5$. 
+
+\emph{Athugum þó} að ekki væri hægt að finna hver hefur þá einkunn með því að skrifa \emph{SELECT nafn, MIN(einkunn)}. \emph{MIN} er samsteypufall sem vinnur (hér) með dálkinn \emph{einkunn} í heild sinni, það veit ekki af öðrum dálkum. Undirkaflar \ref{undirkafli:having} og \ref{undirkafli:undirfyrirspurnir} sýna dæmi um vinnslu með samsteypuföll.}
+\label{sql:k4d28-min}
+\centering
+\sql{sql/k4d28-min.sql}
+\end{example}
+
+\begin{example}
+\vspace{5cm}
+\caption[AVG fallið][5cm]{\emph{SELECT} skipun sem finnur meðaleinkunnina í einkunnatöflunni. Hún finnur gildið $5.2$.}
+\label{sql:k4d29-avg}
+\centering
+\sql{sql/k4d29-avg.sql}
+\end{example}
+
 \section{HAVING}
+\label{undirkafli:having}
 Við vorum búin að komast að því að \verb|GROUP BY| klausa breytir eðli \verb|SELECT| skipunar sem hún tilheyrir. Niðurstöður skipunar sem inniheldur \verb|GROUP BY| klausuna eru nefnilega hópar af línum (hóplínur), ekki línur.
 
 Þetta hefur nokkrar afleiðingar í för með sér. Sérstaklega er sú afleiðing áberandi að \verb|WHERE| klausan virkar ekki sem fyrr. \verb|WHERE| klausan vinnur með línur, hún getur ekki unnið með hóplínur.
