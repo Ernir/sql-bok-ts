@@ -715,7 +715,16 @@ Við höfum farið yfir fjölmargar klausur sem tilheyra \verb|SELECT| skipuninn
  \item \verb|LIMIT|
 \end{enumerate}
 
-Sleppa má hverri af klausunum sem er\footnote{\emph{HAVING} er þó mjög sjaldan notuð án \emph{GROUP BY}.}. Þetta breytir ekki röðinni - \verb|WHERE| þarf alltaf að koma á eftir \verb|FROM|, \verb|ORDER BY| þarf alltaf að koma á eftir \verb|GROUP BY|, og svo framvegis.
+Sleppa má hverri af klausunum sem er\footnote{\emph{HAVING} er þó mjög sjaldan notuð án \emph{GROUP BY}.}. Þetta breytir ekki röðinni - \verb|WHERE| þarf alltaf að koma á eftir \verb|FROM|, \verb|ORDER BY| þarf alltaf að koma á eftir \verb|GROUP BY|, og svo framvegis. Almennt getur \verb|SELECT| skipun með þeim atriðum sem við höfum kynnst því litið út á þann hátt sem sjá má á sýnidæmi \ref{sql:k4d30-skema}.
+
+\begin{example}
+\caption[Uppbygging]{Uppbygging \emph{SELECT} skipunar með þeim atriðum sem koma fyrir í þessum (kafla \ref{kafli:select}).}
+\label{sql:k4d30-skema}
+\centering
+\sql{sql/k4d30-skema.sql}
+\end{example}
+
+
 \section{Yfirlit}
 Í þessum kafla fórum við yfir \verb|SELECT| skipunina í MySQL.
 \begin{itemize}
