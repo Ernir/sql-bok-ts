@@ -88,7 +88,20 @@ Hægt er að tengja saman meira en tvær töflur með því að skrifa mörg \ve
 \sql{sql/k6d4-tvofalt-join.sql}
 \end{example}
 
-\subsection{OUTER JOIN}
+\subsection{ÖNNUR JOIN}
+Til að skilja \verb|JOIN| á milli tveggja taflna er gott að hugsa um töflurnar sem verið er að tengja saman sem mengi. Það að finna \verb|INNER JOIN| af töflunum er þá svipað því að finna sniðmengi taflanna - að finna allar línur sem einkennast af því að töflurnar tvær eigi stökin sameiginleg.
+
+\begin{figure}
+\caption[Mengi]{Líta má á töflur sem mengi af upplýsingum.}
+\label{mynd:join-mengi}
+\centering
+\includegraphics[width=\linewidth]{myndir/join-mengi}
+\end{figure}
+
+Þessi mengjahugsunarháttur opnar fyrir möguleikann á fleiri gerðum af \verb|JOIN|um. Svokölluð \verb|OUTER JOIN| geta fundið allar línur í einni töflu ásamt tilsvarandi línu í annarri töflu - ef tilsvarandi lína er til. Í MySQL eru til \verb|LEFT OUTER JOIN| og \verb|RIGHT OUTER JOIN|, sem virka á sama hátt fyrir utan það að þær virka á mismunandi töflur.
+
+Sum gagnagrunnskerfi (en ekki MySQL) hafa líka svokallað \verb|FULL OUTER JOIN|, sem velur allar línur úr tveimur töflum óháð því hvort að stökin eigi eitthvað sameiginlegt.
+
 \section{Undirfyrirspurnir}
 \label{undirkafli:undirfyrirspurnir}
 
