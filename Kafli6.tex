@@ -104,8 +104,18 @@ Sum gagnagrunnskerfi (en ekki MySQL) hafa líka svokallað \verb|FULL OUTER JOIN
 
 \section{Undirfyrirspurnir}
 \label{undirkafli:undirfyrirspurnir}
+Þegar við vinnum með gagnagrunna getum við lent í því að þurfa að nota upplýsingarnar sem við fáum úr fyrirspurn til þess að geta klárað að skrifa aðra fyrirspurn.
 
+Sem dæmi um slíkar aðstæður getum við litið lengst aftur á töflu \ref{tafla:einkunnir}, sem geymir einkunnir nemenda. Í kaflanum sem taflan var sett fram í (kafli \ref{undirkafli:onnur-samsteypufoll}) sáum við dæmi um hvernig við getum skrifað fyrirspurn til að finna meðaleinkunn nemenda í töflunni. En hvað ef við viljum skrifa fyrirspurn sem finnur nöfn þeirra nemenda sem eru hærri en meðaleinkunnin? Ekki dugar að keyra fyrri fyrirspurnina, skrifa niðurstöðuna niður og nota hana í annarri fyrirspurn. Við viljum ekki að fyrirspurnin okkar verði röng ef gögnin í töflunni breytist.
 
+Til að sameina tvær fyrirspurnir af þessum toga breytum við fyrirspurninni sem við þurfum fyrst að fá upplýsingar úr í svokallaða undirfyrirspurn\footnote{e. \emph{subquery}}. Við umlykjum þá fyrirspurn svigum og setjum hana á þann stað í hinni fyrirspurninni sem upplýsingarnar úr innri fyrirspurninni ættu að koma fyrir.
 
-
-
+Undirfyrirspurn má sjá á sýnidæmi \ref{sql:k6d5-undirfyrirspurn}.
+\begin{example}
+\caption[Undirfyrirspurn]{\emph{SELECT} skipun sem notar undirfyrirspurn til að finna þá nemendur sem eru yfir meðaleinkunninni. Undirfyrirspurnin er í \emph{WHERE} klausunni. Undirfyrirspurnin er alltaf keyrð á undan ytri fyrirspurninni.}
+\label{sql:k6d5-undirfyrirspurn}
+\centering
+{\color{red} TODO: Skrifa sýnidæmið sjálft.}
+\end{example}
+\subsection{Mismunandi hlutverk undirfyrirspurna}
+\subsection{Tengdar undirfyrirspurnir}
