@@ -1,6 +1,6 @@
 Í kafla \ref{undirkafli:synidaemi-i-sql} sáum við dæmi um hvernig búa má til töflu með SQL-skipun. Hins vegar eyddum við ekki sérstaklega miklum tíma í að reyna að skilja hvernig skipunin er uppbyggð, hvað öll lykilorðin sem fram komu þýddu eða hvað er leyfilegt. Viðfangsefni kaflans sem við erum stödd í núna verður að leiðrétta þennan trassaskap og sökkva okkur í töflugerð.
 \section{Að búa til töflu} % CREATE
-Tökum skref aftur á bak frá og athugum hversu einfalda töflu við getum búið til. Hún er líklega eitthvað á þá leið sem sjá má á sýnidæmi \ref{sql:k3d1-create-table-fallegt}.
+Athugum nú hversu einfalda töflu við getum búið til. Hún gæti verið á þá leið sem sjá má á sýnidæmi \ref{sql:k3d1-create-table-fallegt}.
 
 \begin{example}
 \caption[Mjög einföld tafla]{Mjög einföld tafla. Athugum að ``NafnToflu'' og ``nafnDalks'' er ekki hluti af SQL-málinu, heldur bara dæmi um hvernig heiti á töflum og dálkum eru skilgreind.}
@@ -11,9 +11,9 @@ Tökum skref aftur á bak frá og athugum hversu einfalda töflu við getum búi
 
 Skoðum þessa skipun nú mjög vandlega.
 \begin{itemize}
- \item Hún hefst á að lýsa yfir hvað gera skal - hér er það \verb|CREATE TABLE|. Næst kemur nafn töflunnar fram.
+ \item Hún hefst á að lýsa yfir hvað gera skal - hér er það \verb|CREATE|. Við ætlum að búa til töflu, svo við segjum \verb|TABLE|. Næst kemur nafn töflunnar fram.
  \item Þegar nafn töflunnar hefur verið gefið opnast svigi.
- \item Inni í sviganum kemur nafnið á einum dálki og orðið \verb|INTEGER|\footnote{Merkingin á þessum lykilorðum sem við höfum séð á eftir dálkheitunum, \emph{INTEGER} og \emph{VARCHAR}, útskýrist í næsta undirkafla (\ref{undirkafli:gagnagerdir}).}. Hér er einungis einn dálkur.
+ \item Inni í sviganum kemur nafnið á dálki og orðið \verb|INTEGER|\footnote{Merkingin á þessum lykilorðum sem við höfum séð á eftir dálkheitunum, \emph{INTEGER} og \emph{VARCHAR}, útskýrist í næsta undirkafla (\ref{undirkafli:gagnagerdir}).}. Í þessari töflu er einungis einn dálkur.
  \item Skipuninni lýkur á því að sviganum er lokað og semíkomma (;) sett á eftir.
 \end{itemize}
 
@@ -38,7 +38,7 @@ Athugum að engin komma er á eftir síðustu dálklýsingunni. Það er vegna �
 
 \section{Innsetning gagna} % INSERT
 \label{undirkafli:innsetning}
-Þegar töflur eru búnar til með \verb|CREATE TABLE| skipun eru þær tómar. Til að fylla töflu með gögnum þarf að nota aðra skipun - \verb|INSERT|. Til að setja töluna $1$ inn í töfluna sem við bjuggum til með sýnidæmi \ref{sql:k3d1-create-table-fallegt} mætti nota \verb|INSERT| skipunina í sýnidæmi \ref{sql:k3d8-insert-einfalt}.
+Þegar töflur eru búnar til með \verb|CREATE| skipun eru þær tómar. Til að fylla töflu með gögnum þarf að nota aðra skipun - \verb|INSERT|. Til að setja töluna $1$ inn í töfluna sem við bjuggum til með sýnidæmi \ref{sql:k3d1-create-table-fallegt} mætti nota \verb|INSERT| skipunina í sýnidæmi \ref{sql:k3d8-insert-einfalt}.
 
 \begin{example}
 \caption[INSERT í einfalda töflu]{INSERT í einfalda töflu. Þessi skipun setur töluna $1$ inn dálkinn \emph{nafnDalks}. Niðurstaðan er tafla \ref{tafla:insert-einfalt}.}
@@ -53,7 +53,7 @@ Skoðum þessa skipun í smáatriðum líka.
  \item Aftur hefst skipunin á því að lýsa því yfir hvað gera skal. Hér ætlum við að setja inn gögn - \verb|INSERT|. Við ætlum að setja gögnin inn í eitthvað, svo við segjum \verb|INSERT INTO|.
  \item Næst kemur nafn töflunnar sem gögnin eiga að fara í. %Gagnagrunnskerfið getur ekki giskað á hvert gögnin eiga að fara. %Við verðum að taka það fram.
  \item Svigi opnast, nafn dálksins sem gögnin eiga að fara inn í er skrifað og sviginn lokast.\footnote{Strangt til tekið er hægt að sleppa þessum sviga. Gagnagrunnskerfið reynir þá að setja gögnin inn í þá dálka sem það finnur í töflunni. Þessar ágiskanir geta verið til vandræða, betra er að venja sig á að taka dálkheitin alltaf fram.}
- \item Að lokum segjum við hvað við ætlum að setja inn. Það eru gögn (eða ``gildi'', \verb|VALUES|). Gögnin sem við ætlum að setja inn er ein lína, sem við afmörkum með svigum. Línan samanstendur af einni tölu. Sem fyrr lokum við skipuninni með semíkommu.
+ \item Að lokum segjum við hvað við ætlum að setja inn. Það eru gögn (eða ``gildi'', \verb|VALUES|). Gögnin sem við ætlum að setja inn er ein lína, sem við afmörkum með svigum. Hér samanstendur línan af einni tölu. Sem fyrr lokum við skipuninni með semíkommu.
 \end{itemize}
 
 \begin{table}
@@ -69,7 +69,7 @@ nafnDalks\\
 \end{tabular}
 \end{table}
 
-Mikilvægt er að vita að \verb|INSERT| skipun setur alltaf inn \emph{heila línu} af gögnum í töfluna. Sé taflan með fleiri en einn dálk (Flestar töflur sem ekki eru gagnslausar hafa fleiri en einn dálk.) þarf að skilgreina öll gögnin í einu. Sýnidæmi \ref{sql:k3d9-insert-margir-dalkar} er dæmi um slíkt.
+Mikilvægt er að vita að \verb|INSERT| skipun setur alltaf inn \emph{heila línu} af gögnum í töfluna. Sé taflan með fleiri en einn dálk\footnote{Flestar alvöru töflur hafa fleiri en einn dálk.} þarf að skilgreina öll gögnin í einu. Sýnidæmi \ref{sql:k3d9-insert-margir-dalkar} er dæmi um slíkt.
 
 \begin{example}
 \caption[INSERT í tvo dálka í einu]{INSERT í tvo dálka í einu. Þessi skipun setur tölurnar $1$ og $2$ inn í sömu línu. Niðurstaðan er tafla \ref{tafla:insert-margir-dalkar}.}
@@ -119,7 +119,7 @@ nafnFyrstaDalks&nafnAnnarsDalks\\
 \label{undirkafli:gagnagerdir}
 Einni stórri spurningu um \verb|CREATE TABLE| dæmin framar í þessum kafla er enn ósvarað - hvað er þetta \verb|INTEGER|?
 
-Integer er dæmi um svokallaða gagnagerð\footnote{e. \emph{data type}}. Nánar til tekið er þetta gagnagerð sem táknar heiltölur, tölur eins og töluna $1$, töluna $-256$ og allar tölur sem við höfum sett inn í töflur framar í bókinni. Þegar \verb|INTEGER| kemur fyrir í dálkskilgreiningu erum við sem sagt að segja gagnagrunnskerfinu að við munum einungis geyma heiltölur í þessum dálki.
+Integer er dæmi um svokallaða gagnagerð\footnote{e. \emph{data type}}. Nánar til tekið er þetta gagnagerð sem táknar heiltölur\footnote{Tölur  $1$ og $-256$ og allar tölur sem við höfum sett inn í töflur framar í bókinni eru heiltölur. Tölur eins og $1,1$ eru ekki heiltölur, heldur kommutölur.} Þegar \verb|INTEGER| kemur fyrir í dálkskilgreiningu erum við sem sagt að segja gagnagrunnskerfinu að við munum einungis geyma heiltölur í þessum dálki.
 
 Skoðum nokkrar helstu gagnagerðir í MySQL og hvenær við notum þær.
 \subsection{Heiltölur - INTEGER}
@@ -151,28 +151,28 @@ Nafn&Stærð í&Lægsta gildi&Hæsta gildi\\
 
 Ef sérstök skilyrði koma ekki upp er best og einfaldast að halda sig við \verb|INTEGER| til að geyma heiltölur. Þetta getur sérstaklega borgað sig ef seinna reynist nauðsynlegt að færa gagnagrunninn á milli gagnagrunnskerfa - sum gagnagrunnskerfi styðja ekki allar gagnagerðirnar sem MySQL býður upp á. Gamla góða \verb|INTEGER| er hins vegar alltaf til staðar.
 
-\newthought{Íslenskar kennitölur} eru varhugaverðar. Freistandi getur verið að geyma kennitölur í heiltöludálkum. Þær eru jú kommulausar tölur, ekki satt? Nokkur atriði leiða þó til þess að þær passa ekki mjög vel í slíka dálka.
+\newthought{Íslenskar kennitölur }eru varhugaverðar. Freistandi getur verið að geyma kennitölur í heiltöludálkum. Þær eru jú kommulausar tölur, ekki satt? Nokkur atriði leiða þó til þess að þær passa ekki mjög vel í slíka dálka.
 
 \begin{itemize}
- \item Stærsta tala sem hægt er að geyma í venjulegum \verb|INTEGER| dálki er $2147483647$. Það þýðir að kennitölur allra sem fæddir eru á 22. degi mánaðar eða seinna komast ekki fyrir í dálkinum! \verb|BIGINT| þyrfti að nota.
+ \item Stærsta tala sem hægt er að geyma í venjulegum \verb|INTEGER| dálki er $2147483647$. Það þýðir að kennitölur allra sem fæddir eru á 22. degi mánaðar eða seinna komast ekki fyrir í dálkinum! Það þyrfti \verb|BIGINT|.
  \item Kennitölur eru ekki notaðar eins og flestar tölur. Þær eru t.d. ekki lagðar saman eða bornar saman með $<$ og $>$ virkjum. Við þurfum oftar að skoða ákveðna stafi í kennitölunni (t.d. fimmta og sjötta stafinn til að komast að fæðingarári) frekar en stærð tölunnar sjálfrar.
  \item Kennitölur eru venjulega skrifaðar með bandstrikum, sem eiga ekki heima í heiltöludálki.
 \end{itemize}
-Vænlegra er að nota \verb|CHAR| dálk til að geyma kennitölur. Lítum á þá gagnagerð í næsta kafla!
+Vænlegra er að nota \verb|CHAR| dálk til að geyma kennitölur.
 
 \subsection{Texti - VARCHAR og CHAR}
 \label{undirkafli:texti}
-Í forritun lítum við oftast á texta sem safn af stöfum, SQL er hér engin undantekning. Slíkt safn er kallað strengur\footnote{e. \emph{string}}. \verb|'Ari'|, \verb|'Ari sá sól'| og \verb|'Ari á 10 krónur'| eru allt dæmi um strengi. 
+Í forritun lítum við oftast á texta sem safn af stöfum, SQL er engin undantekning. Slíkt safn er kallað strengur\footnote{e. \emph{string}}. \verb|'Ari'|, \verb|'Ari sá sól'| og \verb|'Ari á 10 krónur'| eru allt dæmi um strengi. 
 
-Eins og sjá má eru strengir afmarkaðir með gæsalöppum. Mikilvægt er að gleyma þeim ekki þegar strengir eru slegnir inn (sjá kafla \ref{undirkafli:innsetning}). Þær eru aðalleiðin sem gagnagrunnskerfið hefur til að vita hvort að um streng eða dálkheiti sé að ræða. 
+Eins og sjá má eru strengir afmarkaðir með gæsalöppum. Mikilvægt er að gleyma þeim ekki þegar strengir eru slegnir inn (sjá kafla \ref{undirkafli:innsetning}). Gæsalappir eru aðal leiðin sem gagnagrunnskerfið hefur til að vita hvort að um streng eða dálkheiti sé að ræða. 
 
 Venja er að nota einfaldar gæsalappir (\verb|'|) í SQL til að afmarka strengi. Tvöfaldar gæsalappir (\verb|"|) virka líka í MySQL.
 
 Talað er um að strengur hafi ákveðna \emph{lengd}. Lengd strengs er fjöldi stafa í strengnum, að bilum meðtöldum. Gæsalappirnar eru ekki taldar með, þær umlykja strenginn en eru ekki hluti af honum. Þannig er \verb|'Ari'| strengur af lengd 3, \verb|'Ari sá sól'| er strengur af lengd 10.
 
-Strengir geta innihaldið næstum hvaða stafi sem er, líka tölustafi. \verb|'Ari á 10 krónur'| er löglegur strengur. Strengur getur meira að segja innihaldið ekkert nema tölustafi. \verb|"10"| er strengur, $10$ er heiltala.
+Strengir geta innihaldið næstum hvaða stafi sem er, líka tölustafi og íslenska stafi. \verb|'Ari á 10 krónur'| er löglegur strengur. Strengur getur meira að segja innihaldið ekkert nema tölustafi. \verb|"10"| er strengur, $10$ er heiltala.
 
-\newthought{Til að geyma texta} höfum við nokkrar gagnagerðir, líkt og við höfum nokkrar gagnagerðir til að geyma heiltölur. Þær helstu eru \verb|CHAR| og \verb|VARCHAR|. ``Char'' stendur hér fyrir enska orðið ``character'', sem þýða má sem ``stafur''. ``Var'' í \verb|VARCHAR| stendur fyrir ``variable''. 
+\newthought{Til að geyma texta }höfum við nokkrar gagnagerðir, líkt og við höfum nokkrar gagnagerðir til að geyma heiltölur. Þær helstu eru \verb|CHAR| og \verb|VARCHAR|. ``Char'' stendur hér fyrir enska orðið ``character'', sem þýða má sem ``stafur''. ``Var'' í \verb|VARCHAR| stendur fyrir ``variable''. 
 
 Þegar \verb|CHAR| og \verb|VARCHAR| gagnagerðirnar eru notaðar þurfum við að taka fram hversu langa strengi dálkurinn á að geta tekið við\footnote{Oft er talað um ``breidd'' á þessum dálkum. Til að strengur af lengd $5$ komist inn í dálk þarf dálkurinn að vera $5$ stafa breiður.}. Þetta er gert með því að setja hámarkslengdina inn í sviga. \verb|CHAR(3)| er dálkur sem tekur við strengjum af lengd 3.
 
@@ -185,7 +185,7 @@ Munurinn á \verb|CHAR| og \verb|VARCHAR| kemur fyrst og fremst fram þegar of \
 \end{itemize}
 \verb|CHAR| dálkur getur verið að hámarki 255 stafir að breidd. \verb|VARCHAR| dálkur getur verið allt að 65.535 stafa breiður.
 
-Hljómi \verb|VARCHAR| hér eins og almennt gagnlegri gagnagerð er það líklega vegna þess að það er rétt. \verb|VARCHAR| eyðir minna plássi og breytir strengjum ekki að óþörfu. \verb|CHAR| dálkar eru gagnlegir þegar vitað er fyrirfram að allir strengir sem eiga að fara inn í dálkinn séu af sömu lengd eða ef seinni tíma vinnsla krefst þess að gögnin séu sjálum sér mjög samkvæm. Leiki vafi á er einfaldast að nota bara \verb|VARCHAR|.
+Hljómi \verb|VARCHAR| hér eins og almennt gagnlegri gagnagerð er það líklega vegna þess að það er rétt. \verb|VARCHAR| eyðir minna plássi og breytir strengjum ekki að óþörfu. \verb|CHAR| dálkar eru gagnlegir þegar vitað er fyrirfram að allir strengir sem eiga að fara inn í dálkinn séu af sömu lengd (t.d. kennitölur) eða ef seinni tíma vinnsla krefst þess að gögnin séu sjálfum sér mjög samkvæm. Leiki vafi á er einfaldast að nota bara \verb|VARCHAR|.
 \begin{marginfigure}
 \caption[CHAR og VARCHAR]{Hvernig CHAR og VARCHAR dálkar geyma texta. Talan til vinstri táknar lengd strengsins eins og hann er geymdur.}
 \label{mynd:char-varchar}
@@ -193,7 +193,7 @@ Hljómi \verb|VARCHAR| hér eins og almennt gagnlegri gagnagerð er það líkle
 \includegraphics[width=\linewidth]{myndir/char-varchar}
 \end{marginfigure}
 
-\newthought{Mjög langur texti} getur verið erfiður í meðförum. Sé ætlunin t.d. að geyma bækur, bloggfærslur eða fréttagreinar í gagnagrunni, hversu stóran \verb|VARCHAR| dálk þyrfti til að halda utan um textann? Svarið er: Of stóran.
+\newthought{Mjög langur texti }getur verið erfiður í meðförum. Sé ætlunin t.d. að geyma bækur, bloggfærslur eða fréttagreinar í gagnagrunni, hversu stóran \verb|VARCHAR| dálk þyrfti til að halda utan um textann? Svarið er: Of stóran.
 
 MySQL býður upp á aðrar gagnagerðir sem eru meira viðeigandi fyrir slíka vinnslu - hér eru helstar \verb|TEXT| og \verb|LONGTEXT|. \verb|LONGTEXT| dálkur er fær um að geyma strengi sem eru allt að 4 GiB að lengd.
 
@@ -229,7 +229,7 @@ Sé ætlunin að geyma upplýsingar sem almennt eru af skynsamlegri stærð, t.d
 \end{example}
 
 \section{Fleiri gagnagerðir}
-Þó að ýmislegt sé hægt að gera með einungis texta og heiltölum, þá býður MySQL upp á mun fleiri gagnagerðir. Lítum stuttlega á nokkrar.
+Þó að ýmislegt sé hægt að gera með einungis texta og heiltölum, þá býður MySQL upp á mun fleiri gagnagerðir. Lítum stuttlega á nokkrar af þeim.
 \subsection{Tugabrot - DECIMAL}
 Til að geyma tugabrot (kommutölur, t.d. $1,5$ og $5,2$) dugar \verb|INTEGER| dálkur ekki. Til þess getum við notað \verb|DECIMAL| dálk.
 
@@ -288,6 +288,8 @@ Gliese 581 d &$1,9110\cdot 10^{17}$&$4,1686\cdot10^{25}$\\
 \sql{sql/k3d7-planetur.sql}
 \end{example}
 
+Ekki þarf að taka fram stærð á \verb|DOUBLE| dálki.
+
 \subsection{Dagsetningar - DATE}
 Oft þarf að meðhöndla dagsetningar í forritum.
 
@@ -309,7 +311,7 @@ Sem fyrr segir, þá eru dagsetningar meðhöndlaðar á allt annan hátt en str
 MySQL hefur fleiri gagnagerðir sem meðhöndla tíma, t.d. \verb|TIME| og \verb|TIMESTAMP|. Við förum ekki sérstaklega yfir þær í þessari bók. Flestar hafa þær svipaða eiginleika og \verb|DATE|.
 
 \section{Tóm gildi} % NULL, NOT NULL
-Hvað gerum við ef við þekkjum ekki 
+Hvað gerum við ef við þekkjum ekki allar upplýsingarnar sem tilheyra ákveðinni línu?
 
 Sérstakt lykilorð er notað í SQL til að tákna það að ákveðið gildi sé óþekkt eða ekki til. Það lykilorð er \verb|NULL|.
 
@@ -337,7 +339,7 @@ Sumir dálkar eru þess eðlis að óviðeigandi eða órökrétt er að leyfa \
 
 Sé annað ekki tekið fram gerir MySQL ráð fyrir því að \verb|NULL| sé leyfilegt í öllum dálkum. Hægt er að taka sérstaklega fram að \verb|NULL| sé leyfilegt með því að skrifa \verb|NULL| fyrir aftan skilgreiningu á gagnagerð dálks. Þetta hefur einnig verið gert í sýnidæmi \ref{sql:k3d12-not-null}.
 
-\newthought{Þó að \emph{NULL} eigi sinn sess í gagnagrunnum} er það ekki endilega alltaf æskilegt. \verb|NULL| getur valdið vandræðum við samanburð og talningu, sjá kafla \ref{kafli:select}. Einnig getur mikill fjöldi \verb|NULL| dálka bent til þess að gagnagrunninum ætti að skipta upp í fleiri töflur, sjá kafla \ref{kafli:uppsetninggagnagrunns}.
+\newthought{Þó að NULL eigi sinn sess í gagnagrunnum }er það ekki endilega alltaf æskilegt. \verb|NULL| getur valdið vandræðum við samanburð og talningu, sjá kafla \ref{kafli:select}. Einnig getur mikill fjöldi \verb|NULL| dálka bent til þess að gagnagrunninum ætti að skipta upp í fleiri töflur, sjá kafla \ref{kafli:uppsetninggagnagrunns}.
 
 \section{Aðallyklar - PRIMARY KEY} %PRIMARY KEY
 \label{undirkafli:adallyklar-kynning}

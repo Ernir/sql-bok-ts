@@ -1,7 +1,7 @@
 SQL er nokkuð sveigjanlegt og yfirgripsmikið mál. 
-Margt er að læra, í þessum áfanga er einungis farið yfir lítið brot af því sem viðfangsefnið hefur upp á að bjóða.
+Í þessari bók er einungis farið yfir lítið brot af því sem viðfangsefnið hefur upp á að bjóða.
 
-Byrjum á að skoða grundvallaraðgerðirnar í SQL - það að búa gagnagrunn, búa til töflur, setja í töflurnar gögn og að skoða gögnin aftur.
+Byrjum á að skoða grundvallaraðgerðirnar í SQL - að búa gagnagrunn, búa til töflur, setja gögn í töflurnar og að skoða gögnin aftur.
 \section{Gagnagrunnar}
 Fram kom í kafla \ref{kafli:inngangur} að gagnagrunnur sé \emph{skipulagt samansafn af upplýsingum}. Einnig kom fram að upplýsingarnar eru hlutaðar niður með ``töflum''.
 \begin{marginfigure}
@@ -13,13 +13,13 @@ Fram kom í kafla \ref{kafli:inngangur} að gagnagrunnur sé \emph{skipulagt sam
 Hér er vert að taka nokkur atriði fram:
 \begin{itemize}
  \item Gagnagrunnur er ekki það sama og tölva. Talað er um að gagnagrunnur sé geymdur á tölvu eða jafnvel að tölva keyri gagnagrunns-server. Ein tölva getur geymt marga gagnagrunna.
- \item Gagnagrunnur er ekki forrit. Forrit, nefnt gagnagrunnskerfi\footnote{Sjá undirkafla \ref{undirkafli:gagnagrunnskerfi} og \ref{undirkafli:helstu-gagnagrunnskerfi}} keyrir á tölvunni og heldur utan um gagnagrunninn. En gagnagrunnurinn sjálfur er ekki forrit.
+ \item Gagnagrunnur er ekki forrit. Gagnagrunns\emph{kerfi}\footnote{Sjá undirkafla \ref{undirkafli:gagnagrunnskerfi} og \ref{undirkafli:helstu-gagnagrunnskerfi}}, sem er forrit, keyrir á tölvunni og heldur utan um gagnagrunninn. En gagnagrunnurinn sjálfur er ekki forrit.
 \end{itemize}
 Líkja mætti gagnagrunni við ``möppu'' í tölvu sem inniheldur töflur\footnote{Reyndar getur gagnagrunnur innihaldið ýmislegt annað en töflur. Slík atriði eru tekin fyrir í seinni áföngum.}. Hægt er að búa til gagnagrunna á tölvu, setja í hann töflur og skoða innihald þeirra.
 
 Við sjáum dæmi um hvernig búa má til gagnagrunn í undirkafla \ref{undirkafli:synidaemi-i-sql}.
 \section{Töflur}
-Gögn í SQL-gagnagrunni má líta á sem raðir í töflum. Því hlýtur mikilvægt skref í því að læra að nota SQL að vera það að skilja uppbyggingu taflna mjög nákvæmlega.
+Gögn í SQL-gagnagrunni má líta á sem raðir í töflum. Þess vegna er mikilvægt skref í því að læra að nota SQL að vera það að skilja uppbyggingu taflna mjög nákvæmlega.
 Lítum fyrst á dæmigerða töflu.
 
 \begin{table}
@@ -48,11 +48,11 @@ Tryggvi Jóhannsson&Kerfisstjóri&tj@tskoli.is\\
 \bottomrule
 \end{tabular}
 \end{table}
-Eins og allar alvöru töflur inniheldur þessi starfsmannatafla annarsvegar \emph{dálkheiti} og hins vegar \emph{gögn}. Dálkheitin eru ``Nafn'', ``Starfsheiti'' og ``Netfang''. Dæmi um upplýsingar eru að til sé starfsmaður sem heitir ``Eiríkur Ernir Þorsteinsson'', sem er ``Kennari'' og hefur netfangið ``eet@tskoli.is''. 
+Eins og allar alvöru töflur inniheldur þessi starfsmannatafla annars vegar \emph{dálkheiti} og hins vegar \emph{gögn}. Dálkheitin eru ``Nafn'', ``Starfsheiti'' og ``Netfang''. Dæmi um upplýsingar eru að til sé starfsmaður sem heitir ``Eiríkur Ernir Þorsteinsson'', sem er ``Kennari'' og hefur netfangið ``eet@tskoli.is''. 
 
-Mikilvægt er að átta sig á þessum mun - hver einasta tafla sem unnið er með inniheldur dálkheiti og gögn, sem eru aðskilin fyrirbrigði. Þetta á augljóslega við ``hefðbundnar'' töflur sem við sjáum á prenti og í forritum á borð við Microsoft Excel. 
+Mikilvægt er að átta sig á þessum mun - hver einasta tafla sem unnið er með inniheldur dálkheiti og gögn, sem eru aðskilin fyrirbrigði. Þetta á við ``hefðbundnar'' töflur sem við sjáum á prenti og við töflur í forritum á borð við Microsoft Excel. 
 
-En þetta á en líka við töflur sem við skilgreinum með SQL-skipunum. SQL-töflur innihalda dálkheiti og gögn, alveg eins og við myndum búast við af venjulegum töflum.
+En þetta á líka við töflur sem við skilgreinum með SQL-skipunum. SQL-töflur innihalda dálkheiti og gögn, alveg eins og við myndum búast við af hefðbundnum töflum.
 
 Þegar töflur eru sýndar á prenti er venjan að dálkheitin komi fram í fyrstu línu töflunnar (og oftast aðskilin gögnunum með striki). Gögnin koma fram í næstu línum.
 
@@ -70,10 +70,10 @@ Slíkar uppflettingar, stórar og smáar, eru sérsvið SQL. Þær eru nefndar \
 \label{undirkafli:synidaemi-i-sql}
 Skoðum hvernig búa má til töflu \ref{tafla:starfsmenn-ts} með SQL, setja í hana gögn og sækja gögnin aftur. 
 
-Eins og fram hefur komið þarf til þess að nota SQL-skipanir. 
+Eins og fram hefur komið þarf að nota SQL-skipanir til þess.
 
 \subsection{Skilgreining gagnagrunns}
-Okkar fyrsta verk verður að vera að búa til gagnagrunn til að setja hana í. Slíka skipun má sjá á sýnidæmi \ref{sql:k2d4-create-database}.
+Okkar fyrsta verk verður að vera að búa til gagnagrunn til að setja töfluna í. Slíka skipun má sjá á sýnidæmi \ref{sql:k2d4-create-database}.
 
 \begin{example}
 \caption{CREATE DATABASE skipun fyrir Tækniskólagagnagrunninn.}
@@ -87,7 +87,7 @@ Skipunin er ein lína. Hér vill reyndar svo til að hún er nálægt því að 
 Þetta er mjög einkennandi fyrir SQL. Í SQL erum við nær alltaf að lýsa því \emph{hvað} við viljum gera frekar en \emph{hvernig} við gerum það. Þetta gerir SQL frábrugðið flestum vinsælum forritunarmálum.
 
 \subsection{Skilgreining töflu og innsetning gagna}
-Skipunina til að skilgreina töfluna má sjá á SQL-sýnidæmi \ref{sql:k2d1-create-table}. Þetta er mjög dæmigerð skipun til að búa til töflu. Þar kemur fram hvað gera skal (búa til töflu $\rightarrow$ \verb|CREATE TABLE|) og hver dálkheitin eru (nafn, Starfsheiti og netfang). Í kafla \ref{kafli:uppsetningtaflna} skoðum við hin orðin sem koma fyrir í skipuninni og í næsta undirkafla sjáum við hvernig koma má skipuninni í gagnið.
+Skipunina til að skilgreina töfluna má sjá á SQL-sýnidæmi \ref{sql:k2d1-create-table}. Þetta er mjög dæmigerð skipun til að búa til töflu. Þar kemur fram hvað gera skal (búa til töflu $\rightarrow$ \verb|CREATE TABLE|) og hver dálkheitin eru (nafn, Starfsheiti og netfang). \footnote{Við skulum ekki örvænta þó að skipanirnar séu óskiljanlegar á þessum tímapunkti. Við skoðum skipanirnar vandlega í næsta kafla, þessar eru einungis svo að við getum fengið tilfinningu fyrir því hvernig þær geta litið út.}
 
 \begin{example}[h]
 \caption{CREATE TABLE skipun fyrir starfsmannatöfluna.}
@@ -111,7 +111,7 @@ Hér ber að athuga að enn eru engin gögn komin inn í töfluna. Það má ger
 Til að sækja gögn úr töflunni þarf síðan að framkvæma fyrirspurn. Dæmi um fyrirspurn (SQL-skipun) sem finnur nafn þess starfsmanns sem er með netfangið ``kng@tskoli.is'' má sjá á sýnidæmi \ref{sql:k2d3-select}.
 
 \begin{example}[h]
-\caption{SELECT skipun sem finnur Konráð kennara í starfsmannatöflunni.}
+\caption{SELECT skipun sem finnur nafnið á þeim kennara sem er með netfangið \emph{kng@tskoli.is}. Það nafn er ``Konráð''.}
 \label{sql:k2d3-select}
 \centering
 \sql{sql/k2d3-select.sql}
@@ -167,13 +167,13 @@ Um nokkur skref er að ræða.
 \end{figure*}
 
 \section{Yfirlit}
-Í þessum kafla fengum við örstutta kynningu því hvernig SQL-gagnagrunnar eru uppbyggðir og hvernig við getum átt við þá samskipti. 
+Í þessum kafla fengum við örstutta kynningu því hvernig SQL-gagnagrunnar eru uppbyggðir og hvernig við getum átt samskipti við þá. 
 
 Helstu atriðin eru:
 \begin{itemize}
- \item Gögn í SQL-gagnagrunni má líta á sem raðir í töflum.
- \item SQL-skipanir eru notaðir til að skilgreina töflur og setja í þær gögn.
- \item Fyrirspurnir eru notaðar til að sækja gögn úr gagnagrunnum. Fyrirspurnir eru sérstök gerð SQL-skipana.
+ \item Gögn í SQL-gagnagrunni má líta á sem línur í töflum.
+ \item SQL-skipanir eru notaðir til að skilgreina töflur og setja gögn í þær.
+ \item Fyrirspurnir eru notaðar til að sækja gögn úr gagnagrunnum. Fyrirspurnir eru ákveðin gerð SQL-skipana.
  \item SQL-skipanir má keyra úr aðalglugga MySQL Workbench.
 \end{itemize}
-Athuga ber að við höfum ekki farið yfir uppbyggingu skipananna. Það að læra á skipanirnar sjálfar er viðfangsefni næstu kafla.
+Athugum að við höfum ekki farið yfir uppbyggingu skipananna. Það að læra á skipanirnar sjálfar er viðfangsefni næstu kafla.
