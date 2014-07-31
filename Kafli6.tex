@@ -118,4 +118,12 @@ Undirfyrirspurn má sjá á sýnidæmi \ref{sql:k6d5-undirfyrirspurn}.
 {\color{red} TODO: Skrifa sýnidæmið sjálft.}
 \end{example}
 \subsection{Mismunandi hlutverk undirfyrirspurna}
-\subsection{Tengdar undirfyrirspurnir}
+Undirfyrirspurnir eiga það sameiginlegt að skila niðurstöðum sem ytri fyrirspurnin getur nýtt sér og að vera afmarkaðar af svigum. Þar fyrir utan geta þær verið af ýmsum toga.
+\begin{itemize}
+ \item Undirfyrirspurnir geta skilað einu gildi, dálki af gildum eða heilli töflu af gildum.
+ \item Undirfyrirspurnir geta valið gildi úr sömu töflu og ytri fyrirspurnin eða úr öðrum töflum.
+ \item Undirfyrirspurnir geta komið fram á mörgum stöðum innan ytri fyrirspurnar, oftast í \verb|WHERE| eða \verb|FROM| klausu.
+\end{itemize}
+Undirfyrirspurnir geta haft sínar eigin undirfyrirspurnir, það er að segja, undirfyrirspurnir geta verið hver inni í annarri.\footnote{Ef undirfyrirspurnagryfjan er orðin mjög djúp getur verið ástæða til að stoppa og athuga hvort þær séu allar nauðsynlegar.}
+
+Undirfyrirspurnir geta komið fyrir í SQL-skipunum sem ekki eru fyrirspurnir. Þar á meðal eru \verb|INSERT|, \verb|UPDATE| og \verb|DELETE| skipanir.
