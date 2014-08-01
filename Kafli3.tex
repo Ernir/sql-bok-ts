@@ -1,5 +1,6 @@
 Í kafla \ref{undirkafli:synidaemi-i-sql} sáum við dæmi um hvernig búa má til töflu með SQL-skipun. Hins vegar eyddum við ekki sérstaklega miklum tíma í að reyna að skilja hvernig skipunin er uppbyggð, hvað öll lykilorðin sem fram komu þýddu eða hvað er leyfilegt. Viðfangsefni kaflans sem við erum stödd í núna verður að leiðrétta þennan trassaskap og sökkva okkur í töflugerð.
 \section{Að búa til töflu} % CREATE
+\label{undirkafli:bua-til-toflu}
 Athugum nú hversu einfalda töflu við getum búið til. Hún gæti verið á þá leið sem sjá má á sýnidæmi \ref{sql:k3d1-create-table-fallegt}.
 
 \begin{example}
@@ -363,9 +364,10 @@ Nær allar töflur sem fara í notkun við raunverulegar aðstæður ættu að h
 
 Við kynnumst aðallyklum og öðrum lyklum örlítið betur í undirkafla \ref{undirkafli:lyklar}.
 \section{Að eyða töflum} % DROP
+\label{undirkafli:drop}
 Það að gera villur er eðlilegur hluti af því að byrja að læra á SQL. Því miður er oft erfiðara að bakka frá villum í \verb|CREATE| og \verb|INSERT| skipunum heldur en villum í öðrum forritunarmálum. Þegar \verb|CREATE| eða \verb|INSERT| skipun hefur verið keyrð er sjaldnast hægt að ýta bara á ``Undo'' takka til að komast til baka - upplýsingarnar eru komnar inn í gagnagrunninn.
 
-Fyrsta trikkið sem við lærum til að leiðrétta mistök er að losa okkur einfaldlega við töfluna í heilu lagi. Til þess notum við, viti menn, SQL-skipun. Hún heitir \verb|DROP TABLE|. Notkun hennar er einföld og má sjá í sýnidæmi \ref{sql:k3d12-drop}.
+Fyrsta trikkið sem við lærum til að leiðrétta mistök er að losa okkur einfaldlega við töfluna í heilu lagi. Til þess notum við, viti menn, SQL-skipun. Hún heitir \verb|DROP|. Til að eyða töflu má skrifa \verb|DROP TABLE| og svo nafnið á töflunni. Sjá sýnidæmi \ref{sql:k3d12-drop}.
 
 \begin{example}
 \caption[DROP TABLE]{Töflu með nafnið NafnToflu er eytt úr gagnagrunninum. Þetta ber að gera með varúð - það að eyða töflu er alveg jafn varanlegt og það að búa hana til. Til að fá gögnin aftur inn í gagnagrunninn þyrfti að keyra aftur SQL-skipanirnar sem bjuggu hana til.}
