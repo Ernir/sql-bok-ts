@@ -20,7 +20,7 @@ Notkun á fullu nafni dálks má sjá á sýnidæmi \ref{sql:k6d1-fullt-nafn}.
 \end{example}
 
 \subsection{Að endurnefna - AS}
-Það að vinna með heiti getur verið þreytandi. Til að vinna með dálka og töflur undir öðru nafni má nota lykilorðið \verb|AS|. Þetta býr til ``aukanafn''\footnote{e. \emph{alias}} fyrir fyrirbrigðið sem unnið er með. Gamla nafninu er ekki breytt í gagnagrunnskerfinu, \verb|AS| býr bara til nýtt nafn til að nota tímabundið.
+Það að vísa í löng heiti getur verið óþjált (eða jafnvel ómögulegt). Til að vinna með dálka og töflur undir öðru nafni má nota lykilorðið \verb|AS|. Þetta býr til ``aukanafn''\footnote{e. \emph{alias}} fyrir fyrirbrigðið sem unnið er með. Gamla nafninu er ekki breytt í gagnagrunnskerfinu, \verb|AS| býr bara til nýtt nafn til að nota tímabundið.
 
 Sjá má endurnefndan dálk á sýnidæmi \ref{sql:k6d2-nytt-nafn}.
 
@@ -108,14 +108,14 @@ Sum gagnagrunnskerfi (en ekki MySQL) hafa líka svokallað \verb|FULL OUTER JOIN
 
 Sem dæmi um slíkar aðstæður getum við litið lengst aftur á töflu \ref{tafla:einkunnir}, sem geymir einkunnir nemenda. Í kaflanum sem taflan var sett fram í (kafli \ref{undirkafli:onnur-samsteypufoll}) sáum við dæmi um hvernig við getum skrifað fyrirspurn til að finna meðaleinkunn nemenda í töflunni. En hvað ef við viljum skrifa fyrirspurn sem finnur nöfn þeirra nemenda sem eru hærri en meðaleinkunnin? Ekki dugar að keyra fyrri fyrirspurnina, skrifa niðurstöðuna niður og nota hana í annarri fyrirspurn. Við viljum ekki að fyrirspurnin okkar verði röng ef gögnin í töflunni breytist.
 
-Til að sameina tvær fyrirspurnir af þessum toga breytum við fyrirspurninni sem við þurfum fyrst að fá upplýsingar úr í svokallaða undirfyrirspurn\footnote{e. \emph{subquery}}. Við umlykjum þá fyrirspurn svigum og setjum hana á þann stað í hinni fyrirspurninni sem upplýsingarnar úr innri fyrirspurninni ættu að koma fyrir.
+Til að sameina tvær fyrirspurnir af þessum toga breytum við fyrirspurninni sem við þurfum fyrst að fá upplýsingar úr í svokallaða undirfyrirspurn\footnote{e. \emph{subquery}}. Við umlykjum þá fyrirspurn svigum og setjum hana á þann stað í hinni fyrirspurninni sem upplýsingarnar úr innri fyrirspurninni ættu að koma fyrir\footnote{Ekki þarf að setja semíkommu á eftir undirfyrirspurn. Henni lýkur þegar sviganum sem umkringir hana er lokað.}.
 
 Undirfyrirspurn má sjá á sýnidæmi \ref{sql:k6d5-undirfyrirspurn}.
 \begin{example}
 \caption[Undirfyrirspurn]{\emph{SELECT} skipun sem notar undirfyrirspurn til að finna þá nemendur sem eru yfir meðaleinkunninni. Undirfyrirspurnin er í \emph{WHERE} klausunni. Undirfyrirspurnin er alltaf keyrð á undan ytri fyrirspurninni.}
 \label{sql:k6d5-undirfyrirspurn}
 \centering
-{\color{red} TODO: Skrifa sýnidæmið sjálft.}
+\sql{sql/k6d5-undirfyrirspurn.sql}
 \end{example}
 \subsection{Mismunandi hlutverk undirfyrirspurna}
 Undirfyrirspurnir eiga það sameiginlegt að skila niðurstöðum sem ytri fyrirspurnin getur nýtt sér og að vera afmarkaðar af svigum. Þar fyrir utan geta þær verið af ýmsum toga.
@@ -127,3 +127,13 @@ Undirfyrirspurnir eiga það sameiginlegt að skila niðurstöðum sem ytri fyri
 Undirfyrirspurnir geta haft sínar eigin undirfyrirspurnir, það er að segja, undirfyrirspurnir geta verið hver inni í annarri.\footnote{Ef undirfyrirspurnagryfjan er orðin mjög djúp getur verið ástæða til að stoppa og athuga hvort þær séu allar nauðsynlegar.}
 
 Undirfyrirspurnir geta komið fyrir í SQL-skipunum sem ekki eru fyrirspurnir. Þar á meðal eru \verb|INSERT|, \verb|UPDATE| og \verb|DELETE| skipanir.
+
+\section{Yfirlit}
+Í þessum kafla kynntumst við nokkrum aðferðum til að sameina upplýsingar, sem geta verið úr mismunandi töflum.
+\begin{itemize}
+ \item Til að vísa í ákveðinn dálk í ákveðinni töflu má fyrst skrifa nafn töflunnar, svo punkt, svo nafn dálksins.
+ \item Búa má til tímabundin heiti með því að nota \verb|AS| lykilorðið.
+ \item Líta má á töflur sem mengi af upplýsingum.
+ \item Það að framkvæma \verb|INNER JOIN| á tvær töflur er líkt því að finna sniðmengi taflanna.
+ \item Hægt er að setja fyrirspurn inn í aðrar SQL-skipanir með því að umlykja fyrirspurnina með svigum. Fyrirspurnin kallast þá undirfyrirspurn.
+\end{itemize}
