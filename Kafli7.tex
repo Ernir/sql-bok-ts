@@ -9,7 +9,7 @@ Fyrr í bókinni höfum við farið yfir fjórar grunnaðgerðir sem nauðsynleg
 \section{DDL og DML}
 \begin{marginfigure}[-6cm]
 \caption[DDL og DML]{Yfirlit yfir þær SQL-skipanir sem við höfum séð og flokkun þeirra í DDL og DML.}
-\label{mynd:inner-join}
+\label{mynd:ddl-dml}
 \centering
 \includegraphics[width=\linewidth]{myndir/ddl-dml}
 \end{marginfigure}
@@ -36,6 +36,35 @@ Til þess að breyta töflu notum við skipunina \verb|ALTER TABLE|. Við getum 
 \sql{sql/k7d1-alter-table.sql}
 \end{example}
 
+\verb|ALTER TABLE| breytir einingunum sem í gagnagrunninum eru, töflunum sjálfum. Þess vegna er \verb|ALTER TABLE| er DDL-skipun.
 \section{Að breyta gögnum}
+Fyrir getur komið að við þurfum að breyta töflum. Mun algengari en breytingar á töflum eru þó breytingar á \emph{gögnum}.
+
+Til að breyta gögnum má nota skipunina \verb|UPDATE|. Hún setur ekki inn gögn sjálf (til þess notum við áfram \verb|INSERT| skipanir), hún breytir einungis gögnum sem þegar eru til staðar í gagnagrunninum.
+
+\verb|UPDATE| skipun skiptist í þrjá aðalhluta\footnote{Einnig er hægt að setja \emph{ORDER BY} og \emph{LIMIT} klausur í \emph{UPDATE} skipanir. \emph{ORDER BY} segir til um í hvaða röð \emph{UPDATE} skipunin á að vinna, \emph{LIMIT} setur takmark á það hversu mörgum línum skipunin má breyta.}:
+\begin{enumerate}
+ \item \verb|UPDATE| lykilorðið og nafnið á töflu eða töflum, sem segir til um hvar gögnin er að finna.
+ \item \verb|SET| klausa, sem telur upp þá dálka sem breyta á og nýju gildin sem eiga að fara í þá.
+ \item \verb|WHERE| klausa, sem setur skilyrði á þau gögn sem eiga að uppfærast. Eigi engin skilyrði að gilda um gögnin (sem sagt, ef uppfæra á allar viðeigandi línur) má sleppa \verb|WHERE| klausnni. 
+\end{enumerate}
+Notkun \verb|UPDATE| skipunarinnar má sjá á sýnidæmum \ref{sql:k7d2-update-where} og \ref{sql:k7d3-update}.
+
+\begin{example}
+\caption[UPDATE með WHERE]{\emph{UPDATE} skipun sem breytir nemendatöflunni. Hún skráir umsjónarkennara á nemanda númer 4. Umsjónarkennaranúmerið verður 11 eftir að skipunin hefur verið keyrð, óháð fyrra gildi.}
+\label{sql:k7d2-update-where}
+\centering
+\sql{sql/k7d2-update-where.sql}
+\end{example}
+
+\begin{example}
+\caption[UPDATE án WHERE][1cm]{\emph{UPDATE} skipun sem breytir \emph{allri} nemendatöflunni með því að sleppa \emph{WHERE} klausunni. Þessi skipun myndi skrá alla nemendur í umsjón hjá starfsmanni númer $1$, Bjargeyju.}
+\vspace{1cm}
+\label{sql:k7d3-update}
+\centering
+\sql{sql/k7d3-update.sql}
+\end{example}
+
+Gætum þess að rugla ekki saman \verb|ALTER| og \verb|UPDATE|. \verb|UPDATE| breytir einungis gögnum, ekki töflum eða öðrum gagnagrunnshlutum. Hún er DML skipun.
 \section{Að eyða gögnum}
 \section{Hreyfingar} %Transactions
