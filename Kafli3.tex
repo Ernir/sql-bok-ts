@@ -365,13 +365,13 @@ Nær allar töflur sem fara í notkun við raunverulegar aðstæður ættu að h
 Við kynnumst aðallyklum og öðrum lyklum örlítið betur í undirkafla \ref{undirkafli:lyklar}.
 \section{Að eyða töflum} % DROP
 \label{undirkafli:drop}
-Það að gera villur er eðlilegur hluti af því að byrja að læra á SQL. Því miður er oft erfiðara að bakka frá villum í \verb|CREATE| og \verb|INSERT| skipunum heldur en villum í öðrum forritunarmálum. Þegar \verb|CREATE| eða \verb|INSERT| skipun hefur verið keyrð er sjaldnast hægt að ýta bara á ``Undo'' takka til að komast til baka - upplýsingarnar eru komnar inn í gagnagrunninn.
+Það að gera villur er eðlilegur hluti af því að byrja að læra á SQL. Því miður er oft erfiðara að laga villur í \verb|CREATE| og \verb|INSERT| skipunum heldur en villum í öðrum forritunarmálum. Þegar \verb|CREATE| eða \verb|INSERT| skipun hefur verið keyrð er sjaldnast hægt að ýta bara á ``Undo'' takka til að komast til baka - upplýsingarnar eru komnar inn í gagnagrunninn.
 
-Fyrsta trikkið sem við lærum til að leiðrétta mistök er að losa okkur einfaldlega við töfluna í heilu lagi. Til þess notum við, viti menn, SQL-skipun. Hún heitir \verb|DROP|. Til að eyða töflu má skrifa \verb|DROP TABLE| og svo nafnið á töflunni. Sjá sýnidæmi \ref{sql:k3d12-drop}.
+Fyrsta aðferðin sem við lærum til að leiðrétta mistök er að eyða töflunni í heilu lagi. Til þess notum við, viti menn, SQL-skipun. Hún heitir \verb|DROP TABLE|. Til að eyða töflu má skrifa \verb|DROP TABLE| og svo nafnið á töflunni. Sjá sýnidæmi \ref{sql:k3d13-drop}.
 
 \begin{example}
-\caption[DROP TABLE]{Töflu með nafnið NafnToflu er eytt úr gagnagrunninum. Þetta ber að gera með varúð - það að eyða töflu er alveg jafn varanlegt og það að búa hana til. Til að fá gögnin aftur inn í gagnagrunninn þyrfti að keyra aftur SQL-skipanirnar sem bjuggu hana til.}
-\label{sql:k3d12-drop}
+\caption[DROP TABLE]{Töflu með nafnið NafnToflu er eytt úr gagnagrunninum. Þetta ber að gera með varúð - það að eyða töflu er varanlegt. Til að fá gögnin aftur inn í gagnagrunninn þyrfti að keyra aftur allar SQL-skipanirnar sem bjuggu hana til.}
+\label{sql:k3d13-drop}
 \centering
 \sql{sql/k3d13-drop.sql}
 \end{example}

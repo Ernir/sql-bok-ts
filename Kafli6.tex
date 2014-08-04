@@ -45,10 +45,10 @@ Til að skilgreina mengi sem tekur upplýsingar sínar úr tveimur eða fleiri t
 \subsection{INNER JOIN}
 \verb|INNER JOIN| er sú leið sem langmest er notuð til að ná upplýsingum úr mörgum töflum. 
 
-Til að skilja \verb|INNER JOIN| betur skulum við skoða aftur hvernig töflur voru tengdar saman með aðkomulyklum (undirkafli \ref{undirkafli:adkomulyklar}).
+Til að skilja \verb|INNER JOIN| betur skulum við rifja upp hvernig töflur voru tengdar saman með aðkomulyklum (undirkafli \ref{undirkafli:adkomulyklar}).
 Aðkomulyklar tengja töflur saman með því að halda utan um gögn sem eru sameiginleg í tveimur töflum. \verb|INNER JOIN| nýtir sér þessi sameiginlegu gögn til að smíða eitt stórt mengi sem vinna má með.
 
-Lítum á mynd \ref{mynd:inner-join}.
+Lítum á mynd \ref{mynd:inner-join}. Þar má sjá gildi í tveimur töflum borin saman. Þessi samanburður á sér stað í \verb|ON| hluta skipunarinnar. Hann er líkur samanburði í \verb|WHERE| klausu, en hefur það sérstaka hlutverk að bera saman línur í tveimur mismunandi töflum.\footnote{Venjulega er þetta jafnt-og samanburður, til að finna þær línur sem eru \emph{eins} í báðum töflum.}
 
 \begin{figure}
 \caption[INNER JOIN]{Sýnir hvernig \emph{SELECT} skipun með \emph{INNER JOIN} velur einungis þær línur úr töflunum $A$ og $B$ sem dálkarnir $numerA$ og $numerB$ eiga sameiginlegar.}
@@ -56,8 +56,6 @@ Lítum á mynd \ref{mynd:inner-join}.
 \centering
 \includegraphics[width=\linewidth]{myndir/inner-join}
 \end{figure}
-
-Þar má sjá gildi í tveimur töflum borin saman. Þessi samanburður á sér stað í \verb|ON| hluta skipunarinnar. Hann er líkur samanburði í \verb|WHERE| klausu, en hefur það sérstaka hlutverk að bera saman línur í tveimur mismunandi töflum.\footnote{Venjulega er þetta $=$-samanburður, til að finna þær línur sem eru \emph{eins} í báðum töflum.}
 
 Fyrir utan það að \verb|FROM| klausan er stærri, þá virkar \verb|SELECT| skipun sem velur úr fleiri en einni töflu alveg eins og \verb|SELECT| skipun sem vinnur bara með eina töflu. Hægt er að velja hvaða dálk úr töflunum tveimur sem er.
 
@@ -98,7 +96,7 @@ Til að skilja \verb|JOIN| á milli tveggja taflna er gott að hugsa um töflurn
 \includegraphics[width=\linewidth]{myndir/join-mengi}
 \end{figure}
 
-Þessi mengjahugsunarháttur opnar fyrir möguleikann á fleiri gerðum af \verb|JOIN|um. Svokölluð \verb|OUTER JOIN| geta fundið allar línur í einni töflu ásamt tilsvarandi línu í annarri töflu - ef tilsvarandi lína er til. Í MySQL eru til \verb|LEFT OUTER JOIN| og \verb|RIGHT OUTER JOIN|, sem virka á sama hátt fyrir utan það að þær virka á mismunandi töflur.
+Þessi mengjahugsunarháttur opnar fyrir möguleikann á fleiri gerðum af \verb|JOIN|. Svokölluð \verb|OUTER JOIN| geta fundið allar línur í einni töflu ásamt tilsvarandi línu í annarri töflu - ef tilsvarandi lína er til. Í MySQL eru til \verb|LEFT OUTER JOIN| og \verb|RIGHT OUTER JOIN|, sem virka á sama hátt fyrir utan það að þær virka á mismunandi töflur.
 
 Sum gagnagrunnskerfi (en ekki MySQL) hafa líka svokallað \verb|FULL OUTER JOIN|, sem velur allar línur úr tveimur töflum óháð því hvort að stökin eigi eitthvað sameiginlegt.
 
@@ -106,7 +104,16 @@ Sum gagnagrunnskerfi (en ekki MySQL) hafa líka svokallað \verb|FULL OUTER JOIN
 \label{undirkafli:undirfyrirspurnir}
 Þegar við vinnum með gagnagrunna getum við lent í því að þurfa að nota upplýsingarnar sem við fáum úr fyrirspurn til þess að geta klárað að skrifa aðra fyrirspurn.
 
-Sem dæmi um slíkar aðstæður getum við litið lengst aftur á töflu \ref{tafla:einkunnir}, sem geymir einkunnir nemenda. Í kaflanum sem taflan var sett fram í (kafli \ref{undirkafli:onnur-samsteypufoll}) sáum við dæmi um hvernig við getum skrifað fyrirspurn til að finna meðaleinkunn nemenda í töflunni. En hvað ef við viljum skrifa fyrirspurn sem finnur nöfn þeirra nemenda sem eru hærri en meðaleinkunnin? Ekki dugar að keyra fyrri fyrirspurnina, skrifa niðurstöðuna niður og nota hana í annarri fyrirspurn. Við viljum ekki að fyrirspurnin okkar verði röng ef gögnin í töflunni breytist.
+Sem dæmi um slíkar aðstæður getum við litið lengst aftur á töflu \ref{tafla:einkunnir}, sem geymir einkunnir nemenda. Í kaflanum sem taflan var sett fram í (kafli \ref{undirkafli:onnur-samsteypufoll}) sáum við dæmi um hvernig við getum skrifað fyrirspurn til að finna meðaleinkunn nemenda í töflunni. 
+
+\begin{example}
+\caption[Meðaltal - upprifjun]{Dæmi \ref{sql:k4d29-avg} endurtekið, meðaleinkunn fundin.}
+\label{sql:k6d6-avg-upprifjun}
+\centering
+\sql{sql/k4d29-avg.sql}
+\end{example}
+
+En hvað ef við viljum skrifa fyrirspurn sem finnur nöfn þeirra nemenda sem eru hærri en meðaleinkunnin? Ekki dugar að keyra fyrri fyrirspurnina, skrifa niðurstöðuna niður og nota hana í annarri fyrirspurn. Við viljum ekki að fyrirspurnin okkar verði röng ef gögnin í töflunni breytist.
 
 Til að sameina tvær fyrirspurnir af þessum toga breytum við fyrirspurninni sem við þurfum fyrst að fá upplýsingar úr í svokallaða undirfyrirspurn\footnote{e. \emph{subquery}}. Við umlykjum þá fyrirspurn svigum og setjum hana á þann stað í hinni fyrirspurninni sem upplýsingarnar úr innri fyrirspurninni ættu að koma fyrir\footnote{Ekki þarf að setja semíkommu á eftir undirfyrirspurn. Henni lýkur þegar sviganum sem umkringir hana er lokað.}.
 

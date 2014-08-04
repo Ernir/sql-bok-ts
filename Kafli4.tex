@@ -1,10 +1,10 @@
-Upplýsingar eru sjaldnast geymdar í gagnagrunnum gagnagrunnsins vegna. Markmiðið með að geyma upplýsingar er að gera það mögulegt að ná í þær aftur seinna.
+Upplýsingar eru sjaldnast geymdar í gagnagrunnum upplýsinganna vegna. Markmiðið með að geyma upplýsingar er að gera það mögulegt að ná í þær aftur seinna.
 
 Til að ná í upplýsingar notum við svokallaða \verb|SELECT| skipun. Þetta er skipun sem við munum koma til með að nota mikið og kynnast vel.
 
-Hver \verb|SELECT| skipun er \emph{lýsing} á einhverjum upplýsingum sem við viljum fá. Við lýsum því hvaða upplýsingar við viljum, gagnagrunnskerfið sér svo um að finna hentuga leið til að finna þær fyrir okkur.
+Hver \verb|SELECT| skipun er \emph{lýsing} á einhverjum upplýsingum sem við viljum fá. Við lýsum því hvaða upplýsingar við viljum, gagnagrunnskerfið sér svo um að finna þær fyrir okkur.
 \section{SELECT}
-Allar \verb|SELECT| skipanir innihalda í það minnsta lýsingu á því hvaða upplýsingar þarf að ná í.
+Allar \verb|SELECT| skipanir innihalda að minnsta kosti lýsingu á því hvaða upplýsingar þarf að ná í.
 
 Dæmi um ofurlitla \verb|SELECT| skipun má sjá í sýnidæmi \ref{sql:k4d1-summa}.
 
@@ -33,7 +33,7 @@ Fyrri tvö skrefin lýsa þá því hvaða upplýsingar skal velja, þau seinni 
 
 \begin{table}
 \centering
-\caption[Nemendur]{Nokkrir uppskáldaðir nemendur fæddir árið 1998.}
+\caption[Nemendur]{Nokkrir uppskáldaðir nemendur fæddir árið 1998. Við munum velja upplýsingar úr þessari töflu í næstu sýnidæmum.}
 \label{tafla:nemendur}
 \begin{tabular}{llll}
 \toprule
@@ -129,9 +129,9 @@ Hafrún Þorláksdóttir&250498-2849\\
 \section{WHERE klausan}
 Hingað til höfum við valið heila dálka með \verb|SELECT| skipunum. Það sem við viljum hins vegar oftast gera er að finna ákveðnar upplýsingar í töflunni, frekar en að fá þær allar.
 
-Til þess að fá bara þær upplýsingar sem við viljum búum við til ``síu'' sem hleypir engum upplýsingum í gegn nema þeim sem við viljum.
+Til þess að fá bara þær upplýsingar sem við viljum búum við til ``síu''\footnote{e. \emph{filter}} sem hleypir engum upplýsingum í gegn nema þeim sem við viljum.
 
-Slík sía þarf að innihalda lýsingu á þeim gögnum sem hleypa á í gegn. Það er gert í klausu sem við köllum \verb|WHERE| klausu og kemur fyrir aftan \verb|FROM| klausuna. Dæmi um þetta má sjá í sýnidæmum \ref{sql:k4d4-where-numer} til \ref{mynd:workbench-nidurstada-jon}.
+Slík sía þarf að innihalda lýsingu á þeim gögnum sem hún á að hleypa á í gegn. Það er gert í klausu sem við köllum \verb|WHERE| klausu og kemur fyrir aftan \verb|FROM| klausuna. Dæmi um þetta má sjá í sýnidæmum \ref{sql:k4d4-where-numer} til \ref{mynd:workbench-nidurstada-jon}.
 
 \begin{example}
 \caption[SELECT með WHERE klausu - eftir númeri]{\emph{SELECT} skipun með \emph{WHERE} klausu sem nær í nafn nemanda (úr töflu \ref{tafla:nemendur}) þar sem ``numer'' dálkurinn er með gildið 11. Hún skilar einni línu, nafninu Ingunn Rún Andradóttir.}
@@ -162,7 +162,7 @@ Slík sía þarf að innihalda lýsingu á þeim gögnum sem hleypa á í gegn. 
 \end{figure*}
 \subsection{Röksegðir}
 \label{undirkafli:roksegdir}
-Í öllum \verb|WHERE| klausunum hér á undan er um að ræða síur sem henda öllu sem ekki uppfylla eitt, nákvæmt skilyrði. Skilyrðið í sýnidæmi \ref{sql:k4d4-where-numer}, \verb|numer = 11|, hleypir til dæmis einungis þeim nemanda sem er með nákvæmlega númerið 11 í gegn.
+Í öllum \verb|WHERE| klausunum hér á undan er um að ræða síur sem ekki hleypa neinum línum í gegn nema að þær uppfylli eitt, nákvæmt skilyrði. Skilyrðið í sýnidæmi \ref{sql:k4d4-where-numer}, \verb|numer = 11|, hleypir til dæmis einungis þeim nemanda sem er með nákvæmlega númerið 11 í gegn.
 
 Skilyrðin geta þó verið margs konar. \verb|WHERE| klausan tekur nefnilega við næstum hvaða röksegð\footnote{e. \emph{boolean expression}} sem er, þ.e.a.s. alls kyns samanburðum og staðhæfingum sem að lokum gefa gildin ``satt'' eða ``ósatt''.\footnote{Í MySQL er ``satt'' táknað með tölunni $1$ eða orðinu \emph{TRUE}. ``Ósatt'' er táknað með $0$ eða \emph{FALSE}.}
 
@@ -197,13 +197,13 @@ Segð&Útskýring\\
 
 Eins og við höfum t.d. séð á sýnidæmi \ref{sql:k4d6-where-nafn-endurtekid} þarf röksegð ekki að innihalda eingöngu samanburði með tölum. T.d. er hægt að bera saman strengi og dagsetningar.
 
-Dagsetningar eru bornar saman líkt og tölur. Strengir eru hins vegar bornir saman í stafrófsröð. Dæmi um segðir sem innihalda strengi má sjá á töflu \ref{tafla:samanburdir-strengir}.
+Dagsetningar eru bornar saman líkt og tölur. Strengir eru hins vegar bornir saman í stafrófsröð\footnote{Þannig að stafurinn $a$ sé ``minni en'' stafurinn $b$.}. Dæmi um segðir sem innihalda strengi má sjá á töflu \ref{tafla:samanburdir-strengir}.
 
 Nokkur atriði ber þó að varast þegar strengir eru notaðir til samanburðar í MySQL.
 
-\newthought{Sérstakir stafir og tákn} á borð við upphrópunarmerki og bil eru ekki alltaf borin saman á þann hátt sem við giskum á. Stafrófsröð er ekki skilgreind fyrir þessi tákn. Pössum okkur þegar við notum $>$ eða $<$ til að bera saman strengi sem ekki innihalda bókstafi eingöngu.\footnote{Gagnlegt getur verið að lesa sér til um \emph{Collations} í MySQL til að öðlast frekari skilning á strengjasamanburðum. Ekki er fjallað um það í þessari bók.}
+\newthought{Sérstakir stafir og tákn }á borð við upphrópunarmerki og bil eru ekki alltaf borin saman á þann hátt sem við giskum á. Stafrófsröð er ekki skilgreind fyrir þessi tákn. Pössum okkur þegar við notum $>$ eða $<$ til að bera saman strengi sem ekki innihalda eingöngu bókstafi.\footnote{Gagnlegt getur verið að lesa sér til um \emph{Collations} í MySQL til að öðlast frekari skilning á strengjasamanburðum. Ekki er fjallað um það í þessari bók.}
 
-\newthought{Séu strengir af mismunandi lengdum bornir saman} er bilum bætt við hægra megin við styttri strenginn áður en samanburðurinn er framkvæmdur. Þannig myndi \verb|'a' > 'aa'| vera breytt í \verb|'a ' > 'aa'|. Þetta getur leitt til óvæntra niðurstaðna. Dæmi um niðurstöðu sem við fyrstu sýn kann að virðast undarleg má sjá á sýnidæmi \ref{sql:k4d7-where-nafn-staerra-en}.
+\newthought{Séu strengir af mismunandi lengdum bornir saman }er bilum bætt við hægra megin við styttri strenginn áður en samanburðurinn er framkvæmdur. Þannig myndi \verb|'a' > 'aa'| vera breytt í \verb|'a ' > 'aa'|. Þetta getur leitt til óvæntra niðurstaðna. Dæmi um niðurstöðu sem við fyrstu sýn kann að virðast undarleg má sjá á sýnidæmi \ref{sql:k4d7-where-nafn-staerra-en}.
 
 \begin{table}
 \centering
@@ -242,7 +242,7 @@ Ein gerð af segð sem við höfum ekki getað gert er að athuga hvort að stre
 
 Annars vegar er táknið \verb|_| (strik niðri). \verb|_| getur komið í staðinn fyrir hvaða \emph{einn} staf sem er í strengnum.
 
-Hins vegar er táknið \verb|%| (prósentumerki). \verb|%| getur komið í staðinn fyrir hvaða fjölda stafa sem er.
+Hins vegar er táknið \verb|%| (prósentumerki). \verb|%| getur komið í staðinn fyrir hvaða fjölda stafa sem er (líka fjöldann $0$).
 
 Dæmi \ref{sql:k4d8-like-upphaf} til \ref{sql:k4d12-like-kennitala} sýna notkun \verb|LIKE| og wildcard-tákna.
 
@@ -294,11 +294,13 @@ Hver \verb|SELECT| skipun getur einungis haft eina \verb|WHERE| klausu. Engu að
 
 Þegar skoða á hvort að samsett segð sé sönn eða ósönn þarf fyrst að athuga hvort að segðirnar sem hún er búin til úr séu sannar eða ósannar. Þá verður úr röð af gildunum ``satt'' og ``ósatt'', með \verb|AND| og \verb|OR| á milli. 
 
-Næst þarf að athuga öll \verb|AND| í röðinni. Þegar \verb|AND| stendur á milli tveggja gilda sem eru sönn mynda þau saman gildið ``satt'', annars gildið ``ósatt''.
+Næst þarf að athuga öll \verb|AND| í röðinni. Þegar \verb|AND| stendur á milli tveggja gilda sem eru sönn mynda þau saman gildið ``satt'', annars gildið ``ósatt''. Þegar \verb|AND| stendur á milli tveggja gilda þurfa sem sagt bæði gildin að vera sönn til að útkoman sé sönn.
 
 Að lokum eru öll \verb|OR| skoðuð. Þegar \verb|OR| stendur á milli tveggja gilda er nóg að annað gildanna sé ``satt'' til að þau myndi saman gildið ``satt''. Séu bæði gildin ósönn mynda þau gildið ``ósatt''.
 
-\begin{table}
+\begin{table}[b]
+\caption[AND og OR]{Hér sést hvaða áhrif það hefur að setja \emph{AND} og \emph{OR} á milli tveggja breyta. Gildi breytanna er í vinstri dálkunum, útkoman sést í dálkunum til hægri.}
+\label{tafla:and-or}
 \centering
 \begin{tabular}{ccc}
 \multicolumn{3}{c}{Útkoma \emph{AND}}\\
@@ -329,7 +331,7 @@ $x$&$y$&$x$ \emph{OR} $y$\\
 
 Skoðum dæmi \ref{sql:k4d8-like-upphaf} og \ref{sql:k4d9-like-lok} aftur. Í fyrra dæminu finnum við alla nemendur sem heita nafni sem byrjar á bókstafnum \emph{``K''}, í seinna dæminu finnum við alla nemendur sem heita nafni sem endar á \emph{``dóttir''}. Viljum við finna alla nemendur með nafn sem bæði byrjar á \emph{``K''} og endar á \emph{``dóttir''} getum við tengt skilyrðin tvö saman. Úr verður \verb|WHERE| klausan í sýnidæmi \ref{sql:k4d13-where-and}.
 
-\verb|OR| kemur fyrir þegar einungis eitt af tveimur skilyrðum þarf að vera uppfyllt. Lítum aftur á dæmi \ref{sql:k4d12-like-kennitala}, þar sem allir nemendur sem fæddir eru í apríl eru valdir. Vildum við líka ná í alla nemendur sem fæddir eru í júní gætum við notað \verb|OR| á svipaðan hátt og gert er í dæmi \ref{sql:k4d14-where-or}.
+\verb|OR| kemur fyrir þegar einungis eitt af tveimur skilyrðum þarf að vera uppfyllt. Lítum aftur á dæmi \ref{sql:k4d12-like-kennitala}, þar sem allir nemendur sem fæddir eru í apríl eru valdir. Vildum við breyta skipuninni svo að hún myndi ná í alla nemendur sem fæddir eru annaðhvort í apríl eða í júní gætum við notað \verb|OR| á svipaðan hátt og gert er í dæmi \ref{sql:k4d14-where-or}.
 
 \begin{example}
 \caption[WHERE með AND]{\emph{SELECT} skipun sem finnur alla nemendur í nemendatöflunni sem heita nafni sem bæði byrjar á \emph{``K''} og endar á \emph{``dóttir''}.}
@@ -345,7 +347,7 @@ Skoðum dæmi \ref{sql:k4d8-like-upphaf} og \ref{sql:k4d9-like-lok} aftur. Í fy
 \sql{sql/k4d14-where-or.sql}
 \end{example}
 
-Freistandi getur verið að skrifa \verb|WHERE| klausur þar sem mörg samanburðar\emph{gildi} eru talin upp hvert af öðru, tengd með \verb|AND| eða \verb|OR|. Þetta gengur ekki! Munum alltaf að það eru röksegðir sem \verb|AND| og \verb|OR| tengja saman, það að reyna að nota þau til að tengja saman almenna strengi eða tölur getur leitt til óvæntra niðurstaðna. \footnote{Dæmi um þessa villu væri t.d. að skrifa \emph{WHERE x = 1 OR 2} til að finna línurnar þar sem $x$ er $1$ eða $2$. Réttara væri að skrifa \emph{WHERE x = 1 OR x = 2}.}
+Freistandi getur verið að skrifa \verb|WHERE| klausur þar sem mörg samanburðar\emph{gildi} eru talin upp hvert af öðru, tengd með \verb|AND| eða \verb|OR|. Þetta gengur ekki! Munum alltaf að það eru röksegðir sem \verb|AND| og \verb|OR| tengja saman, það að reyna að nota þau til að tengja saman almenna strengi eða tölur getur leitt til óvæntra niðurstaðna. \footnote{Dæmi um þessa villu væri t.d. að skrifa \emph{WHERE x = 1 OR 3} til að finna línurnar þar sem $x$ er $1$ eða $3$. Rétt væri að skrifa \emph{WHERE x = 1 OR x = 3}.}
 
 Munum líka að \verb|OR| í röksegð er ekki alveg það sama og ``eða'' í talmáli. Í talmáli þýðir ``eða'' oft val á milli tveggja möguleika (má bjóða þér salat eða franskar með hamborgaranum?) en í röksegðum skilar samsett segð sönnu svo lengi sem annar ``möguleikinn'' á við. \footnote{Um þetta er til gamall brandari.
 
@@ -372,7 +374,7 @@ Merkingu flestra röksegða má snúa við með því að setja lykilorðið \ve
 \centering
 \sql{sql/k4d16-not.sql}
 \end{example}
-\section{Helstu ``scalar'' föll}
+\section{Um föll}
 \label{undirkafli:einindafoll}
 Fall\footnote{e. \emph{function}} er mikilvægt stærðfræðihugtak sem kemur víða við í forritun, þar á meðal í SQL.
 
@@ -390,9 +392,11 @@ Við getum t.d. litið á brauðrist sem fall. Brauðrist \emph{tekur inn} brau�
 \text{brauðrist(brauð)} = \text{ristað brauð}
 \]
 
-Í þessum undirkafla ætlum við að skoða MySQL-föll sem taka inn eitt (eða ekkert) gildi og skila einu gildi. Þau eru kölluð ``scalar föll''. Ekki er til íslenskt orð yfir hugtakið sem er í almennri notkun.
+\section{Helstu ``scalar'' föll}
+\label{undirkafli:einindafoll}
+Í þessum undirkafla ætlum við að skoða MySQL-föll sem taka inn eitt eða ekkert gildi og skila einu gildi. Þau eru kölluð ``scalar föll''. Ekki er til íslenskt orð yfir hugtakið sem er í almennri notkun.
 \subsection{Lengd strengs - CHAR\_LENGTH}
-Fyrsta fallið sem við skoðum er MySQL-fallið \verb|CHAR_LENGTH|. \verb|CHAR_LENGTH| tekur inn streng og skilar fjölda stafa sem er í strengnum. Bil og önnur tákn eru tekin með. Almenn lýsing á fallinu gæti þá verið svona:
+Fyrsta fallið sem við skoðum er MySQL-fallið \verb|CHAR_LENGTH|. Það fall tekur inn streng og skilar fjölda stafa sem er í strengnum. Bil og önnur tákn eru tekin með. Almenn lýsing á fallinu gæti þá verið svona:
 \[
 \text{CHAR\_LENGTH(texti)} = \text{fjöldi stafa í texta}
 \]
@@ -414,7 +418,7 @@ Annað fall, sem heitir einfaldlega \verb|LENGTH|, er líka til. Það fall skil
 
 % \subsection{ROUND} 
 \subsection{UCASE og LCASE}
-\verb|UCASE| er fall sem tekur inn streng og skilar honum í hástöfum. Notkun fallsins í MySQL má sjá í sýnidæmi \ref{sql:k4d18-ucase}.
+\verb|UCASE| er fall sem tekur inn streng og skilar honum í hástöfum. \verb|UCASE| er stytting á enska orðinu ``uppercase''. Notkun fallsins í MySQL má sjá í sýnidæmi \ref{sql:k4d18-ucase}.
 
 \begin{example}[h]
 \caption[UCASE]{\emph{SELECT} skipun sem skilar strengnum ``JÓNAS''.}
@@ -432,13 +436,13 @@ Dæmi um notkun er:
 \text{UCASE('Jónas')} = \text{'JÓNAS'}
 \]
 
-\verb|LCASE| er svipað fall. Það fall tekur inn streng og skilar honum í lágstöfum. 
+\verb|LCASE| er svipað fall. Það fall tekur inn streng og skilar honum í lágstöfum. \verb|LCASE| er stytting á orðinu ``lowercase''.
 \subsection{NOW}
-\verb|NOW| er fall sem skilar núverandi tímasetningu (skv. klukku MySQL-serversins). \verb|NOW| er ólíkt föllunum hér á undan að því leytinu til að það þarf ekki að taka neitt inn, það skilar bara gildi. (Þessi vél þarf ekkert hráefni!)
+\verb|NOW| er fall sem skilar núverandi tímasetningu (skv. klukku MySQL-serversins). \verb|NOW| er ólíkt föllunum hér á undan að því leytinu til að það þarf ekki að taka neitt inn, það skilar bara gildi (þessi vél þarf ekkert hráefni!).
 
-Til að prenta núverandi tímasetningu út mætti sem sagt einfaldlega keyra skipunina \verb|SELECT NOW();|.
+Til að prenta núverandi tímasetningu út mætti sem sagt einfaldlega keyra skipunina \verb|SELECT NOW();|.\footnote{Þó að \emph{NOW} fallið taki ekkert inn þurfa svigarnir samt að vera til staðar. Svigarnir segja MySQL að um fall sé að ræða.}
 \subsection{Notkun scalar falla}
-Föllin sem við höfum farið yfir eru sjalnast notuð ein og sér. Oftast þau notuð á eftirfarandi vegu:
+Föllin sem við höfum farið yfir eru sjaldnast notuð ein og sér. Oftast eru þau notuð á eftirfarandi vegu:
 \begin{enumerate}
  \item Sem hluti af lýsingu á því hvaða dálka \verb|SELECT| skipun á að ná í.
  \item Sem hluti af \verb|WHERE| klausu, til samanburðar við gildi.
@@ -716,7 +720,7 @@ Við höfum farið yfir fjölmargar klausur sem tilheyra \verb|SELECT| skipuninn
  \item \verb|LIMIT|
 \end{enumerate}
 
-Sleppa má hverri af klausunum sem er\footnote{\emph{HAVING} er þó mjög sjaldan notuð án \emph{GROUP BY}.}. Þetta breytir ekki röðinni - \verb|WHERE| þarf alltaf að koma á eftir \verb|FROM|, \verb|ORDER BY| þarf alltaf að koma á eftir \verb|GROUP BY|, og svo framvegis. Almennt getur \verb|SELECT| skipun með þeim atriðum sem við höfum kynnst því litið út á þann hátt sem sjá má á sýnidæmi \ref{sql:k4d30-skema}.
+Sleppa má hverri af klausunum sem er\footnote{\emph{HAVING} er þó mjög sjaldan notuð án \emph{GROUP BY}. Ekki er hægt að sleppa sjálfu \emph{SELECT} lykilorðinu.}. Þetta breytir ekki röðinni - \verb|WHERE| þarf alltaf að koma á eftir \verb|FROM|, \verb|ORDER BY| þarf alltaf að koma á eftir \verb|GROUP BY|, og svo framvegis. Almennt getur \verb|SELECT| skipun með þeim atriðum sem við höfum kynnst því litið út á þann hátt sem sjá má á sýnidæmi \ref{sql:k4d30-skema}.
 
 \begin{example}
 \caption[Uppbygging]{Uppbygging \emph{SELECT} skipunar með þeim atriðum sem koma fyrir í þessum (kafla \ref{kafli:select}).}
