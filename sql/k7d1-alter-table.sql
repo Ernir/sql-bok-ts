@@ -1,0 +1,5 @@
+ALTER TABLE Tafla
+ADD nyrDalkur INTEGER;
+
+ALTER TABLE Tafla
+DROP COLUMN dalkur;

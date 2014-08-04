@@ -7,6 +7,12 @@ Fyrr í bókinni höfum við farið yfir fjórar grunnaðgerðir sem nauðsynleg
 \end{itemize}
 Þetta kemur okkur býsna langt. Þetta hefur hins vegar ekki leyft okkur að gera nokkrar breytingar á töflum eða þeim gögnum sem í þeim eru. Til þess þurfum við fleiri skipanir. Þær heita \verb|ALTER TABLE|, \verb|UPDATE| og \verb|DELETE|.
 \section{DDL og DML}
+\begin{marginfigure}[-6cm]
+\caption[DDL og DML]{Yfirlit yfir þær SQL-skipanir sem við höfum séð og flokkun þeirra í DDL og DML.}
+\label{mynd:inner-join}
+\centering
+\includegraphics[width=\linewidth]{myndir/ddl-dml}
+\end{marginfigure}
 Áður en lengra er haldið skulum við staldra við og skoða þær skipanir sem við höfum þegar kynnst.
 
 Þessar skipanir, \verb|CREATE|, \verb|INSERT|, \verb|SELECT| og \verb|DROP| skiptast í tvo flokka. Flokkarnir kallast \emph{Data Definition Language} (DDL) og \emph{Data Manipulation Language} (DML).\footnote{Þessir flokkar hafa verið kallaðir \emph{gagnaskilgreiningarmál} og \emph{gagnameðferðarmál} á íslensku.}
@@ -16,15 +22,20 @@ DDL skipanir hafa áhrif á uppbyggingu gagnagrunnsins. Þær breyta, búa til o
 DML skipanir hafa áhrif á gögn í gagnagrunninum. Þær breyta, búa til, eyða og sýna innihald taflna. \verb|INSERT| og \verb|SELECT| eru DML skipanir.\footnote{\emph{SELECT} skipunin er örlítið sérstök hvað DML skipanir varðar, þar sem hún hefur það ekki að aðalhlutverki að breyta gögnum. Þess vegna er oft fjallað um hana sérstaklega. Hún er DML skipun engu að síður.}
 
 Fleiri flokkar skipana eru til. Þær skipanir sem við förum yfir í þessari bók falla þó allar í þessa tvo.
-
-\begin{marginfigure}
-\caption[DDL og DML]{Yfirlit yfir þær SQL-skipanir sem við höfum séð og flokkun þeirra í DDL og DML.}
-\label{mynd:inner-join}
-\centering
-\includegraphics[width=\linewidth]{myndir/ddl-dml}
-\end{marginfigure}
 \section{Að breyta töflum}
 Hingað til höfum við ekki farið yfir leið til að breyta töflum. Það þýðir að í hvert skipti sem villa er gerð í töflu höfum við þurft að henda töflunni ásamt öllu því sem í henni er (\verb|DROP TABLE|) og búa hana til upp á nýtt.
+
+Þetta ferli gengur ekki mjög vel þegar um flókna gagnagrunna eða töflur með raunverulegum gögnum er að ræða. Við þurfum öflugra tól - við þurfum að geta breytt töflu eftir að hún hefur verið búin til.
+
+Til þess að breyta töflu notum við skipunina \verb|ALTER TABLE|. Við getum m.a. notað hana til þess að bæta við og eyða dálkum. Sjá sýnidæmi \ref{sql:k7d1-alter-table}.
+
+\begin{example}
+\caption[ALTER TABLE]{Tvær \emph{ALTER TABLE} skipanir. Sú fyrri bætir heiltöludálkinum \emph{nyrDalkur} við töfluna \emph{Tafla}. Sú seinni eyðir dálkinum \emph{dalkur} úr sömu töflu.}
+\label{sql:k7d1-alter-table}
+\centering
+\sql{sql/k7d1-alter-table.sql}
+\end{example}
+
 \section{Að breyta gögnum}
 \section{Að eyða gögnum}
 \section{Hreyfingar} %Transactions
