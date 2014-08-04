@@ -67,4 +67,16 @@ Notkun \verb|UPDATE| skipunarinnar má sjá á sýnidæmum \ref{sql:k7d2-update-
 
 Gætum þess að rugla ekki saman \verb|ALTER| og \verb|UPDATE|. \verb|UPDATE| breytir einungis gögnum, ekki töflum eða öðrum gagnagrunnshlutum. Hún er DML skipun.
 \section{Að eyða gögnum}
+Þegar eyða þarf gögnum án þess að hafa áhrif á töfluna eða töflurnar sem gögnin eru í má nota \verb|DELETE| skipun. Henni svipar til \verb|DELETE| skipunarinnar, nema hvað engin \verb|SET| klausa er til staðar - enda eru gögnin fjarlægð, ekki uppfærð.
+
+\begin{example}
+\caption[DELETE]{\emph{DELETE} skipun sem eyðir áfanganum \emph{GSÖ1G2U} úr áfangatöflunni. Notuð er \emph{WHERE} klausa til að einangra áfangann líkt og í \emph{UPDATE} skipuninni.}
+\label{sql:k7d4-delete}
+\centering
+\sql{sql/k7d4-delete.sql}
+\end{example}
+
+Sé \verb|WHERE| klausunni sleppt í \verb|DELETE| skipun er \emph{öllum} línum eytt. Pössum vandlega upp á að klausan sé til staðar og rétt!
+\subsection{Aðkomulyklar og breytingar}
+
 \section{Hreyfingar} %Transactions
