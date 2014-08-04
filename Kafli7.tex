@@ -78,7 +78,7 @@ Gætum þess að rugla ekki saman \verb|ALTER| og \verb|UPDATE|. \verb|UPDATE| b
 
 Sé \verb|WHERE| klausunni sleppt í \verb|DELETE| skipun er \emph{öllum} línum eytt. Pössum vandlega upp á að klausan sé til staðar og rétt!
 \section{Viðhald gagnagrunna}
-Þegar gagnagrunnum er breytt geta komið upp óvæntar aðstæður. Viðhald gagnagrunna er vel fyrir utan efni þessarar bókar, en við getum nefnt nokkur atriði stuttlega.
+Þegar gagnagrunnum og gögnum í þeim er breytt geta komið upp óvæntar aðstæður. Viðhald gagnagrunna er vel fyrir utan efni þessarar bókar, en við getum nefnt nokkur atriði stuttlega.
 \subsection{Aðkomulyklar og breytingar}
 MySQL passar oftast upp á\footnote{Þetta er stillingaratriði sem hægt er að slökkva á.} að ekki sé hægt að breyta eða eyða gögnum sem aðkomulykill vísar á (gögn sem eru í ``foreldrahlutverki'' í aðkomulykilssambandi) svo að sambandið skemmist.
 
@@ -89,3 +89,20 @@ Hægt er að setja upp aðkomulykla svo að slíkar breytingar séu sjálfvirkar
 Þegar margar uppfærslur eða breytingar eru framkvæmdar í röð geta komið upp villur ef ferlið er truflað áður en því er lokið.
 
 Til að tryggja það að breytingar sem eru háðar hver annarri séu framkvæmdar sem ein heild má skilgreina þær sem eina \emph{hreyfingu}\footnote{e. \emph{transaction}}. Líkja SQL-hreyfingu við það þegar fjallgöngukappar binda sig saman í blindbyl - týnist þeir eru þeir þó í það minnsta saman. Hreyfingar eru mikilvægar til að tryggja það að gögn í gagnagrunnum skemmist ekki þegar villur koma upp við breytingar.
+
+\section{Yfirlit}
+Í þessum kafla fórum við yfir nokkur atriði sem tengjast því að uppfæra gagnagrunna og hinar mismunandi skipanir sem því tengjast.
+\begin{itemize}
+ \item SQL-skipanir sem við höfum farið yfir skiptast í tvo flokka, DDL og DML.
+ \item DDL skipanir búa til, breyta og eyða gagnagrunnum og töflum.
+ \begin{itemize}
+  \item \verb|CREATE DATABASE|, \verb|CREATE TABLE|, \verb|ALTER TABLE| og \verb|DROP TABLE| eru DDL-skipanir.
+ \end{itemize}
+ \item DML-skipanir sýna, setja inn, breyta eða eyða \emph{gögnum} í gagnagrunnum án þess að hafa áhrif á gagnagrunninn sjálfan.
+ \begin{itemize}
+  \item \verb|SELECT|, \verb|INSERT|, \verb|UPDATE| og \verb|DELETE| eru DML-skipanir.
+ \end{itemize}
+ \item \verb|ALTER TABLE| skipunin getur bætt við og eytt dálkum taflna.
+ \item \verb|UPDATE| skipunin getur breytt gögnum sem eru í töflum.
+ \item \verb|DELETE| skipunin getur eytt gögnum sem eru í töflum.
+\end{itemize}
