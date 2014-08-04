@@ -77,6 +77,15 @@ Gætum þess að rugla ekki saman \verb|ALTER| og \verb|UPDATE|. \verb|UPDATE| b
 \end{example}
 
 Sé \verb|WHERE| klausunni sleppt í \verb|DELETE| skipun er \emph{öllum} línum eytt. Pössum vandlega upp á að klausan sé til staðar og rétt!
+\section{Viðhald gagnagrunna}
+Þegar gagnagrunnum er breytt geta komið upp óvæntar aðstæður. Viðhald gagnagrunna er vel fyrir utan efni þessarar bókar, en við getum nefnt nokkur atriði stuttlega.
 \subsection{Aðkomulyklar og breytingar}
+MySQL passar oftast upp á\footnote{Þetta er stillingaratriði sem hægt er að slökkva á.} að ekki sé hægt að breyta eða eyða gögnum sem aðkomulykill vísar á (gögn sem eru í ``foreldrahlutverki'' í aðkomulykilssambandi) svo að sambandið skemmist.
 
-\section{Hreyfingar} %Transactions
+Einfaldasta leiðin til að komast fram hjá þessu er að breyta eða eyða gögnunum í barninu á undan gögnunum í foreldrinu, svo að það ``loforð'' sem aðkomulykillinn gefur sé aldrei brotið.
+
+Hægt er að setja upp aðkomulykla svo að slíkar breytingar séu sjálfvirkar. Þetta eru svokallaðar \verb|CASCADE| aðgerðir.
+\subsection{Hreyfingar} %Transactions
+Þegar margar uppfærslur eða breytingar eru framkvæmdar í röð geta komið upp villur ef ferlið er truflað áður en því er lokið.
+
+Til að tryggja það að breytingar sem eru háðar hver annarri séu framkvæmdar sem ein heild má skilgreina þær sem eina \emph{hreyfingu}\footnote{e. \emph{transaction}}. Líkja SQL-hreyfingu við það þegar fjallgöngukappar binda sig saman í blindbyl - týnist þeir eru þeir þó í það minnsta saman. Hreyfingar eru mikilvægar til að tryggja það að gögn í gagnagrunnum skemmist ekki þegar villur koma upp við breytingar.
