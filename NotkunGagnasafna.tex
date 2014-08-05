@@ -1,3 +1,4 @@
+\RequirePackage[l2tabu, orthodox]{nag}
 \documentclass[nohyper, notoc, justified, openany]{tufte-book} 
 
 \usepackage[utf8]{inputenc}
@@ -67,6 +68,12 @@
   {\begin{@tufte@float}[#1]{example}{}}
   {\end{@tufte@float}}
 \let\l@example\l@figure
+\makeatother
+
+% Nag pakkanum kennt á tufte-floats.
+% Uppruni: http://tex.stackexchange.com/a/156466/21638
+\makeatletter
+\g@addto@macro\nag@captions{,@tufte@caption}
 \makeatother
 
 \newcommand{\sql}[1]{\inputminted[frame=lines, fontfamily=courier]{sql}{#1}}
