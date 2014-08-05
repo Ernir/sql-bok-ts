@@ -77,6 +77,8 @@ Gætum þess að rugla ekki saman \verb|ALTER| og \verb|UPDATE|. \verb|UPDATE| b
 \end{example}
 
 Sé \verb|WHERE| klausunni sleppt í \verb|DELETE| skipun er \emph{öllum} línum eytt. Pössum vandlega upp á að sú klausa sé til staðar og að hún sé rétt!
+
+Líkt og \verb|UPDATE| hefur \verb|DELETE| einungis áhrif á gögn, ekki töflur eða gagnagrunna. Hún er DML skipun.
 \section{Viðhald gagnagrunna}
 Þegar gagnagrunnum og gögnum í þeim er breytt geta komið upp óvæntar aðstæður. Viðhald gagnagrunna er efni í bók út af fyrir sig, en við getum nefnt nokkur atriði stuttlega.
 \subsection{Aðkomulyklar og breytingar}
@@ -90,6 +92,7 @@ Hægt er að setja upp aðkomulykla svo að slíkar breytingar séu sjálfvirkar
 
 Til að tryggja það að breytingar sem eru háðar hver annarri séu framkvæmdar sem ein heild má skilgreina þær sem eina \emph{hreyfingu}\footnote{e. \emph{transaction}}. Líkja má SQL-hreyfingu við það þegar fjallgöngukappar binda sig saman í blindbyl; týnist þeir eru þeir þó í það minnsta saman. Hreyfingar eru mikilvægar til að tryggja það að gögn í gagnagrunnum skemmist ekki þegar villur koma upp við breytingar.
 
+\newpage
 \section{Yfirlit}
 Í þessum kafla fórum við yfir nokkur atriði sem tengjast því að uppfæra gagnagrunna og hinar mismunandi skipanir sem því tengjast.
 \begin{itemize}

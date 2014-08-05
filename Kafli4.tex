@@ -20,7 +20,7 @@ Dæmi um ofurlitla \verb|SELECT| skipun má sjá í sýnidæmi \ref{sql:k4d1-sum
 Þegar \verb|SELECT| skipun er skrifuð er það oftast í þeim tilgangi að ná upplýsingum úr SQL-töflu.
 
 Þegar ná á upplýsingum úr töflu þarf að minnsta kosti tvennt að koma fram - hvar upplýsingarnar er að finna og hvaða upplýsingar skal velja. Þetta má gera í eftirfarandi skrefum:
-
+\newpage
 \begin{enumerate}
  \item Skrifa orðið \verb|SELECT| (sem gerir skipunina að \verb|SELECT| skipun)
  \item Skrifa nöfn dálkanna sem velja skal
@@ -77,49 +77,10 @@ numer&nafn&kennitala&innritun\\
 \includegraphics[width=\linewidth]{myndir/workbench-select}
 \end{figure*}
 
-\verb|SELECT| skipun getur náð í marga dálka (eða mörg atriði) í einu. Atriðin eru þá einfaldlega aðgreind með kommum. Þetta má sjá á sýnidæmi \ref{sql:k4d3-margir-dalkar}.
-
-\begin{example}
-\caption[SELECT með mörgum dálkum]{\emph{SELECT} skipun sem nær í marga dálka. }
-\label{sql:k4d3-margir-dalkar}
-\centering
-\sql{sql/k4d3-margir-dalkar.sql}
-\end{example}
-
-\begin{table}
-\centering
-\caption[Niðurstaða margra dálka SELECT]{Niðurstaða skipunarinnar í sýnidæmi \ref{sql:k4d3-margir-dalkar} gæti litið út á þessa leið. Allar upplýsingarnar úr dálkunum ``nafn'' og ``kennitala'' voru valdar. Aðrir dálkar sjást ekki.}
-\label{tafla:margir-dalkar-nidurstada}
-\begin{tabular}{ll}
-\toprule
-nafn&kennitala\\
-\midrule
-Magnús Ásgeir Steinþórsson&090698-6489\\
-Sigurður Ómarsson&251198-1369\\
-Róbert Marinó Björnsson&060998-2489\\
-Konráð Hreinn Aðalsteinsson&120498-8869\\
-Kári Jensson&230598-2159\\
-Birgir Torfason&170798-7249\\
-Höskuldur Frímann Ásmundsson&020298-4139\\
-Styrmir Hreinsson&210498-7889\\
-Hilmar Hjartarson&020798-4599\\
-Reynir Rafn Sigurgeirsson&211298-7239\\
-Ingunn Rún Andradóttir&161298-1589\\
-Pálína Björk Þórólfsdóttir&030798-0829\\
-Regína Sigrún Jensdóttir&140798-6499\\
-Líney Geirsdóttir&111098-3289\\
-Steinunn Berglind Eiðsdóttir&190398-1889\\
-Kristjana Ólafsdóttir&230298-4759\\
-Þóra Gestsdóttir&010498-8489\\
-Kolfinna Svava Óttarsdóttir&210498-5759\\
-Elísabet Hrannarsdóttir&050298-3109\\
-Hafrún Þorláksdóttir&250498-2849\\
-\bottomrule
-\end{tabular}
-\end{table}
+\verb|SELECT| skipun getur náð í marga dálka (eða mörg atriði) í einu. Atriðin eru þá einfaldlega aðgreind með kommum. Þetta má sjá á mynd \ref{mynd:workbench-nidurstada-margir-dalkar}.
 
 \begin{figure*}
-\caption[Niðurstöður margra dálka SELECT í Workbench]{Hér sést hvernig sýnidæmi \ref{sql:k4d3-margir-dalkar} og niðurstaða \emph{SELECT} skipunarinnar sem í því er (tafla \ref{tafla:margir-dalkar-nidurstada}) getur litið út í MySQL Workbench.}
+\caption[Niðurstöður margra dálka SELECT í Workbench]{\emph{SELECT} skipun sem nær í marga dálka getur litið út á þessa leið í MySQL workbench. Allar upplýsingarnar úr dálkunum ``nafn'' og ``kennitala'' voru valdar. Aðrir dálkar sjást ekki.}
 \label{mynd:workbench-nidurstada-margir-dalkar}
 \centering
 \includegraphics[width=\linewidth]{myndir/workbench-nidurstada-margir-dalkar}
@@ -134,7 +95,7 @@ Til þess að fá bara þær upplýsingar sem við viljum búum við til ``síu'
 Slík sía þarf að innihalda lýsingu á þeim gögnum sem hún á að hleypa á í gegn. Það er gert í klausu sem við köllum \verb|WHERE| klausu og kemur fyrir aftan \verb|FROM| klausuna. Dæmi um þetta má sjá í sýnidæmum \ref{sql:k4d4-where-numer} til \ref{mynd:workbench-nidurstada-jon}.
 
 \begin{example}
-\caption[SELECT með WHERE klausu - eftir númeri]{\emph{SELECT} skipun með \emph{WHERE} klausu sem nær í nafn nemanda (úr töflu \ref{tafla:nemendur}) þar sem ``numer'' dálkurinn er með gildið 11. Hún skilar einni línu, nafninu Ingunn Rún Andradóttir.}
+\caption[SELECT með WHERE klausu - eftir númeri][-1cm]{\emph{SELECT} skipun með \emph{WHERE} klausu sem nær í nafn nemanda (úr töflu \ref{tafla:nemendur}) þar sem ``numer'' dálkurinn er með gildið 11. Hún skilar einni línu, nafninu Ingunn Rún Andradóttir.}
 \label{sql:k4d4-where-numer}
 \centering
 \sql{sql/k4d4-where-numer.sql}
@@ -166,6 +127,7 @@ Slík sía þarf að innihalda lýsingu á þeim gögnum sem hún á að hleypa 
 
 Skilyrðin geta þó verið margs konar. \verb|WHERE| klausan tekur nefnilega við næstum hvaða röksegð\footnote{e. \emph{boolean expression}} sem er, þ.e.a.s. alls kyns samanburðum og staðhæfingum sem að lokum gefa gildin ``satt'' eða ``ósatt''.\footnote{Í MySQL er ``satt'' táknað með tölunni $1$ eða orðinu \emph{TRUE}. ``Ósatt'' er táknað með $0$ eða \emph{FALSE}.}
 
+\newpage
 Orðið ``röksegð'' kann að hljóma undarlega, en um kunnuglegt fyrirbæri er að ræða. ``Skilyrðið'' \verb|numer = 11| er til dæmis röksegð. Segðin er sönn þegar \verb|numer| tekur gildið 11, annars ekki. Fleiri dæmi um segðir má sjá á töflu \ref{tafla:samanburdir}.
 
 \begin{table}
@@ -227,7 +189,7 @@ Segð&Gildi\\
 \end{table}
 
 \begin{example}
-\caption[Stærra-en samanburður við streng]{\emph{SELECT}-skipun sem ber saman öll nöfn við strenginn \emph{'M'}. Skipunin skilar nöfnum allra nemanda sem eru á eftir \emph{M} í stafrófinu, \emph{að nemendum sem byrja á M meðtöldum!} Þetta er vegna þess að strengurinn \emph{M} er lengdur með bilum áður en samanburðurinn er framkvæmdur. Bil er álitið ``minna'' en allir bókstafir, svo segðin verður sönn fyrir öll nöfn sem byrja á \emph{M}.}
+\caption[Stærra-en samanburður við streng][-1.5cm]{\emph{SELECT}-skipun sem ber saman öll nöfn við strenginn \emph{'M'}. Skipunin skilar nöfnum allra nemanda sem eru á eftir \emph{M} í stafrófinu, \emph{að nemendum sem byrja á M meðtöldum!} Þetta er vegna þess að strengurinn \emph{M} er lengdur með bilum áður en samanburðurinn er framkvæmdur. Bil er álitið ``minna'' en allir bókstafir, svo segðin verður sönn fyrir öll nöfn sem byrja á \emph{M}.}
 \label{sql:k4d7-where-nafn-staerra-en}
 \centering
 \sql{sql/k4d7-where-nafn-staerra-en.sql}
@@ -247,7 +209,7 @@ Hins vegar er táknið \verb|%| (prósentumerki). \verb|%| getur komið í stað
 Dæmi \ref{sql:k4d8-like-upphaf} til \ref{sql:k4d12-like-kennitala} sýna notkun \verb|LIKE| og wildcard-tákna.
 
 \begin{example}
-\caption[LIKE til að finna orð sem byrja á sama staf]{\emph{SELECT} skipun sem finnur alla nemendur í nemendatöflunni sem byrja á stafnum \emph{K}. Til þess er notaður samanburðarstrengur sem hefur wildcard-táknið \emph{\%} á eftir stafnum \emph{K}, svo að \emph{\%} komi í staðinn fyrir allt sem á eftir \emph{K} kemur.}
+\caption[LIKE til að finna orð sem byrja á sama staf][-1.5cm]{\emph{SELECT} skipun sem finnur alla nemendur í nemendatöflunni sem byrja á stafnum \emph{K}. Til þess er notaður samanburðarstrengur sem hefur wildcard-táknið \emph{\%} á eftir stafnum \emph{K}, svo að \emph{\%} komi í staðinn fyrir allt sem á eftir \emph{K} kemur.}
 \label{sql:k4d8-like-upphaf}
 \centering
 \sql{sql/k4d8-like-upphaf.sql}
@@ -265,6 +227,7 @@ Dæmi \ref{sql:k4d8-like-upphaf} til \ref{sql:k4d12-like-kennitala} sýna notkun
 \label{sql:k4d10-like-midja}
 \centering
 \sql{sql/k4d10-like-midja.sql}
+\vspace{2cm}
 \end{example}
 
 \begin{example}
@@ -272,6 +235,7 @@ Dæmi \ref{sql:k4d8-like-upphaf} til \ref{sql:k4d12-like-kennitala} sýna notkun
 \label{sql:k4d11-like-nakvaemt}
 \centering
 \sql{sql/k4d11-like-nakvaemt.sql}
+\vspace{1cm}
 \end{example}
 
 \begin{example}
@@ -281,7 +245,6 @@ Dæmi \ref{sql:k4d8-like-upphaf} til \ref{sql:k4d12-like-kennitala} sýna notkun
 \sql{sql/k4d12-like-kennitala.sql}
 \end{example}
 
-\FloatBarrier
 \subsection{Mörg aðskilin skilyrði} % AND, OR
 Hver \verb|SELECT| skipun getur einungis haft eina \verb|WHERE| klausu. Engu að síður er hægt að setja mörg skilyrði um þær raðir sem eiga að birtast í niðurstöðum skipunarinnar með því að tengja margar röksegðir saman. Það má gera með lykilorðunum \verb|AND| og \verb|OR|\footnote{Fleiri lykilorð af þessum toga eru til, til dæmis \emph{XOR}.}. Þannig mætti til dæmis búa til samsettu röksegðina \verb|x < 1 OR x > 5| úr segðunum \verb|x < 1|, \verb|x > 5| og lykilorðinu \verb|OR|.
 
@@ -347,6 +310,7 @@ Skoðum dæmi \ref{sql:k4d8-like-upphaf} og \ref{sql:k4d9-like-lok} aftur. Í fy
 \sql{sql/k4d14-where-or.sql}
 \end{example}
 
+\newpage
 Freistandi getur verið að skrifa \verb|WHERE| klausur þar sem mörg samanburðar\emph{gildi} eru talin upp hvert af öðru, tengd með \verb|AND| eða \verb|OR|. Þetta gengur ekki! Munum alltaf að það eru röksegðir sem \verb|AND| og \verb|OR| tengja saman, það að reyna að nota þau til að tengja saman almenna strengi eða tölur getur leitt til óvæntra niðurstaðna. \footnote{Dæmi um þessa villu væri t.d. að skrifa \emph{WHERE x = 1 OR 3} til að finna línurnar þar sem $x$ er $1$ eða $3$. Rétt væri að skrifa \emph{WHERE x = 1 OR x = 3}.}
 
 Munum líka að \verb|OR| í röksegð er ekki alveg það sama og ``eða'' í talmáli. Í talmáli þýðir ``eða'' oft val á milli tveggja möguleika (má bjóða þér salat eða franskar með hamborgaranum?) en í röksegðum skilar samsett segð sönnu svo lengi sem annar ``möguleikinn'' á við. \footnote{Um þetta er til gamall brandari.
@@ -366,7 +330,7 @@ Dæmi um notkun \verb|IN| má sjá á sýnidæmi \ref{sql:k4d15-where-in}.
 \sql{sql/k4d15-where-in.sql}
 \end{example}
 \subsection{Að snúa við skilyrði - NOT}
-Merkingu flestra röksegða má snúa við með því að setja lykilorðið \verb|NOT| fyrir framan segðina. Hafi segðin áður skilað sönnu skilar hún þess í stað ósönnu, hafi hún skilað ósönnu skilar hún sönnu. Dæmi um notkun \verb|NOT| má sjá á sýnidæmi \ref{sql:k4d15-where-in}.
+Merkingu flestra röksegða má snúa við með því að setja lykilorðið \verb|NOT| fyrir framan segðina. Hafi segðin áður skilað sönnu skilar hún þess í stað ósönnu, hafi hún skilað ósönnu skilar hún sönnu. Dæmi um notkun \verb|NOT| má sjá á sýnidæmi \ref{sql:k4d16-not}.
 
 \begin{example}
 \caption[NOT lykilorðið]{\emph{SELECT} skipun sem finnur alla nemendur sem \emph{ekki} byrja á stafnum \emph{``K''}.}
@@ -545,7 +509,7 @@ numer&audkenni&fag&onn\\
 \end{tabular}
 \end{table}
 
-Við getum t.d. notað \verb|SELECT| skipun sem inniheldur \verb|COUNT| fallið til að komast að því hversu margir áfangar eru í grunndeildinni. Slíka skipun má sjá á sýnidæmi \ref{sql:k4d21-count}.
+Við getum t.d. notað \verb|COUNT| fallið til að komast að því hversu margir áfangar eru í grunndeildinni. Slíka skipun má sjá á sýnidæmi \ref{sql:k4d21-count}.
 
 \begin{example}
 \caption[COUNT á dálk]{\emph{SELECT} skipun sem finnur fjölda lína í \emph{Afangar} töflunni (töluna 13). Í raun er fjöldi gilda í dálkinum \emph{numer} talinn, en þar sem við vitum að \emph{numer} er aðallykill getum við verið viss um að allar línurnar séu taldar.}
@@ -556,20 +520,21 @@ Við getum t.d. notað \verb|SELECT| skipun sem inniheldur \verb|COUNT| fallið 
 
 Sé \verb|COUNT| notað með \verb|GROUP BY| klausu er ekki allur dálkurinn talinn, heldur er fjöldi staka (eða lína) í hverjum hópi talinn fyrir sig. Dæmi um slíka skipun og hvernig niðurstöður hennar geta litið út má sjá á myndum \ref{mynd:workbench-group-by} og \ref{mynd:workbench-group-by-onn}.
 
-\begin{figure}
+\begin{figure*}
 \caption[GROUP BY og COUNT eftir fögum]{Dæmi um \emph{SELECT} skipun með \emph{GROUP BY} klausu sem raðar áföngum saman í hópa eftir því hvaða fagi þeir tilheyra. Síðan telur \emph{COUNT} hversu margir áfangar tilheyra hverju fagi.}
 \label{mynd:workbench-group-by}
 \centering
 \includegraphics[width=\linewidth]{myndir/workbench-group-by}
-\end{figure}
+\end{figure*}
 
-\begin{figure}
+\begin{figure*}
 \caption[GROUP BY og COUNT eftir önnum]{Dæmi um \emph{SELECT} skipun með \emph{GROUP BY} klausu sem raðar áföngum saman í hópa eftir því hvaða önn þeir eru kenndir á. Síðan telur \emph{COUNT} hversu margir áfangar eru á hverri önn.}
 \label{mynd:workbench-group-by-onn}
 \centering
-\includegraphics[width=\linewidth]{myndir/workbench-group-by-onn}
-\end{figure}
+\includegraphics[width=\linewidth]{myndir/workbench-group-by-onn-stort}
+\end{figure*}
 
+\newpage
 \subsection{Önnur samsteypuföll - MIN, MAX, SUM, og AVG}
 \label{undirkafli:onnur-samsteypufoll}
 Fleiri samsteypuföll eru til en \verb|COUNT|. Lítum á nokkur til viðbótar. Öll eiga þau sameiginlegt að taka inn mengi af gildum og skila okkur upplýsingum um mengið sjálft.
@@ -616,9 +581,9 @@ Við getum notað samsteypuföll til að fá frekari upplýsingar um töfluna. S
 \sql{sql/k4d28-min.sql}
 \end{example}
 
+\clearpage
 \begin{example}
-\vspace{5cm}
-\caption[AVG fallið][5cm]{\emph{SELECT} skipun sem finnur meðaleinkunnina í einkunnatöflunni. Hún finnur gildið $5.2$.}
+\caption[AVG fallið]{\emph{SELECT} skipun sem finnur meðaleinkunnina í einkunnatöflunni. Hún finnur gildið $5.2$.}
 \label{sql:k4d29-avg}
 \centering
 \sql{sql/k4d29-avg.sql}
@@ -729,7 +694,7 @@ Sleppa má hverri af klausunum sem er\footnote{\emph{HAVING} er þó mjög sjald
 \sql{sql/k4d30-skema.sql}
 \end{example}
 
-
+\newpage
 \section{Yfirlit}
 Í þessum kafla fórum við yfir \verb|SELECT| skipunina í MySQL.
 \begin{itemize}

@@ -31,7 +31,7 @@ Hér sjáum við ágætlega hvernig bæta má við öðrum dálki. Fyrsta dálkl
 Athugum að engin komma er á eftir síðustu dálklýsingunni. Það er vegna þess að dálkarnir eru einungis \emph{aðskildir} með kommum, komman er ekki hluti af dálklýsingunni sjálfri.
 
 \begin{marginfigure}
-\caption[Að sjá töflu í Workbench]{Er erfitt að vita hvort að skipunin tókst eða ekki? Hægt er að hægri-smella á nafn töflu í MySQL workbench og biðja um ``show rows''. Þetta birtir fyrstu þúsund línur sem eru í viðkomandi töflu - sem dugar oftast til að fá yfirlit.}
+\caption[Að sjá töflu í Workbench]{Er erfitt að vita hvort að skipunin tókst eða ekki? Hægt er að hægri-smella á nafn töflu í MySQL workbench og biðja um ``select rows''. Þetta birtir fyrstu þúsund línur sem eru í viðkomandi töflu - sem dugar oftast til að fá yfirlit.}
 \label{mynd:}
 \centering
 \includegraphics[width=\linewidth]{myndir/workbench-select-rows}
@@ -90,19 +90,20 @@ nafnFyrstaDalks&nafnAnnarsDalks\\
 1&2\\
 \bottomrule
 \end{tabular}
+\vspace{1cm}
 \end{table}
 Til að skrifa meira en eina línu af gögnum inn í gagnagrunn má keyra \verb|INSERT| skipun oftar en einu sinni. Væri skipunin í sýnidæmi \ref{tafla:insert-margir-dalkar} keyrð tvisvar myndi línan sem hún lýsir vera tvítekin í töflunni.
 
 Það að skrifa alla \verb|INSERT INTO| romsuna upp upp á nýtt fyrir hverja línu sem setja skal inn getur verið þreytandi. Þess vegna býður MySQL upp á leið til að setja inn margar línur í einu. Við sjáum dæmi um það í sýnidæmi \ref{sql:k3d10-insert-margar-linur}.
 
-\begin{example}
+\begin{example}[hb]
 \caption[INSERT í tvo dálka í einu]{INSERT í tvo dálka í einu. Þessi skipun setur tölurnar $1$ og $2$ inn í eina línu og tölurnar $3$ og $4$ í þá næstu. Niðurstaðan er tafla \ref{tafla:insert-margar-linur}.}
 \label{sql:k3d10-insert-margar-linur}
 \centering
 \sql{sql/k3d10-insert-margar-linur.sql}
 \end{example}
 
-\begin{table}
+\begin{table}[hb]
 \centering
 \caption[Eftir INSERT á tveimur línum]{Niðurstaðan eftir að sýnidæmi \ref{sql:k3d2-create-table-meira-fallegt} og \ref{sql:k3d10-insert-margar-linur} hafa verið keyrð. Tafla með tveimur dálkum og tveimur línum af gögnum.}
 \label{tafla:insert-margar-linur}
@@ -116,6 +117,7 @@ nafnFyrstaDalks&nafnAnnarsDalks\\
 \end{tabular}
 \end{table}
 
+\clearpage
 \section{Algengar gagnagerðir: Tölur og texti} % INTEGER (INT), VARCHAR, CHAR
 \label{undirkafli:gagnagerdir}
 Einni stórri spurningu um \verb|CREATE TABLE| dæmin framar í þessum kafla er enn ósvarað - hvað er þetta \verb|INTEGER|?
@@ -201,7 +203,7 @@ MySQL býður upp á aðrar gagnagerðir sem eru meira viðeigandi fyrir slíka 
 Sé ætlunin að geyma upplýsingar sem almennt eru af skynsamlegri stærð, t.d. mannanöfn, þá er hagkvæmara að nota \verb|VARCHAR| dálk.
 
 \section{Dæmi um töflur með tölum og texta}
-Ýmsar töflur má búa til með tölum og texta. Fyrsta taflan sem við sáum, tafla \ref{tafla:starfsmenn-ts}, er dæmi um slíka töflu. Lítum á nokkur fleiri dæmi.
+Ýmsar töflur má búa til með tölum og texta. Fyrsta taflan sem við sáum, tafla \ref{tafla:starfsmenn-ts}, er dæmi um slíka töflu. Lítum á fleiri dæmi.
 
 \begin{figure}
 \caption[High Score tafla]{``High score'' tafla fyrir tölvuleik. Fyrir nokkrum áratugum litu high score listar í spilakössum yfirleitt út á þennan hátt. Hver lína samanstóð af þremur upphafsstöfum og stigafjölda. Hana mætti búa til með skipuninni í sýnidæmi \ref{sql:k3d4-high-score}.}
@@ -229,6 +231,7 @@ Sé ætlunin að geyma upplýsingar sem almennt eru af skynsamlegri stærð, t.d
 \sql{sql/k3d5-matsedill.sql}
 \end{example}
 
+\newpage
 \section{Fleiri gagnagerðir}
 Þó að ýmislegt sé hægt að gera með einungis texta og heiltölum, þá býður MySQL upp á mun fleiri gagnagerðir. Lítum stuttlega á nokkrar af þeim.
 \subsection{Tugabrot - DECIMAL}
@@ -238,7 +241,7 @@ Til að búa til \verb|DECIMAL| dálk þurfum við að skilgreina tvær tölur. 
 
 \begin{table}
 \centering
-\caption[Eldsneyti]{Eldsneytisverð á bensínstöð. \emph{DECIMAL} dálkur er notaður til að halda utan um bensínverðið með nákvæmlega 1 aukastaf.}
+\caption[Eldsneyti]{Eldsneytisverð á bensínstöð. \emph{DECIMAL} dálkur er notaður til að halda utan um bensínverðið með nákvæmlega einum aukastaf.}
 \label{tafla:eldsneyti}
 \begin{tabular}{lr}
 \toprule
@@ -318,7 +321,7 @@ Sérstakt lykilorð er notað í SQL til að tákna það að ákveðið gildi s
 
 Mikilvægt er að rugla ekki saman \verb|NULL| hugtakinu og tölunni $0$. \verb|NULL| þýðir að gildi sé óþekkt eða ekki til en talan $0$ er alvöru tala. Ekki má heldur rugla því saman við strenginn \verb|'NULL'| eða strenginn \verb|''|. Fyrri strengurinn er einfaldlega orðið ``null'' geymt í gagnagrunni, sá seinni er alvöru strengur sem svo vill til að inniheldur enga stafi en er engu að síður þekkt gildi.
 
-Hægt er að setja \verb|NULL| beint inn í gagnagrunn með \verb|INSERT| skipun. Slíkt getur verið viðeigandi þegar gildin eru ekki til. Þetta er gert í sýnidæmi \ref{sql:k3d11-null-politik}.
+Hægt er að setja \verb|NULL| beint inn í gagnagrunn með \verb|INSERT| skipun. Slíkt getur verið viðeigandi þegar gildin eru ekki til. Sjá sýnidæmi \ref{sql:k3d11-null-politik}.
 
 \begin{example}
 \caption[Mannanöfn]{Nokkur nöfn nýlegra forsætisráðherra sett sundurliðuð inn í gagnagrunn, með \emph{NULL} gildum þar sem viðkomandi nafn er ekki til. T.d. er Sigmundur Davíð Gunnlaugsson ekki með millinafn, svo línan sem tilheyrir Sigmundi fær gildið \emph{NULL} í þeim dálki.}
@@ -329,6 +332,7 @@ Hægt er að setja \verb|NULL| beint inn í gagnagrunn með \verb|INSERT| skipun
 
 Hingað til höfum við alltaf talið upp alla dálka hverrar töflu þegar \verb|INSERT| skipun er notuð. Slíkt er þó ekki alltaf viðeigandi eða nauðsynlegt. Sé dálki sleppt í dálkaupptalningunni í \verb|INSERT| skipun fær línan (eða línurnar) einfaldlega gildið \verb|NULL| í þeim dálki.
 
+\subsection{NOT NULL}
 Sumir dálkar eru þess eðlis að óviðeigandi eða órökrétt er að leyfa \verb|NULL| gildi í þeim. Til þess að hindra það að \verb|NULL| gildi séu sett inn í slíkan dálk er hægt að setja á hann skorðu\footnote{e. \emph{constraint}} þess eðlis. Það má gera í \verb|CREATE TABLE| skipuninni fyrir töfluna sem dálkurinn tilheyrir með því að bæta við lykilorðunum \verb|NOT NULL| fyrir aftan skilgreininguna á gagnagerðinni. Sjá dæmi \ref{sql:k3d12-not-null}.
 
 \begin{example}
@@ -338,6 +342,7 @@ Sumir dálkar eru þess eðlis að óviðeigandi eða órökrétt er að leyfa \
 \sql{sql/k3d12-not-null.sql}
 \end{example}
 
+\newpage
 Sé annað ekki tekið fram gerir MySQL ráð fyrir því að \verb|NULL| sé leyfilegt í öllum dálkum. Hægt er að taka sérstaklega fram að \verb|NULL| sé leyfilegt með því að skrifa \verb|NULL| fyrir aftan skilgreiningu á gagnagerð dálks. Þetta hefur einnig verið gert í sýnidæmi \ref{sql:k3d12-not-null}.
 
 \newthought{Þó að NULL eigi sinn sess í gagnagrunnum }er það ekki endilega alltaf æskilegt. \verb|NULL| getur valdið vandræðum við samanburð og talningu, sjá kafla \ref{kafli:select}. Einnig getur mikill fjöldi \verb|NULL| dálka bent til þess að gagnagrunninum ætti að skipta upp í fleiri töflur, sjá kafla \ref{kafli:uppsetninggagnagrunns}.
@@ -378,6 +383,7 @@ Fyrsta aðferðin sem við lærum til að leiðrétta mistök er að eyða töfl
 
 Við sjáum fleiri leiðir til að uppfæra gagnagrunna í kafla \ref{kafli:uppfaera}. Til að byrja með látum við það að henda töflunum út í heilu lagi og búa þær til aftur duga til að komast í gegnum fyrsta hjallann.
 
+\newpage
 \section{Yfirlit}
 Í þessum kafla kynntumst við helstu atriðum sem snúa að töflugerð í MySQL.
 
