@@ -5,7 +5,7 @@ Fyrr í bókinni höfum við farið yfir fjórar grunnaðgerðir sem nauðsynleg
  \item Ná í gögn úr töflum (\verb|SELECT| skipunin, kaflar \ref{kafli:select} og \ref{kafli:gagnavinnslamargartoflur} eins og þeir leggja sig)
  \item Eyða töflum og öllu sem í þeim er (\verb|DROP| skipunin, kafli \ref{undirkafli:drop})
 \end{itemize}
-Þetta kemur okkur býsna langt. Þetta hefur hins vegar ekki leyft okkur að gera nokkrar breytingar á töflum eða þeim gögnum sem í þeim eru. Til þess þurfum við fleiri skipanir. Þær heita \verb|ALTER TABLE|, \verb|UPDATE| og \verb|DELETE|.
+Þetta kemur okkur býsna langt. Þetta hefur hins vegar ekki gert okkur kleift að gera nokkrar breytingar á töflum eða þeim gögnum sem í þeim eru. Til þess þurfum við fleiri skipanir. Þær heita \verb|ALTER TABLE|, \verb|UPDATE| og \verb|DELETE|.
 \section{DDL og DML}
 \begin{marginfigure}[-6cm]
 \caption[DDL og DML]{Yfirlit yfir þær SQL-skipanir sem við höfum séð og flokkun þeirra í DDL og DML.}
@@ -30,13 +30,13 @@ Hingað til höfum við ekki farið yfir leið til að breyta töflum. Það þ�
 Til þess að breyta töflu notum við skipunina \verb|ALTER TABLE|. Við getum m.a. notað hana til þess að bæta við og eyða dálkum. Sjá sýnidæmi \ref{sql:k7d1-alter-table}.
 
 \begin{example}
-\caption[ALTER TABLE]{Tvær \emph{ALTER TABLE} skipanir. Sú fyrri bætir heiltöludálkinum \emph{nyrDalkur} við töfluna \emph{Tafla}. Sú seinni eyðir dálkinum \emph{dalkur} úr sömu töflu.}
+\caption[ALTER TABLE]{Tvær \emph{ALTER TABLE} skipanir. Sú fyrri bætir heiltöludálkinum \emph{nyrDalkur} við töfluna \emph{Tafla}. Sú seinni eyðir dálkinum \emph{gamallaDalkur} úr sömu töflu.}
 \label{sql:k7d1-alter-table}
 \centering
 \sql{sql/k7d1-alter-table.sql}
 \end{example}
 
-\verb|ALTER TABLE| breytir einingunum sem í gagnagrunninum eru, töflunum sjálfum. Þess vegna er \verb|ALTER TABLE| er DDL-skipun.
+\verb|ALTER TABLE| breytir einingunum sem í gagnagrunninum eru, töflunum sjálfum. Þess vegna er \verb|ALTER TABLE| DDL-skipun.
 \section{Að breyta gögnum}
 Fyrir getur komið að við þurfum að breyta töflum. Mun algengari en breytingar á töflum eru þó breytingar á \emph{gögnum}.
 
@@ -67,7 +67,7 @@ Notkun \verb|UPDATE| skipunarinnar má sjá á sýnidæmum \ref{sql:k7d2-update-
 
 Gætum þess að rugla ekki saman \verb|ALTER| og \verb|UPDATE|. \verb|UPDATE| breytir einungis gögnum, ekki töflum eða öðrum gagnagrunnshlutum. Hún er DML skipun.
 \section{Að eyða gögnum}
-Þegar eyða þarf gögnum án þess að hafa áhrif á töfluna eða töflurnar sem gögnin eru í má nota \verb|DELETE| skipun. Henni svipar til \verb|DELETE| skipunarinnar, nema hvað engin \verb|SET| klausa er til staðar - enda eru gögnin fjarlægð, ekki uppfærð.
+Þegar eyða þarf gögnum án þess að hafa áhrif á töfluna eða töflurnar sem gögnin eru í má nota \verb|DELETE| skipun. Henni svipar til \verb|UPDATE| skipunarinnar, nema hvað engin \verb|SET| klausa er til staðar - enda eru gögnin fjarlægð, ekki uppfærð.
 
 \begin{example}
 \caption[DELETE]{\emph{DELETE} skipun sem eyðir áfanganum \emph{GSÖ1G2U} úr áfangatöflunni. Notuð er \emph{WHERE} klausa til að einangra áfangann líkt og í \emph{UPDATE} skipuninni.}
@@ -76,9 +76,9 @@ Gætum þess að rugla ekki saman \verb|ALTER| og \verb|UPDATE|. \verb|UPDATE| b
 \sql{sql/k7d4-delete.sql}
 \end{example}
 
-Sé \verb|WHERE| klausunni sleppt í \verb|DELETE| skipun er \emph{öllum} línum eytt. Pössum vandlega upp á að klausan sé til staðar og rétt!
+Sé \verb|WHERE| klausunni sleppt í \verb|DELETE| skipun er \emph{öllum} línum eytt. Pössum vandlega upp á að sú klausa sé til staðar og að hún sé rétt!
 \section{Viðhald gagnagrunna}
-Þegar gagnagrunnum og gögnum í þeim er breytt geta komið upp óvæntar aðstæður. Viðhald gagnagrunna er vel fyrir utan efni þessarar bókar, en við getum nefnt nokkur atriði stuttlega.
+Þegar gagnagrunnum og gögnum í þeim er breytt geta komið upp óvæntar aðstæður. Viðhald gagnagrunna er efni í bók út af fyrir sig, en við getum nefnt nokkur atriði stuttlega.
 \subsection{Aðkomulyklar og breytingar}
 MySQL passar oftast upp á\footnote{Þetta er stillingaratriði sem hægt er að slökkva á.} að ekki sé hægt að breyta eða eyða gögnum sem aðkomulykill vísar á (gögn sem eru í ``foreldrahlutverki'' í aðkomulykilssambandi) svo að sambandið skemmist.
 
@@ -88,7 +88,7 @@ Hægt er að setja upp aðkomulykla svo að slíkar breytingar séu sjálfvirkar
 \subsection{Hreyfingar} %Transactions
 Þegar margar uppfærslur eða breytingar eru framkvæmdar í röð geta komið upp villur ef ferlið er truflað áður en því er lokið.
 
-Til að tryggja það að breytingar sem eru háðar hver annarri séu framkvæmdar sem ein heild má skilgreina þær sem eina \emph{hreyfingu}\footnote{e. \emph{transaction}}. Líkja SQL-hreyfingu við það þegar fjallgöngukappar binda sig saman í blindbyl - týnist þeir eru þeir þó í það minnsta saman. Hreyfingar eru mikilvægar til að tryggja það að gögn í gagnagrunnum skemmist ekki þegar villur koma upp við breytingar.
+Til að tryggja það að breytingar sem eru háðar hver annarri séu framkvæmdar sem ein heild má skilgreina þær sem eina \emph{hreyfingu}\footnote{e. \emph{transaction}}. Líkja má SQL-hreyfingu við það þegar fjallgöngukappar binda sig saman í blindbyl; týnist þeir eru þeir þó í það minnsta saman. Hreyfingar eru mikilvægar til að tryggja það að gögn í gagnagrunnum skemmist ekki þegar villur koma upp við breytingar.
 
 \section{Yfirlit}
 Í þessum kafla fórum við yfir nokkur atriði sem tengjast því að uppfæra gagnagrunna og hinar mismunandi skipanir sem því tengjast.
@@ -102,7 +102,7 @@ Til að tryggja það að breytingar sem eru háðar hver annarri séu framkvæm
  \begin{itemize}
   \item \verb|SELECT|, \verb|INSERT|, \verb|UPDATE| og \verb|DELETE| eru DML-skipanir.
  \end{itemize}
- \item \verb|ALTER TABLE| skipunin getur bætt við og eytt dálkum taflna.
- \item \verb|UPDATE| skipunin getur breytt gögnum sem eru í töflum.
- \item \verb|DELETE| skipunin getur eytt gögnum sem eru í töflum.
+ \item \verb|ALTER TABLE| skipunin bætir við og eyðir dálkum taflna.
+ \item \verb|UPDATE| skipunin breytir gögnum sem eru í töflum.
+ \item \verb|DELETE| skipunin eyðir gögnum sem eru í töflum.
 \end{itemize}
