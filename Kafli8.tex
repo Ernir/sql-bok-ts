@@ -8,60 +8,7 @@
 \subsection{Oracle Database}
 \section{Venslalíkanið}
 \section{Að tengjast gagnagrunni með PHP}
-\label{undirkafli:php}
-Við höfum eytt miklum tíma í að skoða gagnagrunna sem sjálfstætt fyrirbrigði.
-
-Í þessum undirkafla skoðum við loksins hvernig tengja má MySQL-gagnagrunn við PHP-forritskóða.
-Slíkar tengingar eru teknar fyrir vegna þess hve algengar\footnote{Linux, Apache, PHP og MySQL mynda saman ``pakka'' sem oft er notaður sem ein heild. Pakkinn er nefndur eftir skammstöfun sinni, LAMP. Hann er í gríðarmikilli notkun.} þær eru í vefforritun.
-
-Útskýringarnar gera ráð fyrir skilningi á ýmsum atriðum:
-\begin{itemize}
- \item Hugtökum í vefsíðum - HTML, Javascript
- \item Keyrslu PHP-skripta
- \item Grundvallarmálfræði PHP
- \item IP-tölum
- \item Föllum, lykkjum og fylkjum\footnote{e. \emph{functions}, \emph{loops} og \emph{arrays}}
-\end{itemize}
 \subsection{Hlutverk gagnagrunna í vefsíðum}
-Vefsíða sem byggð er upp á hefðbundinn hátt skiptist gróflega í tvo hluta - client og server. 
-
-\begin{figure}
-\centering
-\caption{Hefðbundin uppbygging vefsíðu}
-\label{mynd:uppbyggingvefsidu}
-\color{red} Hingað kemur falleg mynd af client-server strúktúr vefsíðu.
-\end{figure}
-
-Client-hlutinn er sá hluti sem keyrður er á tölvu notandans. Í client-hluta eru HTML-tög túlkuð og Javascript-kóði keyrður, m.a.. Venjulega fer þessi vinna fram í vafra\footnote{e. \emph{browser}, t.d. Google Chrome, Firefox og Internet Explorer} notandans.
-
-Server-hlutinn er margskiptur. Viðfangsefni okkar, PHP og MySQL, tilheyra þessum hluta. Oft keyra PHP og MySQL á sömu tölvu, sem er þá einfaldlega nefnd ``serverinn''.
-
-Hlutverk gagnagrunnsins í þessari uppbyggingu er, eðli hans samkvæmt, það að halda utan um upplýsingar. PHP-hluti serversins sér um að eiga samskipti við gagnagrunninn og miðla upplýsingunum áfram til clientsins. Notandinn og tölva hans eiga aldrei bein samskipti við MySQL-serverinn.
-
 \subsection{Uppsetning tengingar með PDO}
-Gerum ráð fyrir að við séum með PHP-skriptu sem keyrir á vefþjóni. Til að tengjast MySQL-gagnagrunni þarf hún eftirfarandi upplýsingar:
-\begin{itemize}
- \item Tengingarupplýsingar: Gagnagrunnsgerðina (hjá okkur alltaf MySQL), nafn gagnagrunnsins og staðsetningu hans
- \item Notandanafn MySQL-þjónsins
- \item Lykilorð notandans.
-\end{itemize}
-Klasann \href{http://www.php.net/manual/en/class.pdo.php}{PDO}\footnote{\url{http://www.php.net/manual/en/class.pdo.php}} má svo nota til þess að mynda tenginguna sjálfa.\footnote{Fleiri leiðir eru færar til að mynda tengingar af þessum toga, til dæmis \emph{mysqli} viðbótin. Þá PHP-viðbót sem einfaldlega heitir \emph{mysql} skal þó alls ekki nota - hún er úreld.}
-
-\begin{example}[h]
-\caption{Tenging við gagnagrunn með PDO}
-\label{sql:k8d1}
-\centering
-\inputminted[frame=lines, fontfamily=courier]{php}{sql/k8d1.php}
-\end{example}
-
-Dæmi um hvernig öll skriptan gæti litið út má sjá á sýnidæmi \ref{sql:k8d1}. Skoðum það sýnidæmi nánar. 
-
-Fyrsta breytan sem er skilgreind í skriptunni (\verb|$source|) inniheldur tengingarupplýsingarnar. Þar kemur fyrst fram orðið \verb|mysql|, aðskilið frá gagnagrunnsnafninu og staðsetningu gagnagrunnins með tvípunkti. Sé ætlunin að skrifa skriptu af þessum toga til nota í eigin forriti þyrfti að skipta út \verb|testdb| fyrir nafn gagnagrunnsins sem nota skal. Sé MySQL-serverinn ekki að keyra á sömu tölvu og PHP-skriptan þarf einnig að breyta IP-tölunni í IP-tölu tölvunnar sem MySQL-serverinn keyrir á.\footnote{Server Upplýsingatækniskólans keyrir á IP-tölunni \emph{82.148.66.15}. Einnig má skrifa nafn hans, \emph{tsuts.tskoli.is}, í stað IP-tölunnar.}
-
-Næstu tvær breytur innihalda notandanafn og lykilorð fyrir MySQL-serverinn. Þetta er sama notandanafn og lykilorð og notað var til að tengjast gagnagrunninum í kafla \ref{kafli:fyrstuskrefin}.
-
-Þegar upplýsingarnar hafa verið geymdar er loks ``reynt'' að búa til tengingu með PDO. Takist það eru tengingarupplýsingarnar geymdar í  ``database handle'' breytu, nefnd \verb|$dbh| í sýnidæminu. Þessa breytu má síðan nýta til að eiga samskipti við gagnagrunninn.
-
-Takist ekki að koma tengingunni á prentar skriptan út strenginn ``Tenging mistókst'' ásamt villuskilaboðunum sem berast.
 \subsection{Að sækja gögn með PDO}
 \subsection{Að birta gögn á vefsíðu}
