@@ -1,11 +1,65 @@
 \section{Views}
 \section{Yfirlit yfir helstu gagnagrunnskerfi}
 \label{undirkafli:helstu-gagnagrunnskerfi}
+Gríðarmörg SQL-gagnagrunnskerfi eru til. Í þessum undirkafla verða þau gagnagrunnskerfi sem höfundur telur líklegast að nemendur Tækniskólans muni rekast á í náinni framtíð kynnt.
+
+Grundvallaratriði SQL, sem farið er yfir í þessari bók, hafa miðast við notkun MySQL (\ref{undirkafli:mysql}). Hugmyndirnar á bak við þessi grundvallaratriði er sú sama í öllum gagnagrunnskerfum sem byggja á SQL, en \emph{útfærslan} er ekki endilega sú sama. Við skulum ekki búast við því að sýnidæmi bókarinnar keyri óbreytt í öllum gagnagrunnskerfum.
 \subsection{MySQL}
-\subsection{SQLite}
+\label{undirkafli:mysql}
+\begin{marginfigure}
+\caption{MySQL}
+\label{mynd:mysql}
+\centering
+\includegraphics[width=\linewidth]{myndir/mysql}
+\end{marginfigure}
+MySQL\footnote{\url{http://www.mysql.com/}} er gagnagrunnskerfi í mikilli notkun, sérstaklega við vefsíðugerð.
+
+Þökk sé útbreiðslunni er tiltölulega auðvelt að finna leiðbeiningar um notkun MySQL og uppsetningu MySQL-servera. Hægt er að vinna með MySQL í gegnum fjölmörg forritunarmál. MySQL er opið\footnote{e. \emph{open source}} og ókeypis.
+
+MySQL hefur skilist að í nokkra hluta síðan það var fyrst gefið út. Upprunalegir höfundar kerfisins vinna nú við afbrigði sem heitir MariaDB\footnote{\url{https://mariadb.org/}}.
 \subsection{PostgreSQL}
+\begin{marginfigure}
+\caption{PostgreSQL}
+\label{mynd:postgresql}
+\centering
+\includegraphics[width=0.8\linewidth]{myndir/postgresql}
+\end{marginfigure}
+PostgreSQL\footnote{\url{http://www.postgresql.org/}} er gagnagrunnskerfi sem leggur mikla áherslu á að fylgja stöðlum og bjóða upp á ``rétta'' gagnavinnslu.
+
+PostgreSQL er vinsælt meðal gagnagrunnssérfræðinga, m.a. vegna þess hversu mikla stjórn gagnagrunnstjórinn hefur yfir virkni kerfisins. Kennt er á PostgreSQL gagnasafnsfræðiáföngum Tækniskólans.
+
+Fyrir utan það að styðja ``venjulegar'' SQL skipanir, þá býður PostgreSQL upp á forritunarmál, kallað PL/pgSQL (Procedural Language/PostgreSQL), til að auðvelda ýmsar aðgerðir. PL/pgSQL býður meðal annars upp á lykkjur og önnur tól sem kunnugleg eru úr forritunarmálum á borð við C\#.
+\subsection{SQLite}
+\begin{marginfigure}
+\caption{SQLite}
+\label{mynd:sqlite}
+\centering
+\includegraphics[width=\linewidth]{myndir/sqlite}
+\end{marginfigure}
+SQLite\footnote{\url{http://sqlite.org/}} er ólíkt flestum gagnagrunnskerfum að því leyti að ekki þarf að setja upp eiginlegt kerfi á tölvunni sem á að hýsa gagnagrunninn, allt forritið er ein skrá.
+
+Smæðarinnar vegna vantar SQLite ýmsa eiginleika sem stærri gagnagrunnskerfi bjóða upp á, en það hentar sérstaklega vel til að nota sem hluta af stærri kerfum. SQLite má finna ``undir húddinu'' á mörgum forritum sem þurfa að geyma gögn.
 \subsection{Microsoft SQL Server}
+\begin{marginfigure}
+\caption{SQL Server}
+\label{mynd:sql-server}
+\centering
+\includegraphics[width=\linewidth]{myndir/sql-server}
+\end{marginfigure}
+SQL Server\footnote{\url{http://www.microsoft.com/sqlserver}} er gagnagrunnskerfi gefið út af Microsoft. Það er sniðið til að passa vel til keyrslu á Windows-vélum. SQL Server er helsti keppinautur Oracle gagnagrunnskerfisins þegar kemur að stórum gagnagrunnum.
+
+Sú útgáfa af SQL sem notuð er til samskipta við SQL Server heitir Transact-SQL. T-SQL styður lykkjur og breytur.
 \subsection{Oracle Database}
+\label{undirkafli:oracle}
+\begin{marginfigure}
+\caption{Oracle Database}
+\label{mynd:oracle}
+\centering
+\includegraphics[width=\linewidth]{myndir/oracle}
+\end{marginfigure}
+Gagnagrunnskerfi Oracle\footnote{\url{http://www.oracle.com/us/products/database/overview/}} er mest notaða gagnagrunnskerfi í heimi í dag. Það hefur verið í þróun áratugum saman og knýr marga af heimsins stærstu gagnagrunnum.
+
+Útvíkkun Oracle á SQL til að styðja lykkjur og önnur algeng forritunaratriði er kallað PL/SQL (Procedural Language/Structured Query Language).
 \section{Venslalíkanið}
 \section{Að tengjast gagnagrunni með PHP}
 \label{undirkafli:php}
