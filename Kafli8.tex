@@ -1,5 +1,39 @@
 \section{Views}
 \label{undirkafli:views}
+Sú leið sem notuð er til að geyma gögn í gagnagrunnum er ekki alltaf sú leið sem hentar best til að vinna með gögnin.
+
+Við getum til dæmis skoðað Tækniskólagagnagrunninn sem við bjuggum til í kafla \ref{kafli:uppsetninggagnagrunns} (sjá mynd \ref{mynd:eer}). Sá gagnagrunnur inniheldur þó nokkuð margar töflur, oft þarf að nota \verb|JOIN| (sjá undirkafla \ref{undirkafli:join}) á töflurnar sem í honum eru til að fá upplýsingarnar sem óskað er eftir. T.d. þarf að fara í gegnum þrjár töflur til að finna hvaða kennari kennir hvaða áfanga í Tækniskólagagnagrunninnum (sjá sýnidæmi \ref{sql:k6d4-tvofalt-join}).
+
+Það að þurfa sífellt að framkvæma svipaðar, en flóknar fyrirspurnir til að ná í gögn getur verið afskaplega þreytandi. Einfaldara væri ef við værum alltaf með akkúrat þær upplýsingar sem við þurfum, á því sniði sem við þurfum.
+
+\begin{figure}
+\caption[View]{Gagnagrunnur með ``Views''}
+\label{mynd:view}
+\centering
+\includegraphics[width=\linewidth]{myndir/views}
+\end{figure}
+
+Til að auðvelda líf okkar í þessum aðstæðum getum við búið til svokölluð \emph{View}. View er nokkurs konar ``sýndartafla'' sem skilgreint er af niðurstöðum fyrirspurnar.
+
+Til að búa til View notum við DDL-skipunina\footnote{sjá DDL og DML í kafla \ref{kafli:uppfaera}} \verb|CREATE VIEW|. Einföld \verb|CREATE VIEW| skipun er byggð upp á eftirfarandi hátt: Fyrst kemur nafn skipunarinnar (\verb|CREATE VIEW|), svo nafnið sem við ætlum að gefa view-inu, svo lykilorðið \verb|AS| og að lokum fyrirspurnin (\verb|SELECT|) sem view-ið á að byggjast á. Sjá sýnidæmi \ref{sql:k8d1-create-view}
+
+\begin{example}
+\caption[View]{\emph{CREATE VIEW} skipun. Þessi skipun býr til sýndartöflu sem einfaldar aðgang að upplýsingum um hvaða kennari kennir hvaða áfanga.}
+\label{sql:k8d1-create-view}
+\centering
+\sql{sql/k8d1-create-view.sql}
+\end{example}
+
+Þegar view-ið hefur verið búið til má senda á það fyrirspurnir eins og hverja aðra töflu í gagnagrunninum. Sjá sýnidæmi \ref{sql:k8d2-select-from-view}.
+
+\begin{example}
+\caption[SELECT úr view]{Kennarar sem kenna \emph{FOR1A3U} fundnir með því að senda fyrirspurn á view-ið sem búið var til í sýnidæmi \ref{sql:k8d1-create-view}. }
+\label{sql:k8d2-select-from-view}
+\centering
+\sql{sql/k8d2-select-from-view.sql}
+\end{example}
+
+View hafa nokkra kosti aðra en að minnka flækjustig algengra aðgerða. T.d. er hægt að nota view til að koma (e.t.v. tímabundið) í stað töflu sem hefur verið breytt, svo niðurstöður fyrirspurna sem hafa verið skrifaðar breytist ekki þó að gagnagrunnurinn hafi verið uppfærður. Einnig er hægt að nota view til að stýra aðgangi að gagnagrunnum. T.d. er hægt að gefa notanda gagnagrunns aðgang að töflu sem inniheldur trúnaðarupplýsingar án þess að notandinn komist í þær upplýsingar með því að búa til view á töfluna sem inniheldur þær upplýsingar sem notandinn þarf, og gefa notandanum svo aðgang að view-inu en fela töfluna.
 \section{Yfirlit yfir helstu gagnagrunnskerfi}
 \label{undirkafli:helstu-gagnagrunnskerfi}
 Gríðarmörg SQL-gagnagrunnskerfi eru til. Í þessum undirkafla verða þau gagnagrunnskerfi sem höfundur telur líklegast að nemendur Tækniskólans muni rekast á í náinni framtíð kynnt.
@@ -159,7 +193,7 @@ Klasann \href{http://www.php.net/manual/en/class.pdo.php}{PDO}\footnote{\url{htt
 
 Dæmi um hvernig öll skriptan gæti litið út má sjá á sýnidæmi \ref{sql:k8d1}. Skoðum það sýnidæmi nánar. 
 
-Fyrsta breytan sem er skilgreind í skriptunni (\verb|$source|) inniheldur tengingarupplýsingarnar. Þar kemur fyrst fram orðið \verb|mysql|, aðskilið frá gagnagrunnsnafninu og staðsetningu gagnagrunnins með tvípunkti. Sé ætlunin að skrifa skriptu af þessum toga til nota í eigin forriti þyrfti að skipta út \verb|testdb| fyrir nafn gagnagrunnsins sem nota skal. Sé MySQL-serverinn ekki að keyra á sömu tölvu og PHP-skriptan þarf einnig að breyta IP-tölunni í IP-tölu tölvunnar sem MySQL-serverinn keyrir á.\footnote{Server Upplýsingatækniskólans keyrir á IP-tölunni \emph{82.148.66.15}. Einnig má skrifa nafn hans, \emph{tsuts.tskoli.is}, í stað IP-tölunnar.}
+Fyrsta breytan sem er skilgreind í skriptunni (\verb|$source|) inniheldur tengingarupplýsingarnar. Þar kemur fyrst fram orðið \verb|mysql|, aðskilið frá gagnagrunnsnafninu og staðsetningu gagnagrunnins með tvípunkti. Sé ætlunin að skrifa skriptu af þessum toga til nota í eigin forriti þyrfti að skipta út \verb|testdb| fyrir nafn gagnagrunnsins sem nota skal. Sé MySQL-serverinn ekki að keyra á sömu tölvu og PHP-skriptan þarf einnig að breyta IP-tölunni í IP-tölu tölvunnar sem MySQL-serverinn keyrir á.
 
 Næstu tvær breytur innihalda notandanafn og lykilorð fyrir MySQL-serverinn. Þetta er sama notandanafn og lykilorð og notað var til að tengjast gagnagrunninum í kafla \ref{kafli:fyrstuskrefin}.
 
