@@ -162,13 +162,6 @@ Slíkar tengingar eru teknar fyrir vegna þess hve algengar\footnote{Linux, Apac
 \subsection{Hlutverk gagnagrunna í vefsíðum}
 Vefsíða sem byggð er upp á hefðbundinn hátt skiptist gróflega í tvo hluta - client og server. 
 
-\begin{figure}
-\centering
-\caption{Hefðbundin uppbygging vefsíðu}
-\label{mynd:uppbyggingvefsidu}
-\color{red} Hingað kemur falleg mynd af client-server strúktúr vefsíðu.
-\end{figure}
-
 Client-hlutinn er sá hluti sem keyrður er á tölvu notandans. Í client-hluta eru HTML-tög túlkuð og Javascript-kóði keyrður, m.a.. Venjulega fer þessi vinna fram í vafra\footnote{e. \emph{browser}, t.d. Google Chrome, Firefox og Internet Explorer} notandans.
 
 Server-hlutinn er margskiptur. Viðfangsefni okkar, PHP og MySQL, tilheyra þessum hluta. Oft keyra PHP og MySQL á sömu tölvu, sem er þá einfaldlega nefnd ``serverinn''.
@@ -176,7 +169,7 @@ Server-hlutinn er margskiptur. Viðfangsefni okkar, PHP og MySQL, tilheyra þess
 Hlutverk gagnagrunnsins í þessari uppbyggingu er, eðli hans samkvæmt, það að halda utan um upplýsingar. PHP-hluti serversins sér um að eiga samskipti við gagnagrunninn og miðla upplýsingunum áfram til clientsins. Notandinn og tölva hans eiga aldrei bein samskipti við MySQL-serverinn.
 
 \subsection{Uppsetning tengingar með PDO}
-Gerum ráð fyrir að við séum með PHP-skriptu sem keyrir á vefþjóni. Til að tengjast MySQL-gagnagrunni þarf hún eftirfarandi upplýsingar:
+Gerum ráð fyrir að við séum með PHP-skriptu sem keyrir á server. Til að tengjast MySQL-gagnagrunni þarf hún eftirfarandi upplýsingar:
 \begin{itemize}
  \item Tengingarupplýsingar: Gagnagrunnsgerðina (hjá okkur alltaf MySQL), nafn gagnagrunnsins og staðsetningu hans
  \item Notandanafn MySQL-þjónsins
@@ -184,14 +177,14 @@ Gerum ráð fyrir að við séum með PHP-skriptu sem keyrir á vefþjóni. Til 
 \end{itemize}
 Klasann \href{http://www.php.net/manual/en/class.pdo.php}{PDO}\footnote{\url{http://www.php.net/manual/en/class.pdo.php}} má svo nota til þess að mynda tenginguna sjálfa.\footnote{Fleiri leiðir eru færar til að mynda tengingar af þessum toga, til dæmis \emph{mysqli} viðbótin. Þá PHP-viðbót sem einfaldlega heitir \emph{mysql} skal þó alls ekki nota - hún er úreld.}
 
-\begin{example}[h]
-\caption{Tenging við gagnagrunn með PDO}
-\label{sql:k8d1}
+\begin{example}
+\caption[Tenging við gagnagrunn með PDO]{Tenging við gagnagrunn með PDO. Þessi kóði er settur í skrá sem heitir \emph{dbcon.php}.}
+\label{php:dbcon}
 \centering
-\inputminted[frame=lines, fontfamily=courier]{php}{php/k8d1.php}
+\inputminted[frame=lines, fontfamily=courier]{php}{php/dbcon.php}
 \end{example}
 
-Dæmi um hvernig öll skriptan gæti litið út má sjá á sýnidæmi \ref{sql:k8d1}. Skoðum það sýnidæmi nánar. 
+Dæmi um hvernig öll skriptan gæti litið út má sjá á sýnidæmi \ref{php:dbcon}. Skoðum það sýnidæmi nánar.
 
 Fyrsta breytan sem er skilgreind í skriptunni (\verb|$source|) inniheldur tengingarupplýsingarnar. Þar kemur fyrst fram orðið \verb|mysql|, aðskilið frá gagnagrunnsnafninu og staðsetningu gagnagrunnins með tvípunkti. Sé ætlunin að skrifa skriptu af þessum toga til nota í eigin forriti þyrfti að skipta út \verb|testdb| fyrir nafn gagnagrunnsins sem nota skal. Sé MySQL-serverinn ekki að keyra á sömu tölvu og PHP-skriptan þarf einnig að breyta IP-tölunni í IP-tölu tölvunnar sem MySQL-serverinn keyrir á.
 
@@ -200,5 +193,80 @@ Næstu tvær breytur innihalda notandanafn og lykilorð fyrir MySQL-serverinn. �
 Þegar upplýsingarnar hafa verið geymdar er loks ``reynt'' að búa til tengingu með PDO. Takist það eru tengingarupplýsingarnar geymdar í  ``database handle'' breytu, nefnd \verb|$dbh| í sýnidæminu. Þessa breytu má síðan nýta til að eiga samskipti við gagnagrunninn.
 
 Takist ekki að koma tengingunni á prentar skriptan út strenginn ``Tenging mistókst'' ásamt villuskilaboðunum sem berast.
+
 \subsection{Að sækja gögn með PDO}
-\subsection{Að birta gögn á vefsíðu}
+Þegar tengingin er komin upp er hægt að nota hana til þess að ná í gögn úr viðkomandi gagnagrunni.
+
+Gefum okkur að highscore-taflan í sýnidæmi \ref{sql:k3d4-high-score} sé til staðar í gagnagrunninum.\footnote{Ef hún er ekki til staðar má keyra sýnidæmið til að ganga úr skugga um það.} Rifjum upp að þetta er einföld tafla með tveimur dálkum: Annar dálkurinn heitir ``player'' og inniheldur þriggja stafa skammstöfun á nafni spilara, hinn dálkurinn heitir ``score'' og inniheldur stigafjölda. Athugum hvernig við getum sótt þessi gögn úr gagnagrunninum.
+
+Byrjum á að búa til php-breytu sem inniheldur fyrirspurnina sem við viljum framkvæma. Það má gera á eftirfarandi hátt:
+
+\verb|  $sql = 'SELECT player, score FROM HighScores';|
+
+Breytan \verb|$sql| inniheldur þá streng sem skilgreinir fyrirspurnina.
+
+Næst þarf að \emph{keyra} fyrirspurnina. Það má gera með ``query'' fallinu sem skilgreint er af PDO. Notum það svona:
+
+\verb|  $result = $dbh->query($sql);|
+
+Breytan \verb|$result| inniheldur þá niðurstöðu fyrirspurnarinnar.
+
+Niðurstöðurnar koma þó ekki á mjög vingjarnlegu sniði frá PDO-klasanum. Til að vinna með niðurstöðurnar er best að setja þær í fylki\footnote{e. \emph{array}}. Til þess getum við notað fallið ``fetch''.
+
+Fetch ``les'' eina línu af niðurstöðunum í \verb|$result| í hvert skipti sem það er gert. Við getum því notað lykkju til að ná í allar niðurstöðurnar:
+
+\begin{verbatim}
+  while ($row = $result->fetch()) {
+    $highscores[] = array($row['player'],$row['score']);
+  }
+\end{verbatim}
+
+Fylkið \verb|$highscores| mun innihalda allar upplýsingarnar úr dálkunum ``player'' og ``score'' þegar keyrslu lykkjunnar lýkur.
+
+Að lokum mun php-skriptan okkar líta út eitthvað á borð við það sem sjá má í sýnidæmi \ref{php:query}.
+
+\begin{example}
+\caption[Upplýsingar sóttar úr gagnagrunni með PHP]{PDO notað til að sækja upplýsingar úr gagnagrunni og geyma þær í fylkinu \emph{\$highscore}. Athugum að breytan \emph{\$dbh} þarf að vera skilgreind þegar þessi skripta er keyrð, sjá undirkafla \ref{undirkafli:html+php}. Vistum skriptuna í skrá sem við köllum \emph{query.php}.}
+\label{php:query}
+\centering
+\inputminted[frame=lines, fontfamily=courier]{php}{php/query.php}
+\end{example}
+
+\subsection{Að setja saman HTML og PHP}
+\label{undirkafli:html+php}
+Nú höfum við séð hvernig tengjast má gagnagrunni með PHP (sýnidæmi \ref{php:dbcon}) og hvernig sækja má upplýsingar í gegnum tenginguna (sýnidæmi \ref{php:query}).
+
+Búum nú til vefsíðu sem notar þessar skriptur, \verb|dbcon.php| og \verb|query.php|. Gerum það með einni skrá í viðbót - köllum hana \verb|index.html.php|. Við veljum nafnið \emph{index} af því það er það nafn sem flestir vefþjónar leita að sem upphafssíðu. Við gefum því viðaukann \verb|.html| af því að þessi skrá mun innihalda HTML-tög að miklum meirihluta. Við endum nafnið á \verb|.php| af því að þetta verður eftir allt saman PHP-skripta sem við þurfum að keyra.
+
+\begin{example}
+\caption[HTML-beinagrind]{HTML beinagrind. Þetta er tóm síða.}
+\label{php:empty-index}
+\centering
+\inputminted[frame=lines, fontfamily=courier]{html}{php/empty-index.html}
+\end{example}
+
+Byrjum á að búa til ``tóma'' HTML-skrá sem vafri getur opnað. Hún getur litið út eins og sýnidæmi \ref{php:empty-index}.
+
+Bætum nú PHP-kóða við tómu skrána svo úr verði sýnidæmi \ref{php:index}. 
+
+Byrjum á að láta \verb|index.html.php| innihalda skripturnar sem við bjuggum til með \emph{include} skipunum.
+
+Þegar þessum skriptum hefur verið bætt við veit \verb|index.html.php| af öllum breytum sem skilgreindar voru í skriptunum, þar á meðal fylkinu sem við geymdum niðurstöður fyrirspurnarinnar í, \verb|$highscores|. 
+
+Nú getum við búið til HTML-töflu. Fyrst skrifum við þá hluta sem ekki eru háðir gögnunum í gagnagrunninum beint, síðan getum við ítrað\footnote{e. \emph{iterated}} í gegnum \verb|$highscores| fylkið til að búa til raðir HTML-töflunnar. Niðurstaðan er sýnidæmi \ref{php:index}.
+
+\begin{example}
+\caption[PHP + HTML]{PHP og HTML notað saman til að mynda HTML-töflu sem inniheldur upplýsingarnar úr ``HighScores'' SQL-töflunni.}
+\label{php:index}
+\centering
+\inputminted[frame=lines, fontfamily=courier]{html}{php/index.html.php}
+\end{example}
+
+Að lokum fáum við ``heimasíðu'' sem sýnir upplýsingarnar. Sú heimasíða gæti e.t.v. litið betur út, en hún gerir það sem hún á að gera - hún er beintengd gagnagrunninum og uppfærist þegar honum er breytt. Svona aðferðir liggja á bakvið mjög margar heimasíður.
+
+\begin{figure}
+\caption[Heimasíðan]{Highscore ``heimasíðan'', sem fær gögn sín úr gagnagrunni.}
+\label{mynd:index}
+\centering
+\includegraphics[width=\linewidth]{myndir/index}
+\end{figure}
