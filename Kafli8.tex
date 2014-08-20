@@ -1,14 +1,276 @@
 \section{Views}
+\label{undirkafli:views}
+Sú leið sem notuð er til að geyma gögn í gagnagrunnum er ekki alltaf sú leið sem hentar best til að vinna með gögnin.
+
+Við getum til dæmis skoðað Tækniskólagagnagrunninn sem við bjuggum til í kafla \ref{kafli:uppsetninggagnagrunns} (sjá mynd \ref{mynd:eer}). Sá gagnagrunnur inniheldur þó nokkuð margar töflur, oft þarf að nota \verb|JOIN| (sjá undirkafla \ref{undirkafli:join}) á töflurnar sem í honum eru til að fá upplýsingarnar sem óskað er eftir. T.d. þarf að fara í gegnum þrjár töflur til að finna hvaða kennari kennir hvaða áfanga í Tækniskólagagnagrunninnum (sjá sýnidæmi \ref{sql:k6d4-tvofalt-join}).
+
+Það að þurfa sífellt að framkvæma svipaðar, en flóknar fyrirspurnir til að ná í gögn getur verið afskaplega þreytandi. Einfaldara væri ef við værum alltaf með akkúrat þær upplýsingar sem við þurfum, á því sniði sem við þurfum.
+
+\begin{figure}
+\caption[View]{Gagnagrunnur með ``Views''}
+\label{mynd:view}
+\centering
+\includegraphics[width=\linewidth]{myndir/views}
+\end{figure}
+
+Til að auðvelda líf okkar í þessum aðstæðum getum við búið til svokölluð \emph{View}. View er nokkurs konar ``sýndartafla'' sem skilgreint er af niðurstöðum fyrirspurnar.
+
+Til að búa til View notum við DDL-skipunina\footnote{sjá DDL og DML í kafla \ref{kafli:uppfaera}} \verb|CREATE VIEW|. Einföld \verb|CREATE VIEW| skipun er byggð upp á eftirfarandi hátt: Fyrst kemur nafn skipunarinnar (\verb|CREATE VIEW|), svo nafnið sem við ætlum að gefa view-inu, svo lykilorðið \verb|AS| og að lokum fyrirspurnin (\verb|SELECT|) sem view-ið á að byggjast á. Sjá sýnidæmi \ref{sql:k8d1-create-view}
+
+\begin{example}
+\caption[View]{\emph{CREATE VIEW} skipun. Þessi skipun býr til sýndartöflu sem einfaldar aðgang að upplýsingum um hvaða kennari kennir hvaða áfanga.}
+\label{sql:k8d1-create-view}
+\centering
+\sql{sql/k8d1-create-view.sql}
+\end{example}
+
+Þegar view-ið hefur verið búið til má senda á það fyrirspurnir eins og hverja aðra töflu í gagnagrunninum. Sjá sýnidæmi \ref{sql:k8d2-select-from-view}.
+
+\begin{example}
+\caption[SELECT úr view]{Kennarar sem kenna \emph{FOR1A3U} fundnir með því að senda fyrirspurn á view-ið sem búið var til í sýnidæmi \ref{sql:k8d1-create-view}. }
+\label{sql:k8d2-select-from-view}
+\centering
+\sql{sql/k8d2-select-from-view.sql}
+\end{example}
+
+View hafa nokkra kosti aðra en að minnka flækjustig algengra aðgerða. T.d. er hægt að nota view til að koma (e.t.v. tímabundið) í stað töflu sem hefur verið breytt, svo niðurstöður fyrirspurna sem hafa verið skrifaðar breytist ekki þó að gagnagrunnurinn hafi verið uppfærður. Einnig er hægt að nota view til að stýra aðgangi að gagnagrunnum. T.d. er hægt að gefa notanda gagnagrunns aðgang að töflu sem inniheldur trúnaðarupplýsingar án þess að notandinn komist í þær upplýsingar með því að búa til view á töfluna sem inniheldur þær upplýsingar sem notandinn þarf, og gefa notandanum svo aðgang að view-inu en fela töfluna.
 \section{Yfirlit yfir helstu gagnagrunnskerfi}
 \label{undirkafli:helstu-gagnagrunnskerfi}
+Gríðarmörg SQL-gagnagrunnskerfi eru til. Í þessum undirkafla verða þau gagnagrunnskerfi sem höfundur telur líklegast að nemendur Tækniskólans muni rekast á í náinni framtíð kynnt.
+
+Grundvallaratriði SQL, sem farið er yfir í þessari bók, hafa miðast við notkun MySQL (\ref{undirkafli:mysql}). Hugmyndirnar á bak við þessi grundvallaratriði er sú sama í öllum gagnagrunnskerfum sem byggja á SQL, en \emph{útfærslan} er ekki endilega sú sama. Við skulum ekki búast við því að sýnidæmi bókarinnar keyri óbreytt í öllum gagnagrunnskerfum.
 \subsection{MySQL}
-\subsection{SQLite}
+\label{undirkafli:mysql}
+\begin{marginfigure}
+\caption{MySQL}
+\label{mynd:mysql}
+\centering
+\includegraphics[width=\linewidth]{myndir/mysql}
+\end{marginfigure}
+MySQL\footnote{\url{http://www.mysql.com/}} er gagnagrunnskerfi í mikilli notkun, sérstaklega við vefsíðugerð.
+
+Þökk sé útbreiðslunni er tiltölulega auðvelt að finna leiðbeiningar um notkun MySQL og uppsetningu MySQL-servera. Hægt er að vinna með MySQL í gegnum fjölmörg forritunarmál. MySQL er opið\footnote{e. \emph{open source}} og ókeypis.
+
+MySQL hefur skilist að í nokkra hluta síðan það var fyrst gefið út. Upprunalegir höfundar kerfisins vinna nú við afbrigði sem heitir MariaDB\footnote{\url{https://mariadb.org/}}.
 \subsection{PostgreSQL}
+\begin{marginfigure}
+\caption{PostgreSQL}
+\label{mynd:postgresql}
+\centering
+\includegraphics[width=0.8\linewidth]{myndir/postgresql}
+\end{marginfigure}
+PostgreSQL\footnote{\url{http://www.postgresql.org/}} er gagnagrunnskerfi sem leggur mikla áherslu á að fylgja stöðlum og bjóða upp á ``rétta'' gagnavinnslu.
+
+PostgreSQL er vinsælt meðal gagnagrunnssérfræðinga, m.a. vegna þess hversu mikla stjórn gagnagrunnstjórinn hefur yfir virkni kerfisins. Kennt er á PostgreSQL gagnasafnsfræðiáföngum Tækniskólans.
+
+Fyrir utan það að styðja ``venjulegar'' SQL skipanir, þá býður PostgreSQL upp á forritunarmál, kallað PL/pgSQL (Procedural Language/PostgreSQL), til að auðvelda ýmsar aðgerðir. PL/pgSQL býður meðal annars upp á lykkjur og önnur tól sem kunnugleg eru úr forritunarmálum á borð við C\#.
+
+\newpage
+\subsection{SQLite}
+\begin{marginfigure}
+\caption{SQLite}
+\label{mynd:sqlite}
+\centering
+\includegraphics[width=\linewidth]{myndir/sqlite}
+\end{marginfigure}
+SQLite\footnote{\url{http://sqlite.org/}} er ólíkt flestum gagnagrunnskerfum að því leyti að ekki þarf að setja upp eiginlegt kerfi á tölvunni sem á að hýsa gagnagrunninn, allt forritið er ein skrá.
+
+Smæðarinnar vegna vantar SQLite ýmsa eiginleika sem stærri gagnagrunnskerfi bjóða upp á, en það hentar sérstaklega vel til að nota sem hluta af stærri kerfum. SQLite má finna ``undir húddinu'' á mörgum forritum sem þurfa að geyma gögn.
 \subsection{Microsoft SQL Server}
+\begin{marginfigure}
+\caption{SQL Server}
+\label{mynd:sql-server}
+\centering
+\includegraphics[width=\linewidth]{myndir/sql-server}
+\end{marginfigure}
+SQL Server\footnote{\url{http://www.microsoft.com/sqlserver}} er gagnagrunnskerfi gefið út af Microsoft. Það er sniðið til að passa vel til keyrslu á Windows-vélum. SQL Server er helsti keppinautur Oracle gagnagrunnskerfisins þegar kemur að stórum gagnagrunnum.
+
+Sú útgáfa af SQL sem notuð er til samskipta við SQL Server heitir Transact-SQL. T-SQL styður lykkjur og breytur.
 \subsection{Oracle Database}
+\label{undirkafli:oracle}
+\begin{marginfigure}
+\caption{Oracle Database}
+\label{mynd:oracle}
+\centering
+\includegraphics[width=\linewidth]{myndir/oracle}
+\end{marginfigure}
+Gagnagrunnskerfi Oracle\footnote{\url{http://www.oracle.com/us/products/database/overview/}} er mest notaða gagnagrunnskerfi í heimi í dag. Það hefur verið í þróun áratugum saman og knýr marga af heimsins stærstu gagnagrunnum.
+
+Útvíkkun Oracle á SQL til að styðja lykkjur og önnur algeng forritunaratriði er kallað PL/SQL (Procedural Language/Structured Query Language).
 \section{Venslalíkanið}
+SQL byggir á föstum stærðfræðilegum grunni. Sá grunnur er kallaður \emph{venslalíkanið}\footnote{e. \emph{Relational model}}. Því var fyrst lýst af tölvunarfræðingnum Edgar Codd um 1970\footnote{Aðalgreinin sem lýsir því heitir ``\emph{A Relational Model of Data for Large Shared Data Banks}''. Áhugasamir geta fundið hana á netinu.}.
+
+Venslalíkanið lýsir því hvernig líta má á gögn sem stök í mengjum og hvernig nota má þekktar\footnote{Þær eru í það minnsta þekktar flestum stærðfræðingum.} stærðfræðiaðgerðir til að nálgast þær. 
+
+SQL er \emph{útfærsla} á venslalíkaninu. Uppbygging þess leiðir til þess að þegar við tölum um SQL notum við sjaldnast sama orðaforða og er notaður í stærðfræðinni sem það byggir á. Engu að síður er skilningur á venslalíkaninu og þeim orðaforða sem þar kemur við sögu mjög gagnlegur öllum sem nota SQL.
+
+Ítarleg umfjöllun um venslalíkanið er viðfangsefni fyrir háskólanámskeið, ekki þessa bók. Engu að síður skulum við skoða mikilvægasta hugtak líkansins, \emph{vensl}, og hvernig það passar við það sem við höfum séð af SQL í þessari bók.
+\subsection{Mengi}
+Áður en lengra er haldið skulum við vera viss um að við höfum hugmynd um hvað \emph{mengi}\footnote{e. \emph{set}} er. Þetta eru sömu mengin og við höfum kynnst í grunnskólastærðfræði.
+
+Mengi er safn/hópur af fyrirbærum. ``Fyrirbærin'' í mengi geta verið nær hvað sem er, t.d. tölur, orð, eða önnur mengi. ``Heiltölur'', ``Íslendingar'' og ``Rauðir hlutir'' eru allt mengi.
+
+Tvö atriði einkenna mengi:
+\begin{itemize}
+ \item Röð hluta í mengi skiptir ekki máli.
+ \item Aldrei er um endurtekningar að ræða í mengi. Hlutur er annaðhvort í mengi eða hann er það ekki.
+\end{itemize}
+Þegar hlutur er í mengi er talað um að hluturinn sé \emph{stak} í menginu.
+
+Mengjum er oft gefið nafn sem er einn stór bókstafur. T.d. er algengt að kalla mengi heiltalna $N$. 
+
+Þetta gerir okkur mögulegt að kynnast fleiri hugtökum. Skoðum tvö mengi, $A$ og $B$. Það skiptir okkur ekki máli hvað er í mengjunum.
+\begin{itemize}
+ \item Séu öll stök í mengi $A$ líka stök í mengi $B$ er sagt að $A$ sé \emph{hlutmengi} $B$.
+ \item Séu einhver stök í mengi $A$ sem líka eru í mengi $B$ er sagt að þau stök séu í \emph{sniðmengi} $A$ og $B$.
+ \item Mengi sem inniheldur öll stök úr mengjum $A$ og $B$ er kallað \emph{sammengi} $A$ og $B$.
+\end{itemize}
+
+
+\subsection{Vensl}
+Við skulum sjá fyrir okkur mörg mengi af upplýsingum. Köllum þau öll $S$ og gefum þeim númer, svo við getum kallað þau $S_1, S_2$ og svo framvegis.
+
+Skoðum nú annað mengi og köllum það $R$. Mengið $R$ er \emph{vensl\footnote{e. \emph{relation}} á mengin $S$} ef $R$ er mengi af \emph{línum}\footnote{e. \emph{tuples}} þar sem að fyrsta gildið í línunni er úr $S_1$, annað stakið úr $S_2$, og svo framvegis.
+
+Til að gera venslin nothæf getum við ákveðið að hvert mengi $S$ standi fyrir einhvern ákveðinn \emph{eiginleika}\footnote{e. \emph{attribute}} sem gögn geta haft. Þá stendur hver lína í venslunum fyrir einn ``hlut'' sem einkennist af þeim eiginleikum sem við skilgreindum.
+
+Hvernig tengist þetta þeim hugtökum sem við höfum lært úr SQL?
+
+\begin{itemize}
+ \item Lína í SQL-töflu samsvarar (e. \emph{tuple}) í venslum.
+ \item Dálkur í SQL-töflu samsvarar eiginleika (e. \emph{attribute}) í venslum.
+ \item SQL-tafla samsvarar að mestu leyti venslum.\footnote{Vensl og SQL-töflur greinast að á nokkrum atriðum. T.d. eru vensl alvöru mengi, sem ekki geta verið með endurtekningar. SQL-tafla sem ekki er með aðallykil getur innihaldið endurtekin gildi.}
+ \item Niðurstöður fyrirspurna og view-a (sjá undirkafla \ref{undirkafli:views}) samsvara líka að mestu leiti venslum.
+\end{itemize}
+
+Það að skilja venslalíkanið gerir sum atriði sem viðkoma SQL skýrari, t.d. samband view-a og taflna. Einnig getum við nú séð að þegar rætt er um venslaðar töflur er átt við töflur sem hægt er að búa til vensl á.
+
+
 \section{Að tengjast gagnagrunni með PHP}
+\label{undirkafli:php}
+Við höfum eytt miklum tíma í að skoða gagnagrunna sem sjálfstætt fyrirbrigði.
+
+Í þessum undirkafla skoðum við loksins hvernig tengja má MySQL-gagnagrunn við PHP-forritskóða.
+Slíkar tengingar eru teknar fyrir vegna þess hve algengar\footnote{Linux, Apache, PHP og MySQL mynda saman ``pakka'' sem oft er notaður sem ein heild. Pakkinn er nefndur eftir skammstöfun sinni, LAMP. Hann er í gríðarmikilli notkun.} þær eru í vefforritun.
+
+Útskýringarnar gera ráð fyrir skilningi á ýmsum atriðum:
+\begin{itemize}
+ \item Hugtökum í vefsíðum - HTML, Javascript
+ \item Keyrslu PHP-skripta
+ \item Grundvallarmálfræði PHP
+ \item IP-tölum
+ \item Föllum, lykkjum og fylkjum\footnote{e. \emph{functions}, \emph{loops} og \emph{arrays}}
+\end{itemize}
 \subsection{Hlutverk gagnagrunna í vefsíðum}
+Vefsíða sem byggð er upp á hefðbundinn hátt skiptist gróflega í tvo hluta - client og server. 
+
+Client-hlutinn er sá hluti sem keyrður er á tölvu notandans. Í client-hluta eru HTML-tög túlkuð og Javascript-kóði keyrður, m.a.. Venjulega fer þessi vinna fram í vafra\footnote{e. \emph{browser}, t.d. Google Chrome, Firefox og Internet Explorer} notandans.
+
+Server-hlutinn er margskiptur. Viðfangsefni okkar, PHP og MySQL, tilheyra þessum hluta. Oft keyra PHP og MySQL á sömu tölvu, sem er þá einfaldlega nefnd ``serverinn''.
+
+Hlutverk gagnagrunnsins í þessari uppbyggingu er, eðli hans samkvæmt, það að halda utan um upplýsingar. PHP-hluti serversins sér um að eiga samskipti við gagnagrunninn og miðla upplýsingunum áfram til clientsins. Notandinn og tölva hans eiga aldrei bein samskipti við MySQL-serverinn.
+
 \subsection{Uppsetning tengingar með PDO}
+Gerum ráð fyrir að við séum með PHP-skriptu sem keyrir á server. Til að tengjast MySQL-gagnagrunni þarf hún eftirfarandi upplýsingar:
+\begin{itemize}
+ \item Tengingarupplýsingar: Gagnagrunnsgerðina (hjá okkur alltaf MySQL), nafn gagnagrunnsins og staðsetningu hans
+ \item Notandanafn MySQL-þjónsins
+ \item Lykilorð notandans.
+\end{itemize}
+Klasann \href{http://www.php.net/manual/en/class.pdo.php}{PDO}\marginnote[-1cm]{\url{http://www.php.net/manual/en/class.pdo.php}} má svo nota til þess að mynda tenginguna sjálfa.\footnote{Fleiri leiðir eru færar til að mynda tengingar af þessum toga, til dæmis \emph{mysqli} viðbótin. Þá PHP-viðbót sem einfaldlega heitir \emph{mysql} skal þó alls ekki nota - hún er úreld.}
+
+\begin{example}
+\caption[Tenging við gagnagrunn með PDO][1cm]{Tenging við gagnagrunn með PDO. Þessi kóði er settur í skrá sem heitir \emph{dbcon.php}.}
+\label{php:dbcon}
+\centering
+\inputminted[frame=lines, fontfamily=courier]{php}{php/dbcon.php}
+\end{example}
+
+Dæmi um hvernig öll skriptan gæti litið út má sjá á sýnidæmi \ref{php:dbcon}. Skoðum það sýnidæmi nánar.
+
+Fyrsta breytan sem er skilgreind í skriptunni (\verb|$source|) inniheldur tengingarupplýsingarnar. Þar kemur fyrst fram orðið \verb|mysql|, aðskilið frá gagnagrunnsnafninu og staðsetningu gagnagrunnins með tvípunkti. Sé ætlunin að skrifa skriptu af þessum toga til nota í eigin forriti þyrfti að skipta út \verb|testdb| fyrir nafn gagnagrunnsins sem nota skal. Sé MySQL-serverinn ekki að keyra á sömu tölvu og PHP-skriptan þarf einnig að breyta IP-tölunni í IP-tölu tölvunnar sem MySQL-serverinn keyrir á.
+
+Næstu tvær breytur innihalda notandanafn og lykilorð fyrir MySQL-serverinn. Þetta er sama notandanafn og lykilorð og notað var til að tengjast gagnagrunninum í kafla \ref{kafli:fyrstuskrefin}.
+
+Þegar upplýsingarnar hafa verið geymdar er loks ``reynt'' að búa til tengingu með PDO. Takist það eru tengingarupplýsingarnar geymdar í  ``database handle'' breytu, nefnd \verb|$dbh| í sýnidæminu. Þessa breytu má síðan nýta til að eiga samskipti við gagnagrunninn.
+
+Takist ekki að koma tengingunni á prentar skriptan út strenginn ``Tenging mistókst'' ásamt villuskilaboðunum sem berast.
+
 \subsection{Að sækja gögn með PDO}
-\subsection{Að birta gögn á vefsíðu}
+Þegar tengingin er komin upp er hægt að nota hana til þess að ná í gögn úr viðkomandi gagnagrunni.
+
+Gefum okkur að highscore-taflan í sýnidæmi \ref{sql:k3d4-high-score} sé til staðar í gagnagrunninum.\footnote{Ef hún er ekki til staðar má keyra sýnidæmið til að setja töfluna upp.} Rifjum upp að þetta er einföld tafla með tveimur dálkum: Annar dálkurinn heitir ``player'' og inniheldur þriggja stafa skammstöfun á nafni spilara, hinn dálkurinn heitir ``score'' og inniheldur stigafjölda. Athugum hvernig við getum sótt þessi gögn úr gagnagrunninum.
+
+Byrjum á að búa til php-breytu sem inniheldur fyrirspurnina sem við viljum framkvæma. Það má gera á eftirfarandi hátt:
+
+\verb|  $sql = 'SELECT player, score FROM HighScores';|
+
+Breytan \verb|$sql| inniheldur þá streng sem skilgreinir fyrirspurnina.
+
+Næst þarf að \emph{keyra} fyrirspurnina. Það má gera með ``query'' fallinu sem skilgreint er af PDO. Notum það svona:
+
+\verb|  $result = $dbh->query($sql);|
+
+Breytan \verb|$result| inniheldur þá niðurstöðu fyrirspurnarinnar.
+
+Niðurstöðurnar koma þó ekki á mjög vingjarnlegu sniði frá PDO-klasanum. Til að vinna með niðurstöðurnar er best að setja þær í fylki\footnote{e. \emph{array}}. Til þess getum við notað fallið ``fetch''.
+
+\newpage
+
+Fetch ``les'' eina línu af niðurstöðunum í \verb|$result| í hvert skipti sem það er gert. Við getum því notað lykkju til að ná í allar niðurstöðurnar:
+
+\begin{verbatim}
+  while ($row = $result->fetch()) {
+    $highscores[] = array($row['player'],$row['score']);
+  }
+\end{verbatim}
+
+Fylkið \verb|$highscores| mun innihalda allar upplýsingarnar úr dálkunum ``player'' og ``score'' þegar keyrslu lykkjunnar lýkur.
+
+Að lokum mun php-skriptan okkar líta út eitthvað á borð við það sem sjá má í sýnidæmi \ref{php:query}.
+
+\begin{example}
+\caption[Upplýsingar sóttar úr gagnagrunni með PHP]{PDO notað til að sækja upplýsingar úr gagnagrunni og geyma þær í fylkinu \emph{\$highscore}. Athugum að breytan \emph{\$dbh} þarf að vera skilgreind þegar þessi skripta er keyrð, sjá undirkafla \ref{undirkafli:html+php}. Vistum skriptuna í skrá sem við köllum \emph{query.php}.}
+\label{php:query}
+\centering
+\inputminted[frame=lines, fontfamily=courier]{php}{php/query.php}
+\end{example}
+
+\subsection{Að setja saman HTML og PHP}
+\label{undirkafli:html+php}
+Nú höfum við séð hvernig tengjast má gagnagrunni með PHP (sýnidæmi \ref{php:dbcon}) og hvernig sækja má upplýsingar í gegnum tenginguna (sýnidæmi \ref{php:query}).
+
+Búum nú til vefsíðu sem notar þessar skriptur, \verb|dbcon.php| og \verb|query.php|. Gerum það með einni skrá í viðbót - köllum hana \verb|index.html.php|. Við veljum nafnið \emph{index} af því það er það nafn sem flestir vefþjónar leita að sem upphafssíðu. Við gefum því viðaukann \verb|.html| af því að þessi skrá mun innihalda HTML-tög að miklum meirihluta. Við endum nafnið á \verb|.php| af því að þetta verður eftir allt saman PHP-skripta sem við þurfum að keyra.
+
+\begin{example}
+\caption[HTML-beinagrind]{HTML beinagrind. Þetta er tóm síða.}
+\label{php:empty-index}
+\centering
+\inputminted[frame=lines, fontfamily=courier]{html}{php/empty-index.html}
+\end{example}
+
+Byrjum á að búa til ``tóma'' HTML-skrá sem vafri getur opnað. Hún getur litið út eins og sýnidæmi \ref{php:empty-index}.
+
+Bætum nú PHP-kóða við tómu skrána svo úr verði sýnidæmi \ref{php:index}. 
+
+Byrjum á að láta \verb|index.html.php| innihalda skripturnar sem við bjuggum til með \emph{include} skipunum.
+
+Þegar þessum skriptum hefur verið bætt við veit \verb|index.html.php| af öllum breytum sem skilgreindar voru í skriptunum, þar á meðal fylkinu sem við geymdum niðurstöður fyrirspurnarinnar í, \verb|$highscores|. 
+
+Nú getum við búið til HTML-töflu. Fyrst skrifum við þá hluta sem ekki eru háðir gögnunum í gagnagrunninum beint, síðan getum við ítrað\footnote{e. \emph{iterated}} í gegnum \verb|$highscores| fylkið til að búa til raðir HTML-töflunnar. Niðurstaðan er sýnidæmi \ref{php:index}.
+
+\begin{example}
+\caption[PHP + HTML]{PHP og HTML notað saman til að mynda HTML-töflu sem inniheldur upplýsingarnar úr ``HighScores'' SQL-töflunni.}
+\label{php:index}
+\centering
+\inputminted[frame=lines, fontfamily=courier]{html}{php/index.html.php}
+\end{example}
+
+Að lokum fáum við ``heimasíðu'' sem sýnir upplýsingarnar. Sú heimasíða gæti e.t.v. litið betur út, en hún gerir það sem hún á að gera - hún er beintengd gagnagrunninum og uppfærist þegar honum er breytt. Svona aðferðir liggja á bakvið mjög margar heimasíður.
+
+\begin{figure}
+\caption[Heimasíðan]{Highscore ``heimasíðan'', sem fær gögn sín úr gagnagrunni.}
+\label{mynd:index}
+\centering
+\includegraphics[width=\linewidth]{myndir/index}
+\end{figure}

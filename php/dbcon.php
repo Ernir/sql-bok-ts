@@ -5,9 +5,9 @@ $user = 'notandanafn';
 $password = 'lykilorð';
 
 try {
-	$dbh = new PDO($source, $user, $password);
+  $dbh = new PDO($source, $user, $password);
 } catch (PDOException $e) {
-	echo 'Tenging mistókst: ' . $e->getMessage();
+  echo 'Tenging mistókst: ' . $e->getMessage();
 }
 
 ?>
