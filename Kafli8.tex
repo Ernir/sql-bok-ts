@@ -64,6 +64,8 @@ PostgreSQL\footnote{\url{http://www.postgresql.org/}} er gagnagrunnskerfi sem le
 PostgreSQL er vinsælt meðal gagnagrunnssérfræðinga, m.a. vegna þess hversu mikla stjórn gagnagrunnstjórinn hefur yfir virkni kerfisins. Kennt er á PostgreSQL gagnasafnsfræðiáföngum Tækniskólans.
 
 Fyrir utan það að styðja ``venjulegar'' SQL skipanir, þá býður PostgreSQL upp á forritunarmál, kallað PL/pgSQL (Procedural Language/PostgreSQL), til að auðvelda ýmsar aðgerðir. PL/pgSQL býður meðal annars upp á lykkjur og önnur tól sem kunnugleg eru úr forritunarmálum á borð við C\#.
+
+\newpage
 \subsection{SQLite}
 \begin{marginfigure}
 \caption{SQLite}
@@ -175,10 +177,10 @@ Gerum ráð fyrir að við séum með PHP-skriptu sem keyrir á server. Til að 
  \item Notandanafn MySQL-þjónsins
  \item Lykilorð notandans.
 \end{itemize}
-Klasann \href{http://www.php.net/manual/en/class.pdo.php}{PDO}\footnote{\url{http://www.php.net/manual/en/class.pdo.php}} má svo nota til þess að mynda tenginguna sjálfa.\footnote{Fleiri leiðir eru færar til að mynda tengingar af þessum toga, til dæmis \emph{mysqli} viðbótin. Þá PHP-viðbót sem einfaldlega heitir \emph{mysql} skal þó alls ekki nota - hún er úreld.}
+Klasann \href{http://www.php.net/manual/en/class.pdo.php}{PDO}\marginnote[-1cm]{\url{http://www.php.net/manual/en/class.pdo.php}} má svo nota til þess að mynda tenginguna sjálfa.\footnote{Fleiri leiðir eru færar til að mynda tengingar af þessum toga, til dæmis \emph{mysqli} viðbótin. Þá PHP-viðbót sem einfaldlega heitir \emph{mysql} skal þó alls ekki nota - hún er úreld.}
 
 \begin{example}
-\caption[Tenging við gagnagrunn með PDO]{Tenging við gagnagrunn með PDO. Þessi kóði er settur í skrá sem heitir \emph{dbcon.php}.}
+\caption[Tenging við gagnagrunn með PDO][1cm]{Tenging við gagnagrunn með PDO. Þessi kóði er settur í skrá sem heitir \emph{dbcon.php}.}
 \label{php:dbcon}
 \centering
 \inputminted[frame=lines, fontfamily=courier]{php}{php/dbcon.php}
@@ -197,7 +199,7 @@ Takist ekki að koma tengingunni á prentar skriptan út strenginn ``Tenging mis
 \subsection{Að sækja gögn með PDO}
 Þegar tengingin er komin upp er hægt að nota hana til þess að ná í gögn úr viðkomandi gagnagrunni.
 
-Gefum okkur að highscore-taflan í sýnidæmi \ref{sql:k3d4-high-score} sé til staðar í gagnagrunninum.\footnote{Ef hún er ekki til staðar má keyra sýnidæmið til að ganga úr skugga um það.} Rifjum upp að þetta er einföld tafla með tveimur dálkum: Annar dálkurinn heitir ``player'' og inniheldur þriggja stafa skammstöfun á nafni spilara, hinn dálkurinn heitir ``score'' og inniheldur stigafjölda. Athugum hvernig við getum sótt þessi gögn úr gagnagrunninum.
+Gefum okkur að highscore-taflan í sýnidæmi \ref{sql:k3d4-high-score} sé til staðar í gagnagrunninum.\footnote{Ef hún er ekki til staðar má keyra sýnidæmið til að setja töfluna upp.} Rifjum upp að þetta er einföld tafla með tveimur dálkum: Annar dálkurinn heitir ``player'' og inniheldur þriggja stafa skammstöfun á nafni spilara, hinn dálkurinn heitir ``score'' og inniheldur stigafjölda. Athugum hvernig við getum sótt þessi gögn úr gagnagrunninum.
 
 Byrjum á að búa til php-breytu sem inniheldur fyrirspurnina sem við viljum framkvæma. Það má gera á eftirfarandi hátt:
 
@@ -212,6 +214,8 @@ Næst þarf að \emph{keyra} fyrirspurnina. Það má gera með ``query'' fallin
 Breytan \verb|$result| inniheldur þá niðurstöðu fyrirspurnarinnar.
 
 Niðurstöðurnar koma þó ekki á mjög vingjarnlegu sniði frá PDO-klasanum. Til að vinna með niðurstöðurnar er best að setja þær í fylki\footnote{e. \emph{array}}. Til þess getum við notað fallið ``fetch''.
+
+\newpage
 
 Fetch ``les'' eina línu af niðurstöðunum í \verb|$result| í hvert skipti sem það er gert. Við getum því notað lykkju til að ná í allar niðurstöðurnar:
 
