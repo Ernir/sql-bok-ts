@@ -130,17 +130,17 @@ Mengjum er oft gefið nafn sem er einn stór bókstafur. T.d. er algengt að kal
 \subsection{Vensl}
 Við skulum sjá fyrir okkur mörg mengi af upplýsingum. Köllum þau öll $S$ og gefum þeim númer, svo við getum kallað þau $S_1, S_2$ og svo framvegis.
 
-Skoðum nú annað mengi og köllum það $R$. Mengið $R$ er \emph{vensl\footnote{e. \emph{relation}} á mengin $S$} ef $R$ er mengi af \emph{línum}\footnote{e. \emph{tuples}} þar sem að fyrsta gildið í línunni er úr $S_1$, annað stakið úr $S_2$, og svo framvegis.
+Skoðum nú annað mengi og köllum það $R$. Mengið $R$ er \emph{vensl\footnote{e. \emph{relation}} á mengin $S$} ef $R$ er mengi af \emph{línum}\footnote{e. \emph{tuples}} þar sem að fyrsta stakið í línunni er úr $S_1$, annað stakið úr $S_2$, og svo framvegis.
 
 Til að gera venslin nothæf getum við ákveðið að hvert mengi $S$ standi fyrir einhvern ákveðinn \emph{eiginleika}\footnote{e. \emph{attribute}} sem gögn geta haft. Þá stendur hver lína í venslunum fyrir einn ``hlut'' sem einkennist af þeim eiginleikum sem við skilgreindum.
 
 Hvernig tengist þetta þeim hugtökum sem við höfum lært úr SQL?
 
 \begin{itemize}
- \item Lína í SQL-töflu samsvarar (e. \emph{tuple}) í venslum.
+ \item Lína í SQL-töflu (e. \emph{row}) samsvarar línu í venslum (e. \emph{tuple}). \footnote{Hugtökin eru svo lík að ekki er gerður greinarmunur á Íslensku.}
  \item Dálkur í SQL-töflu samsvarar eiginleika (e. \emph{attribute}) í venslum.
  \item SQL-tafla samsvarar að mestu leyti venslum.\footnote{Vensl og SQL-töflur greinast að á nokkrum atriðum. T.d. eru vensl alvöru mengi, sem ekki geta verið með endurtekningar. SQL-tafla sem ekki er með aðallykil getur innihaldið endurtekin gildi.}
- \item Niðurstöður fyrirspurna og view-a (sjá undirkafla \ref{undirkafli:views}) samsvara líka að mestu leiti venslum.
+ \item Niðurstöður fyrirspurna og view-a (sjá undirkafla \ref{undirkafli:views}) samsvara líka að mestu leyti venslum.
 \end{itemize}
 
 Það að skilja venslalíkanið gerir sum atriði sem viðkoma SQL skýrari, t.d. samband view-a og taflna. Einnig getum við nú séð að þegar rætt er um venslaðar töflur er átt við töflur sem hægt er að búa til vensl á.
